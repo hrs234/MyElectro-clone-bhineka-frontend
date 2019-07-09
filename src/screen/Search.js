@@ -75,7 +75,7 @@ export default class Search extends Component {
           <Body style={{ flexDirection: "row" }}>
             <Icon
               name="md-arrow-back"
-              style={{ alignSelf: "center", marginRight: 35 }}
+              style={{ alignSelf: "center", marginRight: 35, marginLeft: 10 }}
             />
             <Input
               style={{}}
