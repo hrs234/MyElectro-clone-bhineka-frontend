@@ -9,7 +9,7 @@
 import React, {Fragment, Component} from 'react';
 import {  View, Text, StyleSheet} from 'react-native';
 import { createAppContainer, createDrawerNavigator, createStackNavigator } from 'react-navigation';
-
+// import { Provider as paperProvider } from 'react-native-paper';
 // import AppStackNavigation from './src/navigator/navigate';
 // import styles from './src/css/style';
 
