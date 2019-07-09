@@ -30,6 +30,7 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
 
 },
 {
+  initialRouteName:'Splash',
   drawerWidth: 250,
   drawerPosition: 'left',
   contentOptions: {
