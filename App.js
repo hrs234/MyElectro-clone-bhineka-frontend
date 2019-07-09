@@ -32,7 +32,7 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
 
 },
 {
-  initialRouteName:'Search',
+  initialRouteName:'Splash',
   drawerWidth: 250,
   drawerPosition: 'left',
   contentOptions: {
