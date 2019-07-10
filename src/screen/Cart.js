@@ -19,6 +19,18 @@ import {
   Footer,
   Content
 } from "native-base";
+const kurir = [
+  {
+    id: 1,
+    title: "TIKI Regular Service",
+    price: "200.000"
+  },
+  {
+    id: 2,
+    title: "JNE Regular Service",
+    price: "200.000"
+  }
+];
 
 const faker = [
   {
@@ -62,7 +74,7 @@ export default class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalVisible: false
+      modalVisible: true
     };
   }
   setModalVisible(visible) {
@@ -148,6 +160,38 @@ export default class Cart extends Component {
           Rp TOTAL
         </Text>
       </View>
+    </View>
+  );
+
+  _keyExtractorKurir = (item, index) => item.id;
+
+  renderItemKurir = ({ item }) => (
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row",
+        marginTop: 15,
+        marginBottom: 15,
+        marginLeft: 10
+      }}
+    >
+      <Text
+        style={{
+          flex: 1,
+          fontSize: 15
+        }}
+      >
+        {item.title}
+      </Text>
+      <Text
+        style={{
+          flex: 1,
+          fontSize: 15,
+          marginLeft: 40
+        }}
+      >
+        Rp {item.price}
+      </Text>
     </View>
   );
 
@@ -292,18 +336,81 @@ export default class Cart extends Component {
         </Footer>
         <Modal
           transparent={true}
+          animationType="fade"
           visible={this.state.modalVisible}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
           }}
+          onPress={() => {
+            this.setModalVisible(!this.state.modalVisible);
+          }}
         >
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() => this.setModalVisible(!this.state.modalVisible)}
-            style={{ flex: 1, backgroundColor: "rgba(51,51,51,0.8)" }}
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "rgba(51,51,51,0.8)",
+              justifyContent: "flex-end",
+              alignItems: "flex-end"
+            }}
           >
-            <View style={{ flex: 2, backgroundColor: "blue", width: "50%" }} />
-          </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => this.setModalVisible(!this.state.modalVisible)}
+              style={{
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                right: 0,
+                left: 0
+              }}
+            />
+            <View
+              style={{
+                width: "100%",
+                height: "50%",
+                position: "absolute",
+                backgroundColor: "white",
+                elevetion: 3
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  borderBottomWidth: 1,
+                  borderBottomColor: "#E0E0E0",
+                  alignItems: "center",
+                  paddingTop: 10,
+                  paddingBottom: 10
+                }}
+              >
+                <Text style={{ marginLeft: 10, fontSize: 15, fontWeight:"bold" }}>
+                  Pilih Jasa Pengiriman
+                </Text>
+                <View
+                  style={{ flex: 1, alignItems: "flex-end", marginRight: 20 }}
+                >
+                  <Icon
+                    onPress={() =>
+                      this.setModalVisible(!this.state.modalVisible)
+                    }
+                    name="close"
+                  />
+                </View>
+              </View>
+              <View
+                style={{
+                  flex: 1
+                }}
+              >
+                <FlatList
+                  keyExtractor={this.keyExtractorKurir}
+                  data={kurir}
+                  renderItem={this.renderItemKurir}
+                  style={{ marginTop: 5 }}
+                />
+              </View>
+            </View>
+          </View>
         </Modal>
       </Container>
     );
