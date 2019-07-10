@@ -383,7 +383,9 @@ export default class Cart extends Component {
                   paddingBottom: 10
                 }}
               >
-                <Text style={{ marginLeft: 10, fontSize: 15, fontWeight:"bold" }}>
+                <Text
+                  style={{ marginLeft: 10, fontSize: 15, fontWeight: "bold" }}
+                >
                   Pilih Jasa Pengiriman
                 </Text>
                 <View
