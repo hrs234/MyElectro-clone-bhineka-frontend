@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Image } from "react-native";
+import { View, Image, FlatList } from "react-native";
 import {
   Container,
   Header,
@@ -12,8 +12,61 @@ import {
   Right,
   Content
 } from "native-base";
+const faker = [
+  {
+    id: 1,
+    title: "ASUS Notebook X441MA-GA004T - White",
+    price: "4.000.000"
+  },
+  {
+    id: 2,
+    title: "ASUS Notebook X441MA-GA004T - black",
+    price: "4.500.000"
+  },
+  {
+    id: 3,
+    title: "ASUS Notebook X441MA-GA004T - black",
+    price: "4.500.000"
+  },
+  {
+    id: 4,
+    title: "ASUS Notebook X441MA-GA004T - black",
+    price: "4.500.000"
+  }
+];
 
 export default class Checkout extends Component {
+  _keyExtractor = (item, index) => item.id;
+
+  renderItem = ({ item }) => (
+    <CardItem
+    style={{
+      borderBottomWidth: 1,
+      borderBottomColor: "#E0E0E0"
+    }}
+  >
+    <Body>
+      <Text
+        style={{
+          marginBottom: 10
+        }}
+      >
+        {item.title}
+      </Text>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row"
+        }}
+      >
+        <Text>1 x </Text>
+        <Text>{item.price}</Text>
+        <Text style={{ flex: 1, textAlign: "right" }}>Total</Text>
+      </View>
+    </Body>
+    </CardItem>
+  );
+
   render() {
     return (
       <Container>
@@ -34,7 +87,7 @@ export default class Checkout extends Component {
                 fontWeight: "bold"
               }}
             >
-              Metode Pembayaran
+              Total Pembayaran
             </Text>
           </View>
         </Header>
@@ -70,37 +123,14 @@ export default class Checkout extends Component {
                 >
                   Rp 679.000
                 </Text>
-                <Icon name="ios-arrow-down" style={{ color: "black" }} />
               </Right>
             </CardItem>
-            <CardItem
-              style={{
-                borderBottomWidth: 1,
-                borderBottomColor: "#E0E0E0"
-              }}
-            >
-            {/* flatlist */}
-              <Body>
-                <Text
-                  style={{
-                    marginBottom: 10
-                  }}
-                >
-                  Cosmos stand
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row"
-                  }}
-                >
-                  <Text>1 x </Text>
-                  <Text>199000</Text>
-                  <Text style={{ flex: 1, textAlign: "right" }}>Total</Text>
-                </View>
-              </Body>
-              {/* flatlist */}
-            </CardItem>
+              <FlatList
+                keyExtractor={this.keyExtractor}
+                data={faker}
+                renderItem={this.renderItem}
+                style={{ marginTop: 5 }}
+              />
             <CardItem
               style={{
                 borderBottomWidth: 1,
@@ -112,18 +142,17 @@ export default class Checkout extends Component {
                   style={{
                     flex: 1,
                     flexDirection: "row",
-                    marginBottom:5
+                    marginBottom: 5
                   }}
                 >
-                  <Text >Total Pembelian</Text>
+                  <Text>Total Pembelian</Text>
                   <Text style={{ flex: 1, textAlign: "right" }}>Rp 199000</Text>
                 </View>
                 <View
                   style={{
                     flex: 1,
                     flexDirection: "row",
-                    marginBottom:5
-
+                    marginBottom: 5
                   }}
                 >
                   <Text>Total Pengiriman</Text>
@@ -133,8 +162,7 @@ export default class Checkout extends Component {
                   style={{
                     flex: 1,
                     flexDirection: "row",
-                    marginBottom:5
-
+                    marginBottom: 5
                   }}
                 >
                   <Text>Biaya Layanan</Text>
@@ -143,11 +171,15 @@ export default class Checkout extends Component {
                 <View
                   style={{
                     flex: 1,
-                    flexDirection: "row",
+                    flexDirection: "row"
                   }}
                 >
-                  <Text style={{fontWeight:"bold"}}>Total</Text>
-                  <Text style={{ flex: 1, textAlign: "right",fontWeight:"bold" }}>Rp Total</Text>
+                  <Text style={{ fontWeight: "bold" }}>Total</Text>
+                  <Text
+                    style={{ flex: 1, textAlign: "right", fontWeight: "bold" }}
+                  >
+                    Rp Total
+                  </Text>
                 </View>
               </Body>
             </CardItem>
@@ -165,7 +197,6 @@ export default class Checkout extends Component {
           </Text>
           <Card
             style={{
-              backgroundColor: "blue",
               width: "90%",
               alignSelf: "center"
             }}
