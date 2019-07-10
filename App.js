@@ -18,6 +18,7 @@ import Splash from './src/screen/splash';
 import Main from './src/screen/main';
 import Register from './src/screen/Register';
 import Login from './src/screen/Login';
+import Cart from './src/screen/Cart';
 
 
 // Drawer Navigator
@@ -26,11 +27,12 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
   App: { screen: Main },
   Splash: { screen: Splash },
   Register: { screen: Register },
-  Login: { screen: Login }
+  Login: { screen: Login },
+  Cart: { screen: Cart }
 
 },
 {
-  initialRouteName:'Splash',
+  initialRouteName:'Cart',
   drawerWidth: 250,
   drawerPosition: 'left',
   contentOptions: {
