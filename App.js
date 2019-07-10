@@ -34,7 +34,7 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
 
 },
 {
-  initialRouteName:'Checkout',
+  initialRouteName:'App',
   drawerWidth: 250,
   drawerPosition: 'left',
   contentOptions: {
