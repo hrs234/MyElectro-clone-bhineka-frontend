@@ -230,6 +230,39 @@ export default class Cart extends Component {
           />
           <View
             style={{
+              flex: 1,
+              flexDirection: "row",
+              borderBottomWidth: 1,
+              borderBottomColor: "#E0E0E0",
+              justifyContent: "center",
+              paddingTop:15,
+              paddingBottom:15
+            }}
+          >
+            <Text
+              style={{
+                flex: 1,
+                textAlign: "left",
+                marginLeft: 15,
+              }}
+            >
+              Alamat Pengiriman
+            </Text>
+            <Text
+              onPress={() => {
+                this.setModalVisible(true);
+              }}
+              style={{
+                flex: 1,
+                textAlign: "right",
+                marginRight: 20,
+              }}
+            >
+              pilih
+            </Text>
+          </View>
+          <View
+            style={{
               backgroundColor: "#FAFAFA",
               borderBottomWidth: 1,
               borderBottomColor: "#E0E0E0"
