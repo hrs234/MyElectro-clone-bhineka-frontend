@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native'
-import { List, Colors, TextInput, Appbar, Button } from 'react-native-paper';
+import { List, Colors, HelperText, TextInput, Appbar, Button } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class FloatingLabelExample extends Component {
@@ -18,7 +18,8 @@ export default class FloatingLabelExample extends Component {
 
         <View style={{flex:1, backgroundColor:'cyan'}}>
             <Appbar.Header>
-                <Appbar.BackAction
+                <Appbar.Action
+                    icon="close"
                     onPress={this._goBack}
                 />
                 <Appbar.Content
@@ -36,6 +37,12 @@ export default class FloatingLabelExample extends Component {
                         onChangeText={text => this.setState({ text })}
                     />
                 </View>
+                <HelperText
+                    type="error"
+                    visible={!this.state.text.includes('@')}
+                    >
+                    Format email salah
+                </HelperText>
                 <View style={{flexDirection:'row'}}>   
                     <List.Icon color={Colors.blue300} icon="lock" /> 
                     <TextInput

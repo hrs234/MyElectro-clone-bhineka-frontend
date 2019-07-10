@@ -37,17 +37,8 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
     activeTintColor: '#000',
   }
 });
-
-// Stack Navigator
-const Stack = createStackNavigator(
-{
-  first: {screen: AppSwitchNavigatiorA}
-},
-{
-  headerMode: 'none'
-})
   
-const AppContainer = createAppContainer(Stack);
+const AppContainer = createAppContainer(AppSwitchNavigatiorA);
 
 export default class App extends Component 
 {
