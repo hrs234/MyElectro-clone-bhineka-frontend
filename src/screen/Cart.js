@@ -74,7 +74,7 @@ export default class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalVisible: true
+      modalVisible: false
     };
   }
   setModalVisible(visible) {

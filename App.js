@@ -32,7 +32,7 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
 
 },
 {
-  initialRouteName:'Cart',
+  initialRouteName:'App',
   drawerWidth: 250,
   drawerPosition: 'left',
   contentOptions: {
