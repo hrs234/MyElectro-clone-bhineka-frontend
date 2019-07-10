@@ -4,6 +4,7 @@ import { createAppContainer, createStackNavigator, createMaterialTopTabNavigator
 import { IconButton, Colors, Card, Title, Avatar } from 'react-native-paper';
 import Carousel from "react-native-carousel-control";
 import { ScrollView } from 'react-native-gesture-handler';
+import { Icon } from "native-base";
 
 const data = [
     {nameCategory: 'Aksesories Gadget & Komputer'},
@@ -53,6 +54,10 @@ const list = [
 
 // Tab Main Menu
 class MainMenu extends Component {
+    static navigationOptions = {
+        drawerIcon: <Icon name="home" style={{ color: "#000000" }} />
+      };
+
     constructor(props) {
         super(props);
         this.state = {
