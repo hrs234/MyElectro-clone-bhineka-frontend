@@ -19,6 +19,7 @@ import Main from './src/screen/main';
 import Register from './src/screen/Register';
 import Login from './src/screen/Login';
 import wishlist from './src/screen/wishlist';
+import paymentHistory from './src/screen/paymentHistory';
 
 // Drawer Navigator
 const AppSwitchNavigatiorA = createDrawerNavigator(
@@ -27,7 +28,9 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
   Splash: { screen: Splash },
   Register: { screen: Register },
   Login: { screen: Login },
-  wishlist:{ screen: wishlist }
+  wishlist:{ screen: wishlist },
+  paymentHistory: {screen: paymentHistory}
+
 
 },
 {

@@ -100,23 +100,23 @@ export default class Register extends Component {
                     </View>
                     <View style={styles.formInput}>
                         <List.Icon icon="" />
-                        <TextInput label="First Name" value="" style={styles.inputs} onChangeText={(first_name) => this.setState({ first_name }) } />
+                        <TextInput label="First Name" style={styles.inputs} onChangeText={(first_name) => this.setState({ first_name }) } />
                     </View >
                     <View style={styles.formInput}>
                         <List.Icon icon="" />
-                        <TextInput label="Last Name" value="" style={styles.inputs} onChangeText={(last_name) => this.setState({ last_name })}/>
+                        <TextInput label="Last Name" style={styles.inputs} onChangeText={(last_name) => this.setState({ last_name })}/>
                     </View>
                     <View style={styles.formInput}>
                         <List.Icon icon="email" />
-                        <TextInput label="email" value="" style={styles.inputs} onChangeText={(email) => this.setState({ email })} />
+                        <TextInput label="email" style={styles.inputs} onChangeText={(email) => this.setState({ email })} />
                     </View>
                     <View style={styles.formInput}>
                         <List.Icon icon="phone" />
-                        <TextInput label="Phone Number" value="" style={styles.inputs} onChangeText={(phone_number) => this.setState({ phone_number })} />
+                        <TextInput label="Phone Number" style={styles.inputs} onChangeText={(phone_number) => this.setState({ phone_number })} />
                     </View>
                     <View style={styles.formInput}>
                         <List.Icon icon="lock" />
-                        <TextInput label="password" value="" style={styles.inputs} onChangeText={(password) => this.setState({ password })} />
+                        <TextInput label="password" secureTextEntry={true} style={styles.inputs} onChangeText={(password) => this.setState({ password })} />
                     </View>
                     
                     <View style={styles.formDate}>
