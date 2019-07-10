@@ -20,6 +20,7 @@ import Register from './src/screen/Register';
 import Login from './src/screen/Login';
 import Cart from './src/screen/Cart';
 import Checkout from './src/screen/Checkout';
+import Search from './src/screen/Search';
 
 
 // Drawer Navigator
@@ -30,7 +31,8 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
   Register: { screen: Register },
   Login: { screen: Login },
   Cart: { screen: Cart },
-  Checkout: { screen: Checkout }
+  Checkout: { screen: Checkout },
+  Search: { screen: Search }
 
 },
 {
