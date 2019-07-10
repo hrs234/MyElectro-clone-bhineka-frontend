@@ -94,7 +94,6 @@ export default class Checkout extends Component {
         <Content>
           <Card
             style={{
-              backgroundColor: "blue",
               width: "90%",
               alignSelf: "center",
               marginTop: 15
