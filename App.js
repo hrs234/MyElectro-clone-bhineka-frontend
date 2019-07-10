@@ -7,12 +7,16 @@
  */
 
 import React, { Fragment, Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import {
   createAppContainer,
   createDrawerNavigator,
   createStackNavigator
 } from "react-navigation";
+import { Container, Header, Body } from "native-base";
+import { DrawerItems, SafeAreaView } from 'react-navigation';
+
+
 // import { Provider as paperProvider } from 'react-native-paper';
 // import AppStackNavigation from './src/navigator/navigate';
 // import styles from './src/css/style';
@@ -29,10 +33,29 @@ import wishlist from "./src/screen/wishlist";
 import paymentHistory from "./src/screen/paymentHistory";
 import addSelling from "./src/screen/addSelling";
 
+import { ScrollView } from "react-native-gesture-handler";
+
+const custom = (props)=>(
+  <Container>
+        <Header style={styles.drawerHeader}>
+          <Body style={{ alignItems: "center" }}>
+            <Image
+              style={styles.drawerImage}
+              source={require("./src/assets/image/logo.png")}
+            />
+          </Body>
+        </Header>
+        <ScrollView>
+        <DrawerItems {...props}/>
+        </ScrollView>
+      </Container>
+)
+
+
 // Drawer Navigator
 const AppSwitchNavigatiorA = createDrawerNavigator(
   {
-    App: { screen: Main },
+    main: { screen: Main },
     Splash: { screen: Splash },
     Register: { screen: Register },
     Login: { screen: Login },
@@ -44,9 +67,10 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
     addSelling: { screen: addSelling }
   },
   {
-    initialRouteName: "App",
+    initialRouteName: "main",
     drawerWidth: 250,
     drawerPosition: "left",
+    contentComponent: custom,
     contentOptions: {
       activeTintColor: "#000"
     }
@@ -70,4 +94,20 @@ export default class App extends Component {
   }
 }
 
-// export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  drawerHeader: {
+    height: 200,
+    backgroundColor: "white"
+  },
+  drawerImage: {
+    height: 150,
+    width: 150,
+  }
+});
+
+

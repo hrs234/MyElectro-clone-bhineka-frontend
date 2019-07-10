@@ -36,6 +36,10 @@ const faker = [
 ];
 
 export default class Checkout extends Component {
+  static navigationOptions = {
+    drawerIcon: <Icon name="home" style={{ color: "#000000" }} />
+  };
+
   _keyExtractor = (item, index) => item.id;
 
   renderItem = ({ item }) => (
