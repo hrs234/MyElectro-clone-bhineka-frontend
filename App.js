@@ -20,6 +20,7 @@ import Register from './src/screen/Register';
 import Login from './src/screen/Login';
 import wishlist from './src/screen/wishlist';
 import paymentHistory from './src/screen/paymentHistory';
+import addSelling from './src/screen/addSelling';
 
 // Drawer Navigator
 const AppSwitchNavigatiorA = createDrawerNavigator(
@@ -29,7 +30,8 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
   Register: { screen: Register },
   Login: { screen: Login },
   wishlist:{ screen: wishlist },
-  paymentHistory: {screen: paymentHistory}
+  paymentHistory: {screen: paymentHistory},
+  addSelling: {screen: addSelling}
 
 
 },
