@@ -15,6 +15,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* MyElectroAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* MyElectroAppTests.m */; };
+
 		9A67EFE041F9488DBCD25556 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E20A64F266044A28890BEC0E /* AntDesign.ttf */; };
 		8F172D3517E1479BB2E235E7 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40F7EE715EE2427AADE11D73 /* Entypo.ttf */; };
 		9F5EAA905DFA4581ACA7FC3D /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA48A88476C3451B92ABC439 /* EvilIcons.ttf */; };
@@ -84,6 +85,7 @@
 		2D02E4901E0B4A5D006451C7 /* MyElectroApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MyElectroApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+
 		E20A64F266044A28890BEC0E /* AntDesign.ttf */ = {isa = PBXFileReference; name = "AntDesign.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		40F7EE715EE2427AADE11D73 /* Entypo.ttf */ = {isa = PBXFileReference; name = "Entypo.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		CA48A88476C3451B92ABC439 /* EvilIcons.ttf */ = {isa = PBXFileReference; name = "EvilIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
@@ -207,7 +209,9 @@
 				00E356EF1AD99517003FC87E /* MyElectroAppTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+
 				A94D52AE48B94F1899F93F48 /* Resources */,
+
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -225,6 +229,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+
 		A94D52AE48B94F1899F93F48 /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
@@ -403,6 +408,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+
 				9A67EFE041F9488DBCD25556 /* AntDesign.ttf in Resources */,
 				8F172D3517E1479BB2E235E7 /* Entypo.ttf in Resources */,
 				9F5EAA905DFA4581ACA7FC3D /* EvilIcons.ttf in Resources */,
