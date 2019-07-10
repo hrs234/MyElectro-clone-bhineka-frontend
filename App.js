@@ -19,6 +19,7 @@ import Main from './src/screen/main';
 import Register from './src/screen/Register';
 import Login from './src/screen/Login';
 import Cart from './src/screen/Cart';
+import Checkout from './src/screen/Checkout';
 
 
 // Drawer Navigator
@@ -28,11 +29,12 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
   Splash: { screen: Splash },
   Register: { screen: Register },
   Login: { screen: Login },
-  Cart: { screen: Cart }
+  Cart: { screen: Cart },
+  Checkout: { screen: Checkout }
 
 },
 {
-  initialRouteName:'App',
+  initialRouteName:'Checkout',
   drawerWidth: 250,
   drawerPosition: 'left',
   contentOptions: {
