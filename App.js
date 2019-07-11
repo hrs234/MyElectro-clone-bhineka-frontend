@@ -1,3 +1,4 @@
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -54,18 +55,12 @@ export default class App extends Component
     {
       this.state = {
         isLoading: false
-      }
+      };
     }
   }
 
-  render() 
-  {
-
-    return (
-      <AppContainer />
-    );
+  render() {
+    return <AppContainer />;
   }
 }
 
-
-// export default App;

@@ -3,9 +3,14 @@ import { View, Text, FlatList, StyleSheet, TouchableHighlight, Image, TouchableO
 import { createAppContainer, createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 import { IconButton, Colors, Card } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
+
 import Carousel from "react-native-carousel-control";
 
 import DetailPage from "./DetailPage";
+import { Icon } from "native-base";
+
+
+
 
 const data = [
     {nameCategory: 'Aksesories Gadget & Komputer'},
@@ -48,7 +53,11 @@ const list = [
 ];
 
 // Tab Main Menu
-class MainMenu extends Component {
+export class MainMenu extends Component {
+    static navigationOptions = {
+        drawerIcon: <Icon name="store" type="MaterialIcons" style={{ color: "#000000" }} />
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -393,7 +402,7 @@ const Stack = createStackNavigator({
         navigationOptions:({ navigation }) => ({
             headerLeft: (
                 <IconButton
-                    icon='menu'
+                    icon='close'
                     color={Colors.white}
                     size={25}
                     onPress={() => {navigation.openDrawer()}}
@@ -403,13 +412,13 @@ const Stack = createStackNavigator({
                 <View style={{flexDirection:'row'}}>
                     <IconButton
                         style={{marginRight:-3}}
-                        icon='search'
+                        icon='close'
                         color={Colors.white}
                         size={25}
                         onPress={() => {navigation.openDrawer()}}
                     />
                     <IconButton
-                        icon='shopping-cart'
+                        icon='close'
                         color={Colors.white}
                         size={22}
                         onPress={() => {navigation.openDrawer()}}

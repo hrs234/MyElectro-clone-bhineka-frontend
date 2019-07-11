@@ -1,0 +1,39 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "title": "Asus Notebook A",
+            "image":
+              "https://d2pa5gi5n2e1an.cloudfront.net/global/images/product/laptops/ASUS_ROG_Strix_GL503/ASUS_ROG_Strix_GL503_L_1.jpg",
+            "price": "4.000.000"
+          },
+          {
+            "id": 2,
+            "title": "Asus Notebook B",
+            "image":
+              "https://d2pa5gi5n2e1an.cloudfront.net/global/images/product/laptops/ASUS_ROG_Strix_GL503/ASUS_ROG_Strix_GL503_L_1.jpg",
+            "price": "3.000.000"
+          },
+          {
+            "id": 3,
+            "title": "Asus Notebook C",
+            "image":
+              "https://d2pa5gi5n2e1an.cloudfront.net/global/images/product/laptops/ASUS_ROG_Strix_GL503/ASUS_ROG_Strix_GL503_L_1.jpg",
+            "price": "5.000.000"
+          },
+          {
+            "id": 4,
+            "title": "Asus Notebook D",
+            "image":
+              "https://d2pa5gi5n2e1an.cloudfront.net/global/images/product/laptops/ASUS_ROG_Strix_GL503/ASUS_ROG_Strix_GL503_L_1.jpg",
+            "price": "7.000.000"
+          },
+          {
+            "id": 5,
+            "title": "Asus Notebook E",
+            "image":
+              "https://d2pa5gi5n2e1an.cloudfront.net/global/images/product/laptops/ASUS_ROG_Strix_GL503/ASUS_ROG_Strix_GL503_L_1.jpg",
+            "price": "1.000.000"
+          }
+    ]
+}
