@@ -9,7 +9,7 @@ import ModalBuy from '../component/ModalBeli'
 export default class Note extends Component {
 
     state = {
-        star : 2,
+        star : 3,
     }
 
     items() {
@@ -128,12 +128,12 @@ export default class Note extends Component {
 const styles = StyleSheet.create({
     viewMain: {
         flex:1,
-        backgroundColor:'#e1e5e8',
+        backgroundColor:'#edf0f0',
         paddingBottom: 45
     },
     view1: {
         height:440,
-        elevation:0,
+        elevation:1,
         backgroundColor:'#fff',
         padding:15
     },

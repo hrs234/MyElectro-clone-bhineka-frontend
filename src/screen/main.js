@@ -349,7 +349,7 @@ class Kategori extends React.Component {
                 <FlatList
                     data={data}
                     renderItem={({ item }) => (
-                        <TouchableHighlight overlayColor="cyan" onPress={this.signIn}>
+                        <TouchableHighlight underlayColor="cyan" onPress={this.signIn}>
                             <View style={{flexDirection:'row', borderBottomWidth:1, borderColor:'#33cccc'}}>
                                 <Text style={styles.item}>{item.nameCategory}</Text>
                                 <View style={{justifyContent:'center'}}>
@@ -402,7 +402,7 @@ const Stack = createStackNavigator({
         navigationOptions:({ navigation }) => ({
             headerLeft: (
                 <IconButton
-                    icon='close'
+                    icon='menu'
                     color={Colors.white}
                     size={25}
                     onPress={() => {navigation.openDrawer()}}
@@ -412,13 +412,13 @@ const Stack = createStackNavigator({
                 <View style={{flexDirection:'row'}}>
                     <IconButton
                         style={{marginRight:-3}}
-                        icon='close'
+                        icon='search'
                         color={Colors.white}
                         size={25}
                         onPress={() => {navigation.openDrawer()}}
                     />
                     <IconButton
-                        icon='close'
+                        icon='shopping-cart'
                         color={Colors.white}
                         size={22}
                         onPress={() => {navigation.openDrawer()}}
