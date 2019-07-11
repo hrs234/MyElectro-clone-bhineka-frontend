@@ -14,8 +14,7 @@ import {
   createStackNavigator
 } from "react-navigation";
 import { Container, Header, Body } from "native-base";
-import { DrawerItems, SafeAreaView } from 'react-navigation';
-
+import { DrawerItems, SafeAreaView } from "react-navigation";
 
 // import { Provider as paperProvider } from 'react-native-paper';
 // import AppStackNavigation from './src/navigator/navigate';
@@ -35,22 +34,44 @@ import addSelling from "./src/screen/addSelling";
 
 import { ScrollView } from "react-native-gesture-handler";
 
-const custom = (props)=>(
+const custom = props => (
   <Container>
-        <Header style={styles.drawerHeader}>
-          <Body style={{ alignItems: "center" }}>
-            <Image
-              style={styles.drawerImage}
-              source={require("./src/assets/image/logo.png")}
-            />
-          </Body>
-        </Header>
-        <ScrollView>
-        <DrawerItems {...props}/>
-        </ScrollView>
-      </Container>
-)
-
+    <Header style={styles.drawerHeader}>
+      <Body style={{ alignItems: "baseline" }}>
+        <Image
+          style={styles.drawerImage}
+          source={require("./src/assets/image/logo.png")}
+        />
+        <View style={{flex:1}}>
+        <Text
+          style={{
+            color: "#000000",
+            fontStyle: "normal",
+            fontWeight: "600",
+            lineHeight: 23,
+          }}
+        >
+          Erik Kadarisman
+        </Text>
+        <Text
+          style={{
+            color: "#000000",
+            fontStyle: "normal",
+            fontWeight: "600",
+            lineHeight: 23,
+          }}
+        >
+          Erikadarisman@gmail.com
+        </Text>
+        </View>
+        
+      </Body>
+    </Header>
+    <ScrollView>
+      <DrawerItems {...props} />
+    </ScrollView>
+  </Container>
+);
 
 // Drawer Navigator
 const AppSwitchNavigatiorA = createDrawerNavigator(
@@ -67,7 +88,7 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
     addSelling: { screen: addSelling }
   },
   {
-    initialRouteName: "main",
+    initialRouteName: "Cart",
     drawerWidth: 250,
     drawerPosition: "left",
     contentComponent: custom,
@@ -106,8 +127,6 @@ const styles = StyleSheet.create({
   },
   drawerImage: {
     height: 150,
-    width: 150,
+    width: 150
   }
 });
-
-

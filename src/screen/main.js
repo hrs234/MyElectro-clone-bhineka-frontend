@@ -55,8 +55,8 @@ const list = [
 // Tab Main Menu
 class MainMenu extends Component {
     static navigationOptions = {
-        drawerIcon: <Icon name="home" style={{ color: "#000000" }} />
-      };
+        drawerIcon: <Icon name="store" type="MaterialIcons" style={{ color: "#000000" }} />
+    };
 
     constructor(props) {
         super(props);
