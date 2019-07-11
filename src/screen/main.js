@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableHighlight, Image} from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableHighlight, Image, TouchableOpacity} from 'react-native';
 import { createAppContainer, createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
-import { IconButton, Colors, Card, Title, Avatar } from 'react-native-paper';
-import Carousel from "react-native-carousel-control";
+import { IconButton, Colors, Card } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import Carousel from "react-native-carousel-control";
+
+import DetailPage from "./DetailPage";
 import { Icon } from "native-base";
+
+
+
 
 const data = [
     {nameCategory: 'Aksesories Gadget & Komputer'},
@@ -33,14 +39,8 @@ const list = [
         harga: '1.699.000'
     },
     {
-        image : 'http://static.bmdstatic.com/pk/product/medium/5cd25d5e7c775.jpg',
-        nameBarang: 'Huawei E5577 Max Telkomsel 14 GB black',
-        discon: '',
-        harga: '855.000'
-    },
-    {
         image : 'http://static.bmdstatic.com/pk/product/medium/5cbfcff173f83.jpg',
-        nameBarang: 'Botol Minum Easy',
+        nameBarang: 'LOCK & LOCK Botol Minum Easy Stopper Bottle 950ml Green',
         discon: '',
         harga: '70.000'
     },
@@ -65,12 +65,16 @@ export class MainMenu extends Component {
             list : list
         }
     }
+    handleNavigate = (Item) => {
+        const { navigation } = this.props;
+        navigation.navigate('DetailPage', Item)
+    }
 
     render() {
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'#f2f5f7'}}>
-                <View style={{flexDirection:'row', marginTop:10, marginRight:-13}}>
+                <View style={{flexDirection:'row', marginTop:10, marginRight:-13, marginLeft:-12}}>
                     <Carousel pageWidth={340}>
                         <Card>
                             <Card.Cover style={{height:230}} source={{ uri: 'https://artikel.pricearea.com/wp-content/uploads/2017/10/bkj.jpg' }} />
@@ -106,6 +110,9 @@ export class MainMenu extends Component {
                                 data={list}
                                 renderItem={({ item }) => {
                                     return (
+                                        <TouchableOpacity
+                                            onPress={() => this.props.navigation.navigate('DetailPage', item)}
+                                        >
                                         <View style={{width:180, marginTop:25, marginBottom:14,}}>
                                             <View style={{ justifyContent: 'center', alignItems: 'center'}}>
                                                 <Image
@@ -129,6 +136,7 @@ export class MainMenu extends Component {
                                                 </Text>
                                             </View>
                                         </View>
+                                        </TouchableOpacity>
                                     );
                                 }}
                                 keyExtractor={(item, index) => index}
@@ -425,6 +433,9 @@ const Stack = createStackNavigator({
             headerTintColor: 'red',
             title: 'MyElectro',
         }
+    },
+    DetailPage:{
+        screen: DetailPage
     }
 })
 
