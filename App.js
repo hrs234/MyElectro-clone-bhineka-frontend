@@ -4,8 +4,10 @@ import {
   createDrawerNavigator,
   createStackNavigator
 } from "react-navigation";
+import AppNavigator from "./src/DrawerStack";
 
-import AppNavigator from './src/DrawerStack';
+import { Provider } from 'react-redux'
+import store from './src/public/store';
 
 const AppContainer = createAppContainer(AppNavigator);
 export default class App extends Component {
@@ -19,7 +21,10 @@ export default class App extends Component {
   }
 
   render() {
-    return <AppContainer />;
+    return(
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    )
   }
 }
-
