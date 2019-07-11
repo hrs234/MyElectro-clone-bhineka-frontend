@@ -33,7 +33,6 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
   paymentHistory: {screen: paymentHistory},
   addSelling: {screen: addSelling}
 
-
 },
 {
   initialRouteName:'Splash',

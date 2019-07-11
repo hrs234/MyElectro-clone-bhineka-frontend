@@ -29,13 +29,13 @@ export default class Note extends Component {
         return item
     }
 
-    static navigationOptions = {
+    static navigationOptions = ({ navigation }) => ({
         headerRight: (
             <IconButton
                 icon='shopping-cart'
                 color={Colors.white}
                 size={22}
-                onPress={() => this.props.navigation.openDrawer()}
+                onPress={() => {navigation.openDrawer()}}
             />
         ),
         headerStyle: {
@@ -45,7 +45,7 @@ export default class Note extends Component {
         
         headerTintColor: '#fff',
         title: 'Detail Produk',
-    }
+    })
     render() {
         const { visible } = this.state;
         return (
