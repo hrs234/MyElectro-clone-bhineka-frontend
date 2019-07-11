@@ -68,7 +68,7 @@ export default class FloatingLabelExample extends Component {
                 <Button 
                     style={{width: '80%', marginTop:20}} 
                     mode="contained" 
-                    onPress={() => console.log('Pressed')}
+                    onPress={() => this.props.navigation.navigate("Main")}
                 >
                     LOGIN
                 </Button>

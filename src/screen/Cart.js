@@ -19,6 +19,44 @@ import {
   Footer,
   Content
 } from "native-base";
+const Alamat = [
+  {
+    id: 1,
+    no: "085123",
+    name: "eri",
+    alamat: "margoasri sragen"
+  },
+  {
+    id: 2,
+    no: "085123",
+    name: "kadarisman",
+    alamat: "surakarta Indonesia"
+  },
+  {
+    id: 3,
+    no: "085123",
+    name: "kadarisman",
+    alamat: "surakarta Indonesia"
+  },
+  {
+    id:4,
+    no: "085123",
+    name: "kadarisman",
+    alamat: "surakarta Indonesia"
+  },
+  {
+    id:5,
+    no: "085123",
+    name: "kadarisman",
+    alamat: "surakarta Indonesia"
+  },
+  {
+    id:6,
+    no: "085123",
+    name: "kadarisman",
+    alamat: "surakarta Indonesia"
+  },
+];
 const kurir = [
   {
     id: 1,
@@ -74,11 +112,15 @@ export default class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalVisible: false
+      modalVisible: false,
+      modalInput: false
     };
   }
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
+  }
+  setModalInput(visible) {
+    this.setState({ modalInput: visible });
   }
 
   _keyExtractor = (item, index) => item.id;
@@ -195,6 +237,18 @@ export default class Cart extends Component {
     </View>
   );
 
+  _keyExtractorAlamat = (item, index) => item.id;
+
+  renderItemAlamat = ({ item }) => (
+    <View
+      style={{ padding: 5, borderBottomWidth: 1, borderBottomColor: "#E0E0E0" }}
+    >
+      <Text>{item.name}</Text>
+      <Text>{item.no}</Text>
+      <Text>{item.alamat}</Text>
+    </View>
+  );
+
   render() {
     return (
       <Container>
@@ -235,27 +289,27 @@ export default class Cart extends Component {
               borderBottomWidth: 1,
               borderBottomColor: "#E0E0E0",
               justifyContent: "center",
-              paddingTop:15,
-              paddingBottom:15
+              paddingTop: 15,
+              paddingBottom: 15
             }}
           >
             <Text
               style={{
                 flex: 1,
                 textAlign: "left",
-                marginLeft: 15,
+                marginLeft: 15
               }}
             >
               Alamat Pengiriman
             </Text>
             <Text
               onPress={() => {
-                this.setModalVisible(true);
+                this.setModalInput(true);
               }}
               style={{
                 flex: 1,
                 textAlign: "right",
-                marginRight: 20,
+                marginRight: 20
               }}
             >
               pilih
@@ -441,6 +495,85 @@ export default class Cart extends Component {
                   keyExtractor={this.keyExtractorKurir}
                   data={kurir}
                   renderItem={this.renderItemKurir}
+                  style={{ marginTop: 5 }}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
+        {/* input */}
+        <Modal
+          transparent={true}
+          animationType="fade"
+          visible={this.state.modalInput}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+          onPress={() => {
+            this.setModalInput(!this.state.modalInput);
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "rgba(51,51,51,0.8)",
+              justifyContent: "flex-end",
+              alignItems: "flex-end"
+            }}
+          >
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => this.setModalInput(!this.state.modalInput)}
+              style={{
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                right: 0,
+                left: 0
+              }}
+            />
+            <View
+              style={{
+                width: "100%",
+                height: "50%",
+                position: "absolute",
+                backgroundColor: "white",
+                elevetion: 3
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  borderBottomWidth: 1,
+                  borderBottomColor: "#E0E0E0",
+                  alignItems: "center",
+                  paddingTop: 10,
+                  paddingBottom: 10
+                }}
+              >
+                <Text
+                  style={{ marginLeft: 10, fontSize: 15, fontWeight: "bold" }}
+                >
+                  Alamat pengiriman
+                </Text>
+                <View
+                  style={{ flex: 1, alignItems: "flex-end", marginRight: 20 }}
+                >
+                  <Icon
+                    onPress={() => this.setModalInput(!this.state.modalInput)}
+                    name="close"
+                  />
+                </View>
+              </View>
+              <View
+                style={{
+                  flex: 1
+                }}
+              >
+                <FlatList
+                  keyExtractor={this.keyExtractorAlamat}
+                  data={Alamat}
+                  renderItem={this.renderItemAlamat}
                   style={{ marginTop: 5 }}
                 />
               </View>
