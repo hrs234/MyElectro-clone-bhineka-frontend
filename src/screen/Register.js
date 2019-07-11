@@ -47,7 +47,7 @@ class Register extends Component {
       
     ) {
       let dataReg = {
-        image: this.state.image.path,
+        image: this.state.image,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         email: this.state.email,
