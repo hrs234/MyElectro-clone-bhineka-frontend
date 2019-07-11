@@ -399,13 +399,13 @@ const TabNavigator = createMaterialTopTabNavigator(
 const Stack = createStackNavigator({
     TabNavigator: {
         screen: TabNavigator,
-        navigationOptions: {
+        navigationOptions:({ navigation }) => ({
             headerLeft: (
                 <IconButton
                     icon='close'
                     color={Colors.white}
                     size={25}
-                    onPress={() => this.props.navigation.openDrawer()}
+                    onPress={() => {navigation.openDrawer()}}
                 />
             ),
             headerRight: (
@@ -415,13 +415,13 @@ const Stack = createStackNavigator({
                         icon='close'
                         color={Colors.white}
                         size={25}
-                        onPress={() => this.props.navigation.openDrawer()}
+                        onPress={() => {navigation.openDrawer()}}
                     />
                     <IconButton
                         icon='close'
                         color={Colors.white}
                         size={22}
-                        onPress={() => this.props.navigation.openDrawer()}
+                        onPress={() => {navigation.openDrawer()}}
                     />
                 </View>
             ),
@@ -432,7 +432,7 @@ const Stack = createStackNavigator({
             
             headerTintColor: 'red',
             title: 'MyElectro',
-        }
+        })
     },
     DetailPage:{
         screen: DetailPage
