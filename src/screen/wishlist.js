@@ -40,14 +40,18 @@ export default class wishlist extends Component {
     </View>;
   };
 
-  render() {
-    return (
-      // Header
-      <View style={{ backgroundColor: "#F5F5F5" }}>
-        <Appbar.Header>
-          <Appbar.BackAction onPress={() => alert("this back")} />
-          <Appbar.Content title="Wishlist" />
-        </Appbar.Header>
+    render() {
+        return (
+            // Header
+            <View style={{ backgroundColor: "#F5F5F5" }}>
+                <Appbar.Header style={{ backgroundColor: '#092B51'}}>
+                <Appbar.BackAction
+                    onPress={() => alert('this back')}
+                />
+                <Appbar.Content
+                    title="Wishlist"
+                />
+            </Appbar.Header>
 
         <ScrollView>
           <View style={{ marginTop: 15, marginLeft: 15, marginBottom: 25 }}>
