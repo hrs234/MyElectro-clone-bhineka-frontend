@@ -39,7 +39,7 @@ const AppNavigator = createStackNavigator(
     AddSelling: AddSelling,
   },
   {
-    initialRouteName: "Login",
+    initialRouteName: "Main",
     headerMode: "none",
     defaultNavigationOptions: {
       headerVisible: false

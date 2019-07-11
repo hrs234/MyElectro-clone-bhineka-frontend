@@ -4,7 +4,6 @@ import { Container, Header, Body } from "native-base";
 
 import { ScrollView } from "react-native-gesture-handler";
 
-
 export default class Drawer extends Component {
   render() {
     return (
@@ -39,8 +38,7 @@ export default class Drawer extends Component {
             </View>
           </Body>
         </Header>
-        <ScrollView>
-        </ScrollView>
+        <ScrollView />
       </Container>
     );
   }

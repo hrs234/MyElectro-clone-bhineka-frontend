@@ -394,7 +394,7 @@ const Stack = createStackNavigator({
         navigationOptions: {
             headerLeft: (
                 <IconButton
-                    icon='menu'
+                    icon='close'
                     color={Colors.white}
                     size={25}
                     onPress={() => this.props.navigation.openDrawer()}
@@ -404,13 +404,13 @@ const Stack = createStackNavigator({
                 <View style={{flexDirection:'row'}}>
                     <IconButton
                         style={{marginRight:-3}}
-                        icon='search'
+                        icon='close'
                         color={Colors.white}
                         size={25}
-                        onPress={() => this.props.navigation.navigate("Search")}
+                        onPress={() => this.props.navigation.openDrawer()}
                     />
                     <IconButton
-                        icon='shopping-cart'
+                        icon='close'
                         color={Colors.white}
                         size={22}
                         onPress={() => this.props.navigation.openDrawer()}
