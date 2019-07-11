@@ -16,8 +16,8 @@ export default class FloatingLabelExample extends Component {
   render() {
     return (
 
-        <View style={{flex:1, backgroundColor:'cyan'}}>
-            <Appbar.Header>
+        <View style={{ flex: 1, backgroundColor:'#F5F5F5'}}>
+            <Appbar.Header style={{ backgroundColor: '#fff' }}>
                 <Appbar.Action
                     icon="close"
                     onPress={this._goBack}
@@ -39,7 +39,15 @@ export default class FloatingLabelExample extends Component {
                 </View>
                 <HelperText
                     type="error"
-                    visible={!this.state.text.includes('@')}
+                    visible=
+                    {
+                        !this.state.text.includes('@') ? 
+                            this.state.text == '' ? 
+                                false 
+                                : 
+                                true 
+                            : false
+                    }
                     >
                     Format email salah
                 </HelperText>
@@ -99,6 +107,6 @@ const styles = StyleSheet.create({
     textInput: {
         width: '80%',
         fontSize: 200,
-        backgroundColor: 'cyan'
+        backgroundColor: '#F5F5F5'
     }
 })

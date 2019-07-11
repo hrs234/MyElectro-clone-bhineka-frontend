@@ -41,7 +41,7 @@ export default class wishlist extends Component {
         return (
             // Header
             <View style={{ backgroundColor: "#F5F5F5" }}>
-            <Appbar.Header>
+                <Appbar.Header style={{ backgroundColor: '#092B51'}}>
                 <Appbar.BackAction
                     onPress={() => alert('this back')}
                 />
