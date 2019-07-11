@@ -53,7 +53,7 @@ const list = [
 ];
 
 // Tab Main Menu
-class MainMenu extends Component {
+export class MainMenu extends Component {
     static navigationOptions = {
         drawerIcon: <Icon name="store" type="MaterialIcons" style={{ color: "#000000" }} />
     };
@@ -407,7 +407,7 @@ const Stack = createStackNavigator({
                         icon='search'
                         color={Colors.white}
                         size={25}
-                        onPress={() => this.props.navigation.openDrawer()}
+                        onPress={() => this.props.navigation.navigate("Search")}
                     />
                     <IconButton
                         icon='shopping-cart'
