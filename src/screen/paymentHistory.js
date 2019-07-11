@@ -91,7 +91,7 @@ export default class paymentHistory extends Component {
 
 const styles = StyleSheet.create({
     Head: {
-        backgroundColor: "#fff"
+        backgroundColor: "#092B51"
     },
     back:{
         backgroundColor: "#DEDEDE"

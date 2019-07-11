@@ -1,4 +1,5 @@
 
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -13,6 +14,9 @@ import { createAppContainer, createDrawerNavigator, createStackNavigator } from 
 // import { Provider as paperProvider } from 'react-native-paper';
 // import AppStackNavigation from './src/navigator/navigate';
 // import styles from './src/css/style';
+    
+import { Provider } from 'react-redux'
+import store from './src/public/store';
 
 // Import the pages component
 import Splash from './src/screen/splash';
@@ -60,7 +64,10 @@ export default class App extends Component
   }
 
   render() {
-    return <AppContainer />;
+    return(
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    )
   }
 }
-
