@@ -2,11 +2,12 @@ import { combineReducers } from 'redux';
 
 // import all reducers
 import reducer from './reducer';
+import auth from './auth';
 
 // combine them
 const appReducer = combineReducers({
-    // auth,
-    reducer // es6 shorthand from notes: notes
+    reducer,
+    auth
 })
 
 export default appReducer;
