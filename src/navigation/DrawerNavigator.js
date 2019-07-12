@@ -19,7 +19,7 @@ import informasi from '../screen/Informasi';
 
 //custom drawer
 // import SideMenu from '../components/SideMenu';
-import SideMenu from '../Components/SideMenu';
+import SideMenu from '../components/SideMenu';
 
 const AppSwitchNavigatorA = createDrawerNavigator(
     {
