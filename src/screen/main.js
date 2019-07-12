@@ -122,6 +122,7 @@ export class MainMenu extends Component {
       }
     });
     alert("login id " + this.state.id + " token " + this.state.token);
+    
   };
 
   componentDidMount() {
