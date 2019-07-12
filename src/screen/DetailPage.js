@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import axios from 'axios';
 
-import ModalBuy from '../Components/ModalBeli';
+import ModalBuy from '../components/ModalBeli';
 
 export default class Note extends Component {
 
@@ -161,6 +161,7 @@ export default class Note extends Component {
                         <View>
                             <Button style={{height:46, justifyContent:'center', backgroundColor:'#d5d902'}} mode="contained"
                             onPress={() => {
+                                this.props.navigation.navigate('cart');
                                 this.setModalVisible(!this.state.modalVisible);
                             }}
                             >
