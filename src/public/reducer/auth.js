@@ -4,7 +4,9 @@ const initialState = {
   data: [],
   results: [],
   isLoading: false,
-  isError: false
+  isError: false,
+  token:"",
+  id:""
 };
 
 export default (auth = async (state = initialState, action) => {
@@ -24,13 +26,17 @@ export default (auth = async (state = initialState, action) => {
       // console.log(action.payload.data);
       // console.log(action.payload.data.message);
       console.log(action.payload.data.token);
+      console.log(action.payload.data);
       // console.log(action.payload.data.rows[0]);//getuser
+      // let id = `${action.payload.data.id}`
       await AsyncStorage.setItem("token", action.payload.data.token);
-      await AsyncStorage.setItem("user", action.payload.data.rows[0]);
+      await AsyncStorage.setItem("user", action.payload.data.id);
       return {
         isLoading: false,
         isError: false,
-        data: action.payload.data
+        data: action.payload.data,
+        token:action.payload.data.token,
+        id:action.payload.data.id
       };
     default:
       return state;

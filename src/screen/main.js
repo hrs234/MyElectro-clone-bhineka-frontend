@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  AsyncStorage
+} from "react-native";
 import {
   createAppContainer,
   createStackNavigator,
@@ -19,7 +26,6 @@ import listproduct from "../screen/ListProduct";
 
 // Import the pages component
 import Splash from "./splash";
-import Main from "./main";
 import Register from "./Register";
 import Login from "./Login";
 import wishlist from "./wishlist";
@@ -82,16 +88,48 @@ export class MainMenu extends Component {
       Category1: [],
       Category2: [],
       Category3: [],
-      list: list
+      list: list,
+      token: "",
+      id: "",
+      isLogin: false
     };
+    this.loginasync();
   }
+
+  loginasync = async () => {
+    await AsyncStorage.getItem("user", (error, id) => {
+      if (id) {
+        this.setState({
+          isLogin: true,
+          id: id
+        });
+      } else {
+        this.setState({
+          isLogin: false
+        });
+      }
+    });
+    await AsyncStorage.getItem("token", (error, token) => {
+      if (token) {
+        this.setState({
+          isLogin: true,
+          token: token
+        });
+      } else {
+        this.setState({
+          isLogin: false
+        });
+      }
+    });
+    alert("login id " + this.state.id + " token " + this.state.token);
+    
+  };
 
   componentDidMount() {
     axios
       .get("https://clone-bhineka.herokuapp.com/product?category=1")
       .then(res => {
         const data = res.data;
-        //console.warn(data.data)
         this.setState({ Category1: data.data, loading: false });
       })
       .catch(error => {
@@ -102,7 +140,6 @@ export class MainMenu extends Component {
       .get("https://clone-bhineka.herokuapp.com/product?category=2")
       .then(res => {
         const data = res.data;
-        //console.warn(data.data)
         this.setState({ Category2: data.data, loading: false });
       })
       .catch(error => {
@@ -113,7 +150,6 @@ export class MainMenu extends Component {
       .get("https://clone-bhineka.herokuapp.com/product/category=3")
       .then(res => {
         const data = res.data;
-        //console.warn(data.data)
         this.setState({ Category3: data.data, loading: false });
       })
       .catch(error => {
@@ -127,7 +163,6 @@ export class MainMenu extends Component {
   };
 
   render() {
-    console.warn(this.state.Category1);
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
@@ -680,7 +715,10 @@ const Stack = createStackNavigator({
   Forgot: { screen: Forgot },
   ChangePassword: { screen: ChangePassword },
   cart: { screen: cart, navigationOptions: { header: null } },
-  search: { screen: search }
+  search: { screen: search },
+  Main: { screen: MainMenu }
 });
 
+// connect with redux,first param is map and second is component
+// export default connect(mapStateToProps)(Login);
 export default createAppContainer(Stack);
