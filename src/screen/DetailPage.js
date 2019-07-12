@@ -1,9 +1,11 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, ScrollView, Modal, AsyncStorage } from "react-native";
-import { IconButton, Colors, Button } from "react-native-paper";
-import Icon from "react-native-vector-icons/dist/MaterialIcons";
-import Icon2 from "react-native-vector-icons/dist/MaterialCommunityIcons";
-import axios from "axios";
+
+import React, {Component} from 'react';
+import { StyleSheet, Text, View, Image, ScrollView,Modal} from 'react-native';
+import { IconButton, Colors, Button} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/dist/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/dist/MaterialCommunityIcons';
+import axios from 'axios';
+import {getCart} from '../public/action/cart'
 
 import ModalBuy from "../components/ModalBeli";
 
@@ -217,93 +219,55 @@ class DetailPage extends Component {
                                 <Text style={{fontSize:17, color:'#7b6ec2'}}>{'\u2022'}Grey</Text>
                             </View>
                         </View> */}
-            <View style={styles.view5}>
-              <Text style={{ fontSize: 20, marginBottom: 5 }}>Overview</Text>
-              <View style={{ flex: 1, marginBottom: 12 }}>
-                <Text style={{ fontSize: 17, color: "#272929" }}>
-                  {this.state.description}
-                </Text>
-              </View>
-            </View>
-          </View>
-        </ScrollView>
-        <View style={{ backgroundColor: "#d5d902" }}>
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={this.state.modalVisible}
-          >
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: "rgba(0, 0, 0, 0.50)",
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-            >
-              <View
-                style={{
-                  backgroundColor: "#FFF",
-                  borderTopRightRadius: 3,
-                  borderTopLeftRadius: 3,
-                  width: "90%",
-                  height: "8%",
-                  padding: 10,
-                  elevation: 3
-                }}
-              >
-                <View
-                  style={{ flexDirection: "row", padding: 5, elevation: 1 }}
-                >
-                  <Image
-                    style={{ width: 22, height: 22, marginRight: 5 }}
-                    source={{
-                      uri:
-                        "https://dumielauxepices.net/sites/default/files/hand-emoji-clipart-air-emoji-png-632601-5302983.png"
-                    }}
-                  />
-                  <Text style={{ fontWeight: "bold", fontSize: 17 }}>
-                    Produk berhasil ditambah
-                  </Text>
-                </View>
-              </View>
-              <View
-                style={{
-                  backgroundColor: "#f2f0f0",
-                  borderBottomRightRadius: 3,
-                  borderBottomLeftRadius: 3,
-                  width: "90%",
-                  height: "20%",
-                  padding: 10,
-                  elevation: 3
-                }}
-              >
-                <View>
-                  <Button
-                    style={{
-                      height: 46,
-                      justifyContent: "center",
-                      backgroundColor: "#d5d902"
-                    }}
-                    mode="contained"
-                    onPress={() => {
-                      this.props.navigation.navigate("cart");
-                      this.setModalVisible(!this.state.modalVisible);
-                    }}
-                  >
-                    <Text style={{ fontSize: 14, color: "black" }}>
-                      LANJUT KE KERANJANG
-                    </Text>
-                  </Button>
-                  <Button
-                    style={{
-                      height: 45,
-                      justifyContent: "center",
-                      backgroundColor: "#fff",
-                      marginTop: 15,
-                      elevation: 3
-                    }}
-                    mode="contained"
+                        <View style={styles.view5}>
+                            <Text style={{fontSize:20, marginBottom:5}}>Overview</Text>
+                            <View style={{flex:1, marginBottom:12}}>
+                                <Text style={{fontSize:17, color:'#272929'}}>
+                                {this.state.description}
+                                </Text>
+                            </View>
+                        </View>
+                    </View> 
+                </ScrollView>
+                <View style={{backgroundColor: '#d5d902'}}>
+                <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={this.state.modalVisible}>
+                    <View style={{flex:1, backgroundColor: 'rgba(0, 0, 0, 0.50)', alignItems:'center', justifyContent:'center' }}>
+                        <View style={{backgroundColor:'#FFF', borderTopRightRadius:3, borderTopLeftRadius:3, width:'90%', height:'8%', padding:10, elevation:3 }}>
+                        <View style={{flexDirection:'row', padding:5, elevation:1}}>
+                            <Image
+                            style={{width: 22, height: 22, marginRight:5}}
+                            source={{uri: 'https://dumielauxepices.net/sites/default/files/hand-emoji-clipart-air-emoji-png-632601-5302983.png'}}
+                            />
+                            <Text style={{fontWeight:'bold', fontSize:17}}>Produk berhasil ditambah</Text>
+                        </View>
+                        </View>
+                        <View style={{backgroundColor:'#f2f0f0', borderBottomRightRadius:3, borderBottomLeftRadius:3, width:'90%', height:'20%', padding:10, elevation:3 }}>
+                        <View>
+                            <Button style={{height:46, justifyContent:'center', backgroundColor:'#d5d902'}} mode="contained"
+                            onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                                this.props.navigation.navigate('cart', this.state.id_user);
+                                console.log(this.state.id_user)
+                            }}
+                            >
+                            <Text style={{fontSize:14,color:'black'}}>LANJUT KE KERANJANG</Text>
+                            </Button>
+                            <Button style={{height:45, justifyContent:'center', backgroundColor:'#fff', marginTop:15, elevation:3}} mode="contained"
+                            onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                            }}
+                            >
+                            <Text style={{fontSize:14,color:'#c8a8ed'}}>KEMBALI BERBELANJA</Text>
+                            </Button>
+                        </View>
+                        </View>
+                    </View>
+                    </Modal>
+
+                    <Button style={{height:57, justifyContent:'center'}} mode="text"
                     onPress={() => {
                       this.setModalVisible(!this.state.modalVisible);
                     }}
