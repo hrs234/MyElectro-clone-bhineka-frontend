@@ -38,6 +38,7 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
     Wishlist :{ screen: wishlist },
     Kontak :{ screen: Kontak },
     Informasi :{ screen: Informasi },
+    Login :{ screen: Login },
   
   },
   {

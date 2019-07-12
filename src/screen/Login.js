@@ -25,6 +25,7 @@ class Login extends Component {
 
   removeAsync = async () => {
     await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("user");
     alert("remove");
   };
 
@@ -37,10 +38,14 @@ class Login extends Component {
     await this.props.dispatch(loginUser(dataLogin));
 
     AsyncStorage.getItem("token", (error, result) => {
+      console.log('aaaaaa');
+      console.log(result);
+      
       if (result) {
-        alert("berhasil Login" + result);
+        this.props.navigation.goBack();
+        alert("berhasil Login token " + result);
       } else {
-        alert("Terjadi Kesalahan saat Login");
+        alert("salah");
       }
     });
   };
