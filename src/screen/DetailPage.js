@@ -61,7 +61,7 @@ export default class Note extends Component {
                 icon='shopping-cart'
                 color={Colors.white}
                 size={22}
-                onPress={() => {navigation.openDrawer()}}
+                onPress={() => {navigation.navigate('Cart')}}
             />
         ),
         headerStyle: {

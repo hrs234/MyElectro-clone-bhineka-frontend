@@ -13,6 +13,7 @@ import { Icon } from "native-base";
 import axios from 'axios';
 import Kategori from "./CategoryScreen.js"
 import listproduct from '../screen/ListProduct'
+import Cart from '../screen/Cart'
 
 
 
@@ -437,6 +438,7 @@ const Stack = createStackNavigator({
     ListProduct: { 
         screen: listproduct,
     },
+
     Search: {
         screen: Search,
         navigationOptions: {header: null}
@@ -445,6 +447,7 @@ const Stack = createStackNavigator({
         screen: Cart,
         navigationOptions: {header: null}
     }
+
 })
 
 export default createAppContainer(Stack);
