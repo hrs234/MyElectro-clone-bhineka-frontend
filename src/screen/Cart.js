@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from "axios";
+
 import {
   View,
   Text,
@@ -6,7 +8,8 @@ import {
   Image,
   Modal,
   TouchableOpacity,
-  Alert
+  Alert,
+  AsyncStorage
 } from "react-native";
 import {
   Container,
@@ -17,7 +20,8 @@ import {
   Icon,
   Button,
   Footer,
-  Content
+  Content,
+  Spinner
 } from "native-base";
 const Alamat = [
   {
@@ -39,23 +43,23 @@ const Alamat = [
     alamat: "surakarta Indonesia"
   },
   {
-    id:4,
+    id: 4,
     no: "085123",
     name: "kadarisman",
     alamat: "surakarta Indonesia"
   },
   {
-    id:5,
+    id: 5,
     no: "085123",
     name: "kadarisman",
     alamat: "surakarta Indonesia"
   },
   {
-    id:6,
+    id: 6,
     no: "085123",
     name: "kadarisman",
     alamat: "surakarta Indonesia"
-  },
+  }
 ];
 const kurir = [
   {
@@ -113,9 +117,56 @@ export default class Cart extends Component {
     super(props);
     this.state = {
       modalVisible: false,
-      modalInput: false
+      modalInput: false,
+      loading: true
     };
+    this.loginasync();
   }
+
+  loginasync = async () => {
+    await AsyncStorage.getItem("user", (error, id) => {
+      if (id) {
+        this.setState({
+          isLogin: true,
+          id_user: id
+        });
+      } else {
+        this.setState({
+          isLogin: false
+        });
+      }
+    });
+    await AsyncStorage.getItem("token", (error, token) => {
+      if (token) {
+        this.setState({
+          isLogin: true,
+          token: token
+        });
+      } else {
+        this.setState({
+          isLogin: false
+        });
+      }
+    });
+    // alert("login id " + this.state.id_user + " token " + this.state.token);
+
+    axios
+      .get(`https://clone-bhineka.herokuapp.com/cart/` + this.state.id_user)
+      .then(res => {
+        const data = res.data;
+        console.log("res.data");
+        console.log(res.data);
+
+        this.setState({ cart: data.data, loading: false });
+      })
+      .catch(error => {
+        this.setState({ loading: false, error: "something went wrong" });
+      });
+    console.log(this.state.cart);
+  };
+
+  
+
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
@@ -123,7 +174,7 @@ export default class Cart extends Component {
     this.setState({ modalInput: visible });
   }
 
-  _keyExtractor = (item, index) => item.id;
+  _keyExtractor = (item, index) => index.toString();
 
   renderItem = ({ item }) => (
     <View
@@ -145,7 +196,7 @@ export default class Cart extends Component {
           style={{ width: 80, height: 80, margin: 5 }}
         />
         <View style={{ flex: 1, marginLeft: 5, marginTop: 15 }}>
-          <Text style={{ fontSize: 15 }}>{item.title}</Text>
+          <Text style={{ fontSize: 15 }}>ini nama</Text>
           <Text style={{ fontWeight: "bold", marginTop: 5 }}>
             Rp. {item.price}
           </Text>
@@ -205,7 +256,7 @@ export default class Cart extends Component {
     </View>
   );
 
-  _keyExtractorKurir = (item, index) => item.id;
+  _keyExtractorKurir = (item, index) => index;
 
   renderItemKurir = ({ item }) => (
     <View
@@ -237,7 +288,7 @@ export default class Cart extends Component {
     </View>
   );
 
-  _keyExtractorAlamat = (item, index) => item.id;
+  _keyExtractorAlamat = (item, index) => index;
 
   renderItemAlamat = ({ item }) => (
     <View
@@ -276,12 +327,13 @@ export default class Cart extends Component {
           </Text>
         </View>
         <Content>
+        {this.state.loading ? <Spinner/> : 
           <FlatList
             keyExtractor={this.keyExtractor}
-            data={faker}
+            data={this.state.cart}
             renderItem={this.renderItem}
             style={{ marginTop: 5 }}
-          />
+          />}
           <View
             style={{
               flex: 1,
