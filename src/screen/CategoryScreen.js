@@ -3,18 +3,13 @@ import { View, Text, FlatList, StyleSheet, TouchableHighlight } from 'react-nati
 import { IconButton, Colors, Card } from 'react-native-paper';
 
 import { getCategory } from '../public/action/category'
-import { getProduct } from '../public/action/product'
 import { connect } from 'react-redux'
+
 // Tab Category
 class CategoryScreen extends React.Component {
 
     getDataCategory(){
         this.props.dispatch(getCategory())
-    }
-
-    getDataProduct(id){
-        console.log(id,'masuk fungsi')
-        this.props.dispatch(getProduct(id))
     }
 
     componentDidMount = () => {
@@ -26,8 +21,8 @@ class CategoryScreen extends React.Component {
             <View style={styles.container}>
                 <FlatList
                     data={this.props.category.data}
-                    renderItem={({ item, index }) => (
-                        <TouchableHighlight underlayColor="cyan" onPress={() => this.props.navigation.navigate('Informasi', console.warn('test'))}>
+                    renderItem={({ item }) => (
+                        <TouchableHighlight underlayColor="cyan" onPress={() => this.props.navigation.navigate('ListProduct', item)}>
                             <View style={{flexDirection:'row', borderBottomWidth:1, borderColor:'#33cccc'}}>
                                 <Text style={styles.item}>{item.category}</Text>
                                 <View style={{justifyContent:'center'}}>
@@ -49,8 +44,7 @@ class CategoryScreen extends React.Component {
 
 const mapStateToProps = ( state ) => {
     return {
-      category: state.category,
-      product: state.product
+      category: state.category
     }
 }
 export default connect(mapStateToProps)(CategoryScreen);

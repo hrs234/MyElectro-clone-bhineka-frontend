@@ -46,6 +46,7 @@ export default class Note extends Component {
         headerTintColor: '#fff',
         title: 'Detail Produk',
     })
+    
     render() {
         const { visible } = this.state;
         return (

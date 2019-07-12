@@ -13,12 +13,15 @@ export default product = (state = initialState, action) => {
 				isLoading: true
 			}
 		case 'GET_PRODUCT_REJECTED':
+                console.log(action.payload)
+                console.warn(action.payload)
 			return{
                 isLoading: false,
                 isError: true
 			}
 		case 'GET_PRODUCT_FULFILLED':
-            console.log('tess')
+            console.log(action.payload)
+            console.warn(action.payload)
 			return {
                 isLoading: false,
                 isError: false,

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableHighlight, Image, TouchableOpacity} from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
 import { createAppContainer, createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
-import { IconButton, Colors, Card } from 'react-native-paper';
+import { IconButton, Colors, Card, Button } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import Carousel from "react-native-carousel-control";
 
 import DetailPage from "./DetailPage";
-import { Icon } from "native-base";
 import Kategori from "./CategoryScreen.js"
+import listproduct from '../screen/ListProduct'
 
 const list = [
     {
@@ -76,7 +76,7 @@ export class MainMenu extends Component {
                 <View style={{width:'95%', marginTop:20, borderWidth:0}}>
                     <Card style={{elevation:5}}>
                         <Card.Title 
-                            style={{borderBottomWidth:0.7, borderColor:'#97a6a1', height:50}}
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
                             title="Rekomendasi untuk Anda"
                             titleStyle={{fontSize: 17}}
                             right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
@@ -127,7 +127,7 @@ export class MainMenu extends Component {
                 <View style={{width:'95%', marginTop:20, borderWidth:0}}>
                     <Card style={{elevation:5}}>
                         <Card.Title 
-                            style={{borderBottomWidth:0.7, borderColor:'#97a6a1', height:50}}
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
                             title="Rekomendasi untuk Anda"
                             titleStyle={{fontSize: 17}}
                             right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
@@ -174,7 +174,7 @@ export class MainMenu extends Component {
                 <View style={{width:'95%', marginTop:20, borderWidth:0}}>
                     <Card style={{elevation:5}}>
                         <Card.Title 
-                            style={{borderBottomWidth:0.7, borderColor:'#97a6a1', height:50}}
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
                             title="Rekomendasi untuk Anda"
                             titleStyle={{fontSize: 17}}
                             right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
@@ -221,7 +221,7 @@ export class MainMenu extends Component {
                 <View style={{width:'95%', marginTop:20, borderWidth:0}}>
                     <Card style={{elevation:5}}>
                         <Card.Title 
-                            style={{borderBottomWidth:0.7, borderColor:'#97a6a1', height:50}}
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
                             title="Rekomendasi untuk Anda"
                             titleStyle={{fontSize: 17}}
                             right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
@@ -268,10 +268,17 @@ export class MainMenu extends Component {
                 <View style={{width:'95%', marginTop:20, marginBottom: 40}}>
                     <Card style={{elevation:5}}>
                         <Card.Title 
-                            style={{borderBottomWidth:0.7, borderColor:'#97a6a1', height:50}}
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
                             title="Rekomendasi untuk Anda"
                             titleStyle={{fontSize: 17}}
-                            right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
+                            right={(props) => 
+                                <Button 
+                                    style={{color:'blue', fontWeight:'bold', fontSize:12}}
+                                    onPress={() => this.props.navigation.navigate('ListProduct')}
+                                >
+                                    LIHAT SEMUA
+                                </Button>
+                            } 
                             rightStyle={{marginRight:16}}
                         />
                         <Card.Content>
@@ -382,9 +389,12 @@ const Stack = createStackNavigator({
             title: 'MyElectro',
         })
     },
-    DetailPage:{
+    DetailPage: {
         screen: DetailPage
-    }
+    },
+    ListProduct: { 
+        screen: listproduct,
+    },
 })
 
 export default createAppContainer(Stack);
