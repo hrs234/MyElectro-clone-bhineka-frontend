@@ -12,8 +12,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 //redux
 import { connect } from "react-redux";
-import { loginUser } from "../public/action/action";
-
+import { loginUser } from "../public/action/auth";
 
 class Login extends Component {
   constructor(props) {
@@ -24,27 +23,27 @@ class Login extends Component {
     };
   }
 
-  removeAsync = async () =>{
+  removeAsync = async () => {
     await AsyncStorage.removeItem("token");
-    alert('remove')
-  }
+    alert("remove");
+  };
 
   login = async () => {
-    let dataLogin ={
+    let dataLogin = {
       email: this.state.email,
       password: this.state.password
-    }
+    };
 
     await this.props.dispatch(loginUser(dataLogin));
 
-    AsyncStorage.getItem("token",(error, result)=>{
+    AsyncStorage.getItem("token", (error, result) => {
       if (result) {
-        alert('berhasil Login'+result)
-      } else{
-        alert('Terjadi Kesalahan saat Login')
+        alert("berhasil Login" + result);
+      } else {
+        alert("Terjadi Kesalahan saat Login");
       }
-    })
-  }
+    });
+  };
 
   //Action Header
   _goBack = () => this.props.navigation.goBack();
@@ -52,7 +51,7 @@ class Login extends Component {
   render() {
     // console.log("~~~~~~~");
     // console.log(this.props.reducer.data);
-    
+
     return (
       <View style={{ flex: 1, backgroundColor: "#F5F5F5" }}>
         <Appbar.Header style={{ backgroundColor: "#fff" }}>
@@ -93,15 +92,18 @@ class Login extends Component {
               onChangeText={password => this.setState({ password })}
             />
           </View>
-          <TouchableOpacity style={{ marginTop: 20, TextAlign: "right" }}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('Forgot')}
+            style={{ marginTop: 20, TextAlign: "right" }}
+          >
             <Text style={{ textAlign: "right" }}>LUPA PASSWORD</Text>
           </TouchableOpacity>
           <Button
             style={{ width: "80%", marginTop: 20 }}
             mode="contained"
             onPress={() => {
-                this.login()
-              }}
+              this.login();
+            }}
           >
             LOGIN
           </Button>
@@ -111,7 +113,9 @@ class Login extends Component {
           <Button
             style={{ color: "blue", width: "34%", backgroundColor: "#fff" }}
             mode="contained"
-            onPress={() => {this.removeAsync()}}
+            onPress={() => {
+              this.removeAsync();
+            }}
           >
             <Text style={{ color: "blue" }}>REGISTRASI</Text>
           </Button>
@@ -121,10 +125,9 @@ class Login extends Component {
   }
 }
 
-
 const mapStateToProps = state => {
   return {
-    reducer: state.reducer
+    auth: state.auth
     // auth: state.auth
   };
 };
