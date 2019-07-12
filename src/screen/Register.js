@@ -8,7 +8,6 @@ import {
   List
 } from "react-native-paper";
 import { DatePicker } from "native-base";
-import DateTimePicker from "react-native-modal-datetime-picker";
 import ImagePicker from "react-native-image-picker";
 
 //redux
@@ -44,7 +43,7 @@ class Register extends Component {
       this.state.gender != "" &&
       this.state.password != "" &&
       this.state.birth_date != ""
-      
+
     ) {
       let dataReg = {
         image: this.state.image,
@@ -63,7 +62,55 @@ class Register extends Component {
   };
 
   setDate(newDate) {
-    this.setState({ birth_date: '1999-05-12' });
+
+    let filter = newDate.toString();
+    let filterA = filter.split(' ');
+
+    let res = '';
+
+
+    if (filterA[1] == 'Jan') {
+      res = `${filterA[3]}-01-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'Feb') {
+      res = `${filterA[3]}-02-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'Mar') {
+      res = `${filterA[3]}-03-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'Apr') {
+      res = `${filterA[3]}-04-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'May') {
+      res = `${filterA[3]}-05-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'Jun') {
+      res = `${filterA[3]}-06-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'Jul') {
+      res = `${filterA[3]}-07-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'Aug') {
+      res = `${filterA[3]}-08-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'Sep') {
+      res = `${filterA[3]}-09-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'Oct') {
+      res = `${filterA[3]}-10-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'Nov') {
+      res = `${filterA[3]}-11-${filterA[2]}`;
+    }
+    else if (filterA[1] == 'Dec') {
+      res = `${filterA[3]}-12-${filterA[2]}`;
+    }
+    else {
+      res = `${filterA[3]}-00-${filterA[2]}`;
+    }
+
+    this.setState({ birth_date: res });
+    console.log(res);
   }
 
   showDateTimePicker = () => {
@@ -86,7 +133,7 @@ class Register extends Component {
     ImagePicker.launchImageLibrary(options, response => {
       if (response.uri) {
         this.setState({ image: response });
-        
+
       }
     });
   };
@@ -112,11 +159,11 @@ class Register extends Component {
                 style={{ width: 150, height: 150, borderRadius: 150 }}
               />
             ) : (
-              <Image
-                source={require("../icons/man-user.png")}
-                style={{ width: 150, height: 150, borderRadius: 150 }}
-              />
-            )}
+                <Image
+                  source={require("../icons/man-user.png")}
+                  style={{ width: 150, height: 150, borderRadius: 150 }}
+                />
+              )}
 
             <View style={styles.formInput}>
               <Button onPress={this.handleChoosePhoto}>Upload Photo</Button>
@@ -125,7 +172,7 @@ class Register extends Component {
             <View style={styles.Toggle}>
               <List.Icon icon="person" />
               <ToggleButton.Group
-                onValueChange={value => this.setState({ gender:value })}
+                onValueChange={value => this.setState({ gender: value })}
                 value={this.state.gender}
               >
                 <ToggleButton
@@ -197,6 +244,7 @@ class Register extends Component {
                 modalTransparent={false}
                 animationType={"fade"}
                 androidMode={"default"}
+                format="YYYY-MM-DD"
                 placeHolderText="Select date"
                 textStyle={{ color: "#000" }}
                 placeHolderTextStyle={{ color: "#d3d3d3" }}
@@ -209,7 +257,7 @@ class Register extends Component {
               title="Register!"
               onPress={() => {
                 this.regUser()
-                alert("this regist")
+                // alert("this regist")
               }}
               style={styles.button}
             >

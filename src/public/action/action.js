@@ -43,3 +43,42 @@ export const regUser = dataReg => {
     payload: axios.post(URL + "/user", data)
   };
 };
+
+export const getHistory = getID => {
+  return {
+    type: "REQ_HISTORY",
+    payload: axios.get(URL + `/transaction?id=${getID}`)
+  }
+}
+
+export const getCart = getID => {
+  return {
+    type: "REQ_CART",
+    payload: axios.get(URL + `/cart/${getID}`)
+  }
+}
+
+export const regItems = dataReg => {
+  console.log("XXXXXX");
+  console.log(dataReg);
+  let data = new FormData();
+  data.append("product", dataReg.product);
+  data.append("price", dataReg.price);
+  data.append("description", dataReg.description);
+  data.append("image", {
+    uri: dataReg.image.uri,
+    name: dataReg.image.fileName,
+    type: "image/jpg"
+  });
+  data.append("id_user", dataReg.id_user);
+  data.append("id_category", dataReg.id_category);
+  data.append("id_variant", dataReg.id_variant);
+
+  console.log("=======");
+  console.log(data);
+
+  return {
+    type: 'ADD_PRODUCT',
+    payload: axios.post(URL + `/product`, data)
+  }
+}
