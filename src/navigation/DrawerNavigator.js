@@ -14,43 +14,42 @@ import Login from '../screen/Login';
 import wishlist from '../screen/wishlist';
 import paymentHistory from '../screen/paymentHistory';
 import addSelling from '../screen/addSelling';
-import kontak from '../screen/Kontak';
-import informasi from '../screen/Informasi';
+import Forgot from '../screen/Forgot';
+import ChangePassword from '../screen/ChangePassword';
+import cart from '../screen/Cart';
+import search from '../screen/Search';
 
 //custom drawer
 // import SideMenu from '../components/SideMenu';
 import SideMenu from '../components/SideMenu';
 
-const AppSwitchNavigatorA = createDrawerNavigator(
-    {
-      Belanja : { 
-        screen: Main,
-        navigationOptions: {
-          drawerIcon: (
-            <Icon name="store" type="MaterialIcons" style={{ marginRight:-5 }} />
-          )
-        }
-      },
-      // Splash : { screen: Splash },
-      // Register : { screen: Register },
-      // Login : { screen: Login },
-      Wishlist :{ screen: wishlist },
-      //PaymentHistory : {screen: paymentHistory},
-      //AddSelling : {screen: addSelling},
-      Kontak :{ screen: kontak },
-      Informasi :{ screen: informasi },
-    },
-    {
-      initialRouteName:'Belanja',
-      drawerWidth: 280,
-      contentComponent: SideMenu,
-      contentOptions: {
-        activeTintColor: '#908be8',
-      }
+const AppSwitchNavigatiorA = createDrawerNavigator(
+  {
+    App: { screen: Main },
+    Splash: { screen: Splash },
+    Register: { screen: Register },
+    Login: { screen: Login },
+    wishlist:{ screen: wishlist },
+    paymentHistory: {screen: paymentHistory},
+    addSelling: {screen: addSelling},
+    Forgot: {screen: Forgot},
+    ChangePassword: {screen: ChangePassword},
+    cart: { screen: cart },
+    search: { screen: search },
+    // profile: { screen: profile }
+  
+  },
+  {
+    initialRouteName:'App',
+    drawerWidth: 250,
+    drawerPosition: 'left',
+    contentComponent: SideMenu,
+    contentOptions: {
+      activeTintColor: '#000',
     }
-);
+  });
 
-const AppContainer = createAppContainer(AppSwitchNavigatorA);
+const AppContainer = createAppContainer(AppSwitchNavigatiorA);
 export default class DrawerNavigator extends Component {
   render() {
     return (
