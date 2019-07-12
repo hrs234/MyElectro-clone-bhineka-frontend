@@ -1,10 +1,24 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import PropTypes from 'prop-types';
+import { View, Text, StyleSheet, Image, Alert, TouchableOpacity } from "react-native";
 import { Container, Header, Body } from "native-base";
+import {NavigationActions, DrawerItems } from 'react-navigation';
 
 import { ScrollView } from "react-native-gesture-handler";
 
-export default class Drawer extends Component {
+class SideMenu extends Component {
+
+  handleHomePressed() {
+    console.warn('tes')
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'informasi'})
+      ]
+    })
+    return () => this.props.navigation.dispatch(resetAction)
+  }
+
   render() {
     return (
       <Container>
@@ -38,11 +52,26 @@ export default class Drawer extends Component {
             </View>
           </Body>
         </Header>
-        <ScrollView />
+        <ScrollView>
+          <View style={{marginTop:10}}>
+            <DrawerItems
+              {...this.props} />
+              <TouchableOpacity
+                onPress={ () => {this.props.navigation.navigate('Belanja'),this.props.navigation.closeDrawer()} }
+                >
+                <Text style={{margin: 16,fontWeight: 'bold'}}>Logout</Text>
+              </TouchableOpacity>
+          </View>
+        </ScrollView>
       </Container>
     );
   }
 }
+
+SideMenu.propTypes = {
+  navigation: PropTypes.object
+};
+export default SideMenu;
 
 const styles = StyleSheet.create({
   container: {
@@ -52,7 +81,7 @@ const styles = StyleSheet.create({
   },
   drawerHeader: {
     height: 200,
-    backgroundColor: "white"
+    backgroundColor: "#0B2D53"
   },
   drawerImage: {
     height: 150,

@@ -1,57 +1,59 @@
 import React, { Component } from "react";
 import { View, Text, ScrollView, FlatList, Image } from "react-native";
-import { Icon } from "native-base";
-import { Appbar } from "react-native-paper";
-// import { FlatList } from 'react-native-gesture-handler';
+import { IconButton, Colors } from 'react-native-paper';
 
-export default class wishlist extends Component {
+import { connect } from 'react-redux'
+import { getProduct } from '../public/action/product'
+
+class ListProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dummy: [
-        {
-          id: "1",
-          nameCategory: "wishlist",
-          price: 2000
-        },
-        {
-          id: "2",
-          nameCategory: "important",
-          price: 2000
-        },
-        {
-          id: "3",
-          nameCategory: "work",
-          price: 2000
-        }
-      ]
-    };
+        name_category: this.props.navigation.state.params.category
+    }
   }
-  static navigationOptions = {
-    drawerIcon: (
-      <Icon name="favorite" type="MaterialIcons" style={{ color: "#000000", marginRight:-5 }} />
-    )
-  };
 
-  rendered = ({ item }) => {
-    <View style={{ borderStyle: "solid" }}>
-      <Text>{JSON.stringify(item.id)}</Text>
-      {console.log("DATA: " + JSON.stringify(item.id))}
-    </View>;
-  };
+    getDataProduct(id){
+        this.props.dispatch(getProduct(id))
+    }
+
+    componentDidMount = () => {
+        this.getDataProduct(this.props.navigation.state.params.id_category)
+        this.props.navigation.setParams({ title : this.state.name_category })
+    }
+  
+  static navigationOptions = ({ navigation }) => ({
+    headerRight: (
+        <View style={{flexDirection:'row'}}>
+            <IconButton
+                style={{marginRight:-3}}
+                icon='search'
+                color={Colors.white}
+                size={25}
+                onPress={() => {navigation.openDrawer()}}
+            />
+            <IconButton
+                icon='shopping-cart'
+                color={Colors.white}
+                size={22}
+                onPress={() => {navigation.navigate('Informasi')}}
+            />
+        </View>
+    ),
+    headerStyle: {
+        backgroundColor: '#092B51',
+        elevation:0
+    },
+    
+    headerTintColor: '#fff',
+    title: navigation.getParam('title')
+  })
 
     render() {
+        console.warn('tes')
         return (
             // Header
             <View style={{ backgroundColor: "#F5F5F5" }}>
-            <Appbar.Header style={{ backgroundColor: '#092B51'}}>
-                <Appbar.BackAction
-                    onPress={() => alert('this back')}
-                />
-                <Appbar.Content
-                    title="Wishlist"
-                />
-            </Appbar.Header>
 
         <ScrollView>
           <View style={{ marginTop: 15, marginLeft: 15, marginBottom: 25 }}>
@@ -59,12 +61,12 @@ export default class wishlist extends Component {
           </View>
           <View style={{ marginBottom: 300 }}>
             <FlatList
-              data={this.state.dummy}
+              data={this.props.product.data}
               keyExtractor={(item, index) => {
                 item.id;
               }}
               numColumns={2}
-              renderItem={({ item }) => (
+              renderItem={({ item, index }) => (
                 <View
                   style={{
                     borderColor: "#DEDEDE",
@@ -76,12 +78,12 @@ export default class wishlist extends Component {
                 >
                   <View style={{ display: "flex" }}>
                     <Image
-                      source={require("../icons/indonesia.jpg")}
+                      source={{uri: item.image}}
                       style={{ width: 176, height: 160, marginBottom: 70 }}
                     />
                     <View style={{ marginLeft: 23 }}>
                       <Text style={{ fontSize: 20, marginBottom: 35 }}>
-                        {item.nameCategory}
+                        {item.product}
                       </Text>
                       <Text>Rp. {item.price}</Text>
                     </View>
@@ -102,3 +104,10 @@ export default class wishlist extends Component {
     );
   }
 }
+
+const mapStateToProps = ( state ) => {
+    return {
+      product: state.product
+    }
+}
+export default connect(mapStateToProps)(ListProduct);

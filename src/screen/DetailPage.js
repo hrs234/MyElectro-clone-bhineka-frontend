@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import axios from 'axios';
 
-import ModalBuy from '../component/ModalBeli'
+import ModalBuy from '../Components/ModalBeli';
 
 export default class Note extends Component {
 
@@ -72,6 +72,7 @@ export default class Note extends Component {
         headerTintColor: '#fff',
         title: 'Detail Produk',
     })
+    
     render() {
         const { visible } = this.state;
         return (
@@ -198,12 +199,12 @@ export default class Note extends Component {
 const styles = StyleSheet.create({
     viewMain: {
         flex:1,
-        backgroundColor:'#e1e5e8',
+        backgroundColor:'#edf0f0',
         paddingBottom: 45
     },
     view1: {
         height:440,
-        elevation:0,
+        elevation:1,
         backgroundColor:'#fff',
         padding:15
     },
