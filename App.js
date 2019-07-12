@@ -28,6 +28,9 @@ import paymentHistory from './src/screen/paymentHistory';
 import addSelling from './src/screen/addSelling';
 import Forgot from './src/screen/Forgot';
 import ChangePassword from './src/screen/ChangePassword';
+import cart from './src/screen/Cart';
+import search from './src/screen/Search';
+// import profile from './src/screen/profile';
 
 // Drawer Navigator
 const AppSwitchNavigatiorA = createDrawerNavigator(
@@ -40,11 +43,14 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
   paymentHistory: {screen: paymentHistory},
   addSelling: {screen: addSelling},
   Forgot: {screen: Forgot},
-  ChangePassword: {screen: ChangePassword}
+  ChangePassword: {screen: ChangePassword},
+  cart: { screen: cart },
+  search: { screen: search },
+  // profile: { screen: profile }
 
 },
 {
-  initialRouteName:'ChangePassword',
+  initialRouteName:'Splash',
   drawerWidth: 250,
   drawerPosition: 'left',
   contentOptions: {
