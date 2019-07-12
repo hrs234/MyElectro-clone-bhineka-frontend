@@ -21,7 +21,7 @@ export default class FloatingLabelExample extends Component {
                     <Text style={{fontSize:15, fontWeight:'bold', marginBottom:10}}>Ilham Yoga P.</Text>
                     <Text style={{fontSize:15, marginBottom:10}}>ilhamyogha@gmail.com</Text>
                 </View>
-                <Button style={{color:'blue', width: '34%', borderWidth:2, borderColor:'blue'}} mode="outlined" onPress={() => console.log('Pressed')}>
+                <Button style={{color:'blue', width: '34%', borderWidth:2, borderColor:'blue'}} mode="outlined" onPress={() => this.props.navigation.navigate('EditUser')}>
                     <Text style={{color: 'blue'}}>UBAH</Text> 
                 </Button>
             </View>

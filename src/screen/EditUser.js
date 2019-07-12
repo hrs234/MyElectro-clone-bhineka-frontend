@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { regUser } from "../public/action/action";
 
 
-class Register extends Component {
+class EditUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -278,7 +278,7 @@ const mapStateToProps = state => {
 };
 
 // connect with redux,first param is map and second is component
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps)(EditUser);
 
 const styles = StyleSheet.create({
   Head: {

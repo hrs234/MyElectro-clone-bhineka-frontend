@@ -13,6 +13,7 @@ class ModalExample extends Component {
   }
 
   render() {
+    console.log(transaksi)
     return (
       <View>
         <Modal
@@ -52,7 +53,7 @@ class ModalExample extends Component {
 
         <Button style={{height:57, justifyContent:'center'}} mode="text"
           onPress={() => {
-            this.setModalVisible(true);
+            this.setModalVisible(true)
           }}
         >
           <Text style={{fontSize:17,color:'black'}}>BELI</Text>

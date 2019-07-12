@@ -1,15 +1,31 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView,Modal} from 'react-native';
 import { IconButton, Colors, Button} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/dist/MaterialCommunityIcons';
+import axios from 'axios';
 
-import ModalBuy from '../components/ModalBeli'
+import ModalBuy from '../components/ModalBeli';
 
 export default class Note extends Component {
 
-    state = {
-        star : 3,
+    constructor(props) {
+        super(props);
+        this.state = {
+          image: this.props.navigation.state.params.image,
+          product: this.props.navigation.state.params.product,
+          id_product: this.props.navigation.state.params.id_product,
+          description: this.props.navigation.state.params.description,
+          id_user: this.props.navigation.state.params.id_user,
+          price: this.props.navigation.state.params.price,
+          star: 3,
+          amount_purchase : 1,
+          modalVisible: false
+        }
+    }
+
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
     }
 
     items() {
@@ -27,6 +43,16 @@ export default class Note extends Component {
             }
         }
         return item
+    }
+
+    postCart = (data) =>{
+        console.warn(data)
+        axios.post('https://clone-bhineka.herokuapp.com/cart',{id_product:data.id_product, id_user:data.id_user, amount_purchase: data.amount_purchase}).then(function (response) {
+            console.warn(response);
+          })
+          .catch(function (error) {
+            console.warn(error);
+          })
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -57,16 +83,15 @@ export default class Note extends Component {
                             <View style={styles.view1A}>
                                 <Image
                                     style={{width: '50%', height: '100%',}}
-                                    source={{uri: this.props.navigation.state.params.image}}
+                                    source={{uri: this.state.image}}
                                 />
                             </View>
                             <View style={styles.view1B}>
-                                <Text style={{fontSize:21,fontWeight:'bold',color:'#272929'}}>{this.props.navigation.state.params.nameBarang}</Text>
-                                <Text style={{fontSize:16, color:'blue', marginTop:5}}>Consina - Backpack Pria</Text>
+                                <Text style={{fontSize:21,fontWeight:'bold',color:'#272929'}}>{this.state.product}</Text>
                             </View>
                             <View style={styles.view1C}>
                                 <View style={{flex:1, justifyContent:'center'}}>
-                                    <Text style={{fontSize:16, color:'#81868a'}}>SKU - 3323309823</Text>
+                                    <Text style={{fontSize:16, color:'#81868a'}}>KP-{this.state.id_product}</Text>
                                 </View>
                                 <View style={{flexDirection:'row', justifyContent:'flex-end',}}>
                                     <Text>
@@ -76,8 +101,7 @@ export default class Note extends Component {
                                 </View>
                             </View>
                             <View style={styles.view1D}>
-                                <Text style={{ textDecorationLine: 'line-through', color:'#6a6f7a' }}>{this.props.navigation.state.params.discon}</Text>
-                                <Text style={{ marginTop:2, fontSize:24, fontWeight:'bold', color:'blue'}}>Rp {this.props.navigation.state.params.harga}</Text>
+                                <Text style={{ marginTop:2, fontSize:24, fontWeight:'bold', color:'blue'}}>Rp {this.state.price}</Text>
                                 <Text style={{ marginTop:4, color:'#272929'}}>Siap dikirim di hari yang sama</Text>
                             </View>
                         </View>
@@ -112,14 +136,61 @@ export default class Note extends Component {
                             <Text style={{fontSize:20, marginBottom:5}}>Overview</Text>
                             <View style={{flex:1, marginBottom:12}}>
                                 <Text style={{fontSize:17, color:'#272929'}}>
-                                    Jaket X Multifungsi merupakan jaket yang dapat digunakan sebagai pelindung tubuh dari terpaan angin sekaligus berfungsi sebagai mantel hujan. Cocok digunakan untuk segala aktivitas tanpa mengurangi kenyamanan.
+                                {this.state.description}
                                 </Text>
                             </View>
                         </View>
                     </View> 
                 </ScrollView>
                 <View style={{backgroundColor: '#d5d902'}}>
-                    <ModalBuy/>
+                <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={this.state.modalVisible}>
+                    <View style={{flex:1, backgroundColor: 'rgba(0, 0, 0, 0.50)', alignItems:'center', justifyContent:'center' }}>
+                        <View style={{backgroundColor:'#FFF', borderTopRightRadius:3, borderTopLeftRadius:3, width:'90%', height:'8%', padding:10, elevation:3 }}>
+                        <View style={{flexDirection:'row', padding:5, elevation:1}}>
+                            <Image
+                            style={{width: 22, height: 22, marginRight:5}}
+                            source={{uri: 'https://dumielauxepices.net/sites/default/files/hand-emoji-clipart-air-emoji-png-632601-5302983.png'}}
+                            />
+                            <Text style={{fontWeight:'bold', fontSize:17}}>Produk berhasil ditambah</Text>
+                        </View>
+                        </View>
+                        <View style={{backgroundColor:'#f2f0f0', borderBottomRightRadius:3, borderBottomLeftRadius:3, width:'90%', height:'20%', padding:10, elevation:3 }}>
+                        <View>
+                            <Button style={{height:46, justifyContent:'center', backgroundColor:'#d5d902'}} mode="contained"
+                            onPress={() => {
+                                this.props.navigation.navigate('cart');
+                                this.setModalVisible(!this.state.modalVisible);
+                            }}
+                            >
+                            <Text style={{fontSize:14,color:'black'}}>LANJUT KE KERANJANG</Text>
+                            </Button>
+                            <Button style={{height:45, justifyContent:'center', backgroundColor:'#fff', marginTop:15, elevation:3}} mode="contained"
+                            onPress={() => {
+                                this.setModalVisible(!this.state.modalVisible);
+                            }}
+                            >
+                            <Text style={{fontSize:14,color:'#c8a8ed'}}>KEMBALI BERBELANJA</Text>
+                            </Button>
+                        </View>
+                        </View>
+                    </View>
+                    </Modal>
+
+                    <Button style={{height:57, justifyContent:'center'}} mode="text"
+                    onPress={() => {
+                        this.setModalVisible(true)
+                        this.postCart({
+                            id_product: this.state.id_product,
+                            amount_purchase: this.state.amount_purchase,
+                            id_user: this.state.id_user
+                        })
+                    }}
+                    >
+                    <Text style={{fontSize:17,color:'black'}}>BELI</Text>
+                    </Button>
                 </View>
             </View>
         )

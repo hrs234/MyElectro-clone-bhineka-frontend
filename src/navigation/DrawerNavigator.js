@@ -20,6 +20,7 @@ import profil from '../screen/Profil'
 import history from '../screen/paymentHistory'
 
 //custom drawer
+// import SideMenu from '../components/SideMenu';
 import SideMenu from '../components/SideMenu';
 
 const AppSwitchNavigatorA = createDrawerNavigator(
