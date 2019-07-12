@@ -72,7 +72,7 @@ class addSelling extends Component {
         })
     }
     
-    onValueChange2(value: string) {
+    onValueChange2(value) {
         this.setState({
             selected2: value
         });
