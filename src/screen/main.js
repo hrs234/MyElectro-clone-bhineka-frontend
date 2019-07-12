@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableHighlight, Image, TouchableOpacity} from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
 import { createAppContainer, createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
-import { IconButton, Colors, Card } from 'react-native-paper';
+import { IconButton, Colors, Card, Button } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
-
 import Carousel from "react-native-carousel-control";
+import Search from '../screen/Search';
+import Cart from '../screen/Cart';
+
 
 import DetailPage from "./DetailPage";
 import { Icon } from "native-base";
 import axios from 'axios';
-
+import Kategori from "./CategoryScreen.js"
+import listproduct from '../screen/ListProduct'
 
 
 
@@ -56,9 +59,6 @@ const list = [
 
 // Tab Main Menu
 export class MainMenu extends Component {
-    static navigationOptions = {
-        drawerIcon: <Icon name="store" type="MaterialIcons" style={{ color: "#000000" }} />
-    };
 
     constructor(props) {
         super(props);
@@ -67,7 +67,8 @@ export class MainMenu extends Component {
             list : list,
             Category1:[],
             Category2:[],
-            Category3:[]
+            Category3:[],
+            list: list
         }
     }
 
@@ -134,7 +135,7 @@ export class MainMenu extends Component {
                 <View style={{width:'95%', marginTop:20, borderWidth:0}}>
                     <Card style={{elevation:5}}>
                         <Card.Title 
-                            style={{borderBottomWidth:0.7, borderColor:'#97a6a1', height:50}}
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
                             title="Rekomendasi untuk Anda"
                             titleStyle={{fontSize: 17}}
                             right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
@@ -180,7 +181,7 @@ export class MainMenu extends Component {
                 <View style={{width:'95%', marginTop:20, borderWidth:0}}>
                     <Card style={{elevation:5}}>
                         <Card.Title 
-                            style={{borderBottomWidth:0.7, borderColor:'#97a6a1', height:50}}
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
                             title="Rekomendasi untuk Anda"
                             titleStyle={{fontSize: 17}}
                             right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
@@ -226,7 +227,7 @@ export class MainMenu extends Component {
                 <View style={{width:'95%', marginTop:20, borderWidth:0}}>
                     <Card style={{elevation:5}}>
                         <Card.Title 
-                            style={{borderBottomWidth:0.7, borderColor:'#97a6a1', height:50}}
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
                             title="Rekomendasi untuk Anda"
                             titleStyle={{fontSize: 17}}
                             right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
@@ -272,7 +273,7 @@ export class MainMenu extends Component {
                 <View style={{width:'95%', marginTop:20, borderWidth:0}}>
                     <Card style={{elevation:5}}>
                         <Card.Title 
-                            style={{borderBottomWidth:0.7, borderColor:'#97a6a1', height:50}}
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
                             title="Rekomendasi untuk Anda"
                             titleStyle={{fontSize: 17}}
                             right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
@@ -314,10 +315,17 @@ export class MainMenu extends Component {
                 <View style={{width:'95%', marginTop:20, marginBottom: 40}}>
                     <Card style={{elevation:5}}>
                         <Card.Title 
-                            style={{borderBottomWidth:0.7, borderColor:'#97a6a1', height:50}}
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
                             title="Rekomendasi untuk Anda"
                             titleStyle={{fontSize: 17}}
-                            right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
+                            right={(props) => 
+                                <Button 
+                                    style={{color:'blue', fontWeight:'bold', fontSize:12}}
+                                    onPress={() => this.props.navigation.navigate('ListProduct')}
+                                >
+                                    LIHAT SEMUA
+                                </Button>
+                            } 
                             rightStyle={{marginRight:16}}
                         />
                         <Card.Content>
@@ -359,38 +367,6 @@ export class MainMenu extends Component {
     }
 }
 
-// Tab Category
-class Kategori extends React.Component {
-    signIn = () => {
-        console.warn('Tes Highlight')  
-    }
-    render() {
-        return (
-            <View style={styles.container}>
-                <FlatList
-                    data={data}
-                    renderItem={({ item }) => (
-                        <TouchableHighlight overlayColor="cyan" onPress={this.signIn}>
-                            <View style={{flexDirection:'row', borderBottomWidth:1, borderColor:'#33cccc'}}>
-                                <Text style={styles.item}>{item.nameCategory}</Text>
-                                <View style={{justifyContent:'center'}}>
-                                    <IconButton
-                                        icon='keyboard-arrow-right'
-                                        color={Colors.black}
-                                        size={25}
-                                        onPress={() => console.log('Pressed')}
-                                    />
-                                </View>
-                            </View>
-                        </TouchableHighlight>
-                    )}
-                    keyExtractor={(item,index)=>index.toString()}
-                />
-            </View>
-        );
-    }
-}
-
 //Tab Navigation
 const TabNavigator = createMaterialTopTabNavigator(
     {
@@ -423,7 +399,7 @@ const Stack = createStackNavigator({
         navigationOptions:({ navigation }) => ({
             headerLeft: (
                 <IconButton
-                    icon='close'
+                    icon='menu'
                     color={Colors.white}
                     size={25}
                     onPress={() => {navigation.openDrawer()}}
@@ -433,16 +409,16 @@ const Stack = createStackNavigator({
                 <View style={{flexDirection:'row'}}>
                     <IconButton
                         style={{marginRight:-3}}
-                        icon='close'
+                        icon='search'
                         color={Colors.white}
                         size={25}
-                        onPress={() => {navigation.openDrawer()}}
+                        onPress={() => { navigation.navigate('Search')}}
                     />
                     <IconButton
-                        icon='close'
+                        icon='shopping-cart'
                         color={Colors.white}
                         size={22}
-                        onPress={() => {navigation.openDrawer()}}
+                        onPress={() => {navigation.navigate('Cart')}}
                     />
                 </View>
             ),
@@ -455,24 +431,20 @@ const Stack = createStackNavigator({
             title: 'MyElectro',
         })
     },
-    DetailPage:{
+    DetailPage: {
         screen: DetailPage
+    },
+    ListProduct: { 
+        screen: listproduct,
+    },
+    Search: {
+        screen: Search,
+        navigationOptions: {header: null}
+    },
+    Cart: {
+        screen: Cart,
+        navigationOptions: {header: null}
     }
-})
-
-const styles = StyleSheet.create({
-    container: {
-        borderColor: '#33cccc',
-        flexDirection: 'column',
-        textAlignVertical: 'center',
-    },
-    item: {
-        flex: 1,
-        fontSize: 17,
-        paddingLeft: '18%',
-        height: 60,
-        textAlignVertical: 'center',
-    },
 })
 
 export default createAppContainer(Stack);
