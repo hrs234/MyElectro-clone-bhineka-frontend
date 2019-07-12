@@ -16,6 +16,8 @@ import paymentHistory from '../screen/paymentHistory';
 import addSelling from '../screen/addSelling';
 import kontak from '../screen/Kontak';
 import informasi from '../screen/Informasi';
+import profil from '../screen/Profil'
+import history from '../screen/paymentHistory'
 
 //custom drawer
 import SideMenu from '../components/SideMenu';
@@ -33,11 +35,18 @@ const AppSwitchNavigatorA = createDrawerNavigator(
       // Splash : { screen: Splash },
       // Register : { screen: Register },
       // Login : { screen: Login },
+      Profil :{ screen: profil },
       Wishlist :{ screen: wishlist },
       //PaymentHistory : {screen: paymentHistory},
       //AddSelling : {screen: addSelling},
       Kontak :{ screen: kontak },
       Informasi :{ screen: informasi },
+      History :{
+        screen: history,
+        navigationOptions: {
+          drawerLabel: ()=>null
+        }
+      }
     },
     {
       initialRouteName:'Belanja',

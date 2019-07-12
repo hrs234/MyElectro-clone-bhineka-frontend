@@ -9,6 +9,9 @@ import DetailPage from "./DetailPage";
 import Kategori from "./CategoryScreen.js"
 import listproduct from '../screen/ListProduct'
 import Cart from '../screen/Cart'
+import profil from '../screen/Profil'
+import profilDetail from '../components/ProfilDetail'
+import search from '../screen/Search'
 
 const list = [
     {
@@ -45,10 +48,6 @@ export class MainMenu extends Component {
         this.state = {
             list : list
         }
-    }
-    handleNavigate = (Item) => {
-        const { navigation } = this.props;
-        navigation.navigate('DetailPage', Item)
     }
 
     render() {
@@ -371,7 +370,7 @@ const Stack = createStackNavigator({
                         icon='search'
                         color={Colors.white}
                         size={25}
-                        onPress={() => {navigation.openDrawer()}}
+                        onPress={() => {navigation.navigate('Search')}}
                     />
                     <IconButton
                         icon='shopping-cart'
@@ -399,6 +398,49 @@ const Stack = createStackNavigator({
     Cart: { 
         screen: Cart,
     },
+    Profil: { 
+        screen: profil,
+        navigationOptions:({ navigation }) => ({
+            headerLeft: (
+                <IconButton
+                    icon='menu'
+                    color={Colors.white}
+                    size={25}
+                    onPress={() => {navigation.openDrawer()}}
+                />
+            ),
+            headerRight: (
+                <IconButton
+                    icon='shopping-cart'
+                    color={Colors.white}
+                    size={22}
+                    onPress={() => {navigation.navigate('Cart')}}
+                />
+            ),
+            headerStyle: {
+                backgroundColor: '#092B51',
+                elevation:0
+            },
+            
+            headerTintColor: '#fff',
+            title: 'Akun Saya',
+        })
+    },
+    ProfilDetail: {
+        screen: profilDetail,
+        navigationOptions:({ navigation }) => ({
+            headerStyle: {
+                backgroundColor: '#092B51',
+                elevation:0
+            },  
+            headerTintColor: '#fff',
+            title: 'Profil',
+        })
+    },
+    Search: {
+        screen: search,
+        navigationOptions: { header: null }
+    }
 })
 
 export default createAppContainer(Stack);
