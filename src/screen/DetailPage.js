@@ -4,6 +4,7 @@ import { IconButton, Colors, Button} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 import axios from 'axios';
+import {getCart} from '../public/action/cart'
 
 import ModalBuy from '../components/ModalBeli';
 
@@ -161,8 +162,9 @@ export default class Note extends Component {
                         <View>
                             <Button style={{height:46, justifyContent:'center', backgroundColor:'#d5d902'}} mode="contained"
                             onPress={() => {
-                                this.props.navigation.navigate('cart');
                                 this.setModalVisible(!this.state.modalVisible);
+                                this.props.navigation.navigate('cart', this.state.id_user);
+                                console.log(this.state.id_user)
                             }}
                             >
                             <Text style={{fontSize:14,color:'black'}}>LANJUT KE KERANJANG</Text>

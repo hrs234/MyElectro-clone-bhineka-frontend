@@ -23,6 +23,21 @@ export default category = (state = initialState, action) => {
                 isError: false,
 				data: action.payload.data.data
             }
+        case "GET_CART_PENDING":
+            return {
+                isLoading: true
+            };
+        case "GET_CART_REJECTED":
+            return {
+                isLoading: false,
+                isError: true
+            };
+        case "GET_CART_FULFILLED":
+            return {
+                isLoading: false,
+                isError: false,
+                data: action.payload.data.data
+            };
 
         // DEFAULT
         default:

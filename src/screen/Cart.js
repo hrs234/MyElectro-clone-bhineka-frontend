@@ -19,6 +19,9 @@ import {
   Footer,
   Content
 } from "native-base";
+import {connect} from 'react-redux';
+import {getCart} from '../public/action/cart'
+import cart from "../public/reducer/cart";
 const Alamat = [
   {
     id: 1,
@@ -107,13 +110,13 @@ const faker = [
     price: "1.000.000"
   }
 ];
-
-export default class Cart extends Component {
+class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modalVisible: false,
-      modalInput: false
+      modalInput: false,
+      id_user: this.props.navigation.state.params
     };
   }
   setModalVisible(visible) {
@@ -145,7 +148,7 @@ export default class Cart extends Component {
           style={{ width: 80, height: 80, margin: 5 }}
         />
         <View style={{ flex: 1, marginLeft: 5, marginTop: 15 }}>
-          <Text style={{ fontSize: 15 }}>{item.title}</Text>
+          <Text style={{ fontSize: 15 }}>{item.product}</Text>
           <Text style={{ fontWeight: "bold", marginTop: 5 }}>
             Rp. {item.price}
           </Text>
@@ -161,12 +164,13 @@ export default class Cart extends Component {
               <Icon name="remove" style={{ color: "gray" }} />
             </Button>
             <Button bordered>
-              <Text style={{ padding: 20 }}>1</Text>
+              <Text style={{ padding: 20, color: '#000' }}>{item.amount_purchase}</Text>
             </Button>
-
-            <Button bordered>
-              <Icon name="add" style={{ color: "gray" }} />
-            </Button>
+            <TouchableOpacity>
+              <Button bordered>
+                <Icon name="add" style={{ color: "gray" }} />
+              </Button>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -199,7 +203,7 @@ export default class Cart extends Component {
             paddingRight: 10
           }}
         >
-          Rp TOTAL
+          Rp {item.price * item.amount_purchase}
         </Text>
       </View>
     </View>
@@ -249,6 +253,14 @@ export default class Cart extends Component {
     </View>
   );
 
+  fatch = () =>{
+    this.props.dispatch(getCart(this.state.id_user))
+  }
+
+  componentDidMount = () =>{
+    this.fatch()
+  }
+
   render() {
     return (
       <Container>
@@ -278,7 +290,7 @@ export default class Cart extends Component {
         <Content>
           <FlatList
             keyExtractor={this.keyExtractor}
-            data={faker}
+            data={this.props.cart.data}
             renderItem={this.renderItem}
             style={{ marginTop: 5 }}
           />
@@ -418,7 +430,7 @@ export default class Cart extends Component {
               color: "white"
             }}
           >
-            LANJUT
+            CHECKOUT
           </Text>
         </Footer>
         <Modal
@@ -584,3 +596,12 @@ export default class Cart extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    cart: state.category
+  };
+};
+
+// connect with redux,first param is map and second is component
+export default connect(mapStateToProps)(Cart);
