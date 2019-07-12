@@ -1,4 +1,3 @@
-import {AsyncStorage} from 'react-native';
 const initialState = {
   number: 10,
   data: [],
@@ -7,8 +6,45 @@ const initialState = {
   isError: false
 };
 
-export default (reducer = async (state = initialState, action) => {
+export default reducer =  (state = initialState, action) => {
   switch (action.type) {
+
+    case "CHANGE_PASSWORD_PENDING":
+      return {
+        isLoading: true
+      };
+    case "CHANGE_PASSWORD_REJECTED":
+      return {
+        isLoading: false,
+        isError: true
+      };
+    case "CHANGE_PASSWORD_FULFILLED":
+      console.log('XXXXXXX');
+      console.log(action.payload.data);
+      return {
+        isLoading: false,
+        isError: false,
+        // data: action.payload.data
+      };
+    case "FORGOT_USER_PENDING":
+      return {
+        isLoading: true
+      };
+    case "FORGOT_USER_REJECTED":
+      return {
+        isLoading: false,
+        isError: true
+      };
+    case "FORGOT_USER_FULFILLED":
+      console.log('XXXXXXX');
+      console.log(action.payload.data);
+      return {
+        isLoading: false,
+        isError: false,
+        data: action.payload.data
+      };
+
+    //REG USER
     case "REG_USER_PENDING":
       return {
         isLoading: true
@@ -25,30 +61,62 @@ export default (reducer = async (state = initialState, action) => {
         data: []
       };
 
-    //LOGIN USER
-    case "LOGIN_USER_PENDING":
+    case "REQ_CART_PENDING":
       return {
         isLoading: true
       };
-    case "LOGIN_USER_REJECTED":
+    case "REQ_CART_REJECTED":
       return {
-        isLoading: false,
-        isError: true
+        isError: true,
+        isLoading: false
       };
-    case "LOGIN_USER_FULFILLED":
-      // console.log("XXXXXXXX");
-      // console.log(action.payload.data);
-      // console.log(action.payload.data.message);
-      console.log(action.payload.data.token);
-      // console.log(action.payload.data.rows[0]);//getuser
-      await AsyncStorage.setItem("token",action.payload.data.token)
-      await AsyncStorage.setItem("user",action.payload.data.rows[0])
+    case "REQ_CART_FULFILLED":
       return {
         isLoading: false,
         isError: false,
-        data: action.payload.data
+        data: []
       };
+
+    case "REQ_HISTORY_PENDING":
+      return {
+        ...state,
+        isLoading: true
+      };
+    case "REQ_HISTORY_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true
+      };
+    case "REQ_HISTORY_FULFILLED":
+      console.log("STATE" + JSON.stringify(state));
+      console.log("==========================================");
+      console.log("ACTION" + JSON.stringify(action));
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        data: action.payload.data.data
+      };
+
+    case "ADD_PRODUCT_PENDING":
+      return {
+
+        isLoading: true
+      }
+    case "ADD_PRODUCT_REJECTED":
+      return {
+        isLoading: false,
+        isError: true
+      }
+    case "ADD_PRODUCT_FULFILLED":
+      return {
+        isLoading: false,
+        data: []
+      }
+
+
     default:
       return state;
   }
-});
+};

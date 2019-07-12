@@ -1,16 +1,20 @@
 import axios from "axios";
 let URL = "https://clone-bhineka.herokuapp.com";
 
-export const getCategory = () => {
+export const changePassword = (dataPassword) => {
+  console.log('action');
+  console.log(dataPassword);  
   return {
-    type: "GET_CATEGORY",
-    payload: axios.get(URL + "/category")
+    type: "CHANGE_PASSWORD",
+    payload: axios.patch(URL + "/forget",dataPassword)
   };
 };
-export const loginUser = dataLogin => {
+export const forgotUser = (dataForgot) => {
+  console.log('action');
+  console.log(dataForgot);  
   return {
-    type: "LOGIN_USER",
-    payload: axios.post(URL + "/auth", dataLogin)
+    type: "FORGOT_USER",
+    payload: axios.post(URL + "/mail",dataForgot)
   };
 };
 
@@ -39,3 +43,42 @@ export const regUser = dataReg => {
     payload: axios.post(URL + "/user", data)
   };
 };
+
+export const getHistory = getID => {
+  return {
+    type: "REQ_HISTORY",
+    payload: axios.get(URL + `/transaction?id=${getID}`)
+  }
+}
+
+export const getCart = getID => {
+  return {
+    type: "REQ_CART",
+    payload: axios.get(URL + `/cart/${getID}`)
+  }
+}
+
+export const regItems = dataReg => {
+  console.log("XXXXXX");
+  console.log(dataReg);
+  let data = new FormData();
+  data.append("product", dataReg.product);
+  data.append("price", dataReg.price);
+  data.append("description", dataReg.description);
+  data.append("image", {
+    uri: dataReg.image.uri,
+    name: dataReg.image.fileName,
+    type: "image/jpg"
+  });
+  data.append("id_user", dataReg.id_user);
+  data.append("id_category", dataReg.id_category);
+  data.append("id_variant", dataReg.id_variant);
+
+  console.log("=======");
+  console.log(data);
+
+  return {
+    type: 'ADD_PRODUCT',
+    payload: axios.post(URL + `/product`, data)
+  }
+}

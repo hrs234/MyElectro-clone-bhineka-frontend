@@ -26,6 +26,11 @@ import Login from './src/screen/Login';
 import wishlist from './src/screen/wishlist';
 import paymentHistory from './src/screen/paymentHistory';
 import addSelling from './src/screen/addSelling';
+import Forgot from './src/screen/Forgot';
+import ChangePassword from './src/screen/ChangePassword';
+import cart from './src/screen/Cart';
+import search from './src/screen/Search';
+// import profile from './src/screen/profile';
 
 // Drawer Navigator
 const AppSwitchNavigatiorA = createDrawerNavigator(
@@ -36,11 +41,16 @@ const AppSwitchNavigatiorA = createDrawerNavigator(
   Login: { screen: Login },
   wishlist:{ screen: wishlist },
   paymentHistory: {screen: paymentHistory},
-  addSelling: {screen: addSelling}
+  addSelling: {screen: addSelling},
+  Forgot: {screen: Forgot},
+  ChangePassword: {screen: ChangePassword},
+  cart: { screen: cart },
+  search: { screen: search },
+  // profile: { screen: profile }
 
 },
 {
-  initialRouteName:'App',
+  initialRouteName:'Splash',
   drawerWidth: 250,
   drawerPosition: 'left',
   contentOptions: {
