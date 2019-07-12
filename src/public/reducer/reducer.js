@@ -1,4 +1,3 @@
-import {AsyncStorage} from 'react-native';
 const initialState = {
   number: 10,
   data: [],
@@ -7,8 +6,45 @@ const initialState = {
   isError: false
 };
 
-export default (reducer = async (state = initialState, action) => {
+export default reducer =  (state = initialState, action) => {
   switch (action.type) {
+
+    case "CHANGE_PASSWORD_PENDING":
+      return {
+        isLoading: true
+      };
+    case "CHANGE_PASSWORD_REJECTED":
+      return {
+        isLoading: false,
+        isError: true
+      };
+    case "CHANGE_PASSWORD_FULFILLED":
+      console.log('XXXXXXX');
+      console.log(action.payload.data);
+      return {
+        isLoading: false,
+        isError: false,
+        // data: action.payload.data
+      };
+    case "FORGOT_USER_PENDING":
+      return {
+        isLoading: true
+      };
+    case "FORGOT_USER_REJECTED":
+      return {
+        isLoading: false,
+        isError: true
+      };
+    case "FORGOT_USER_FULFILLED":
+      console.log('XXXXXXX');
+      console.log(action.payload.data);
+      return {
+        isLoading: false,
+        isError: false,
+        data: action.payload.data
+      };
+
+    //REG USER
     case "REG_USER_PENDING":
       return {
         isLoading: true
@@ -25,30 +61,7 @@ export default (reducer = async (state = initialState, action) => {
         data: []
       };
 
-    //LOGIN USER
-    case "LOGIN_USER_PENDING":
-      return {
-        isLoading: true
-      };
-    case "LOGIN_USER_REJECTED":
-      return {
-        isLoading: false,
-        isError: true
-      };
-    case "LOGIN_USER_FULFILLED":
-      // console.log("XXXXXXXX");
-      // console.log(action.payload.data);
-      // console.log(action.payload.data.message);
-      console.log(action.payload.data.token);
-      // console.log(action.payload.data.rows[0]);//getuser
-      await AsyncStorage.setItem("token",action.payload.data.token)
-      await AsyncStorage.setItem("user",action.payload.data.rows[0])
-      return {
-        isLoading: false,
-        isError: false,
-        data: action.payload.data
-      };
     default:
       return state;
   }
-});
+};

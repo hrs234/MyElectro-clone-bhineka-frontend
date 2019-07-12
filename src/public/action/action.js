@@ -1,16 +1,20 @@
 import axios from "axios";
 let URL = "https://clone-bhineka.herokuapp.com";
 
-export const getCategory = () => {
+export const changePassword = (dataPassword) => {
+  console.log('action');
+  console.log(dataPassword);  
   return {
-    type: "GET_CATEGORY",
-    payload: axios.get(URL + "/category")
+    type: "CHANGE_PASSWORD",
+    payload: axios.patch(URL + "/forget",dataPassword)
   };
 };
-export const loginUser = dataLogin => {
+export const forgotUser = (dataForgot) => {
+  console.log('action');
+  console.log(dataForgot);  
   return {
-    type: "LOGIN_USER",
-    payload: axios.post(URL + "/auth", dataLogin)
+    type: "FORGOT_USER",
+    payload: axios.post(URL + "/mail",dataForgot)
   };
 };
 
