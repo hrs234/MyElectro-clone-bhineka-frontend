@@ -3,27 +3,11 @@ import { View, Text, FlatList, StyleSheet, TouchableHighlight, Image, TouchableO
 import { createAppContainer, createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
 import { IconButton, Colors, Card } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
-
 import Carousel from "react-native-carousel-control";
 
 import DetailPage from "./DetailPage";
 import { Icon } from "native-base";
-
-
-
-
-const data = [
-    {nameCategory: 'Aksesories Gadget & Komputer'},
-    {nameCategory: 'Alat Musik & Pro Audio'},
-    {nameCategory: 'Alat Tulis & Perlengkapan Kerja'},
-    {nameCategory: 'Buku, Film & Musik'},
-    {nameCategory: 'Camera and Video'},
-    {nameCategory: 'Computer,Dekstop,Notebook'},
-    {nameCategory: 'Fashion & Busana Pria'},
-    {nameCategory: 'Fashion & Busana Wanita'},
-    {nameCategory: 'Gadget'},
-    {nameCategory: 'Kesehatan dan Kecantikan'},
-]
+import Kategori from "./CategoryScreen.js"
 
 const list = [
     {
@@ -54,14 +38,10 @@ const list = [
 
 // Tab Main Menu
 export class MainMenu extends Component {
-    static navigationOptions = {
-        drawerIcon: <Icon name="store" type="MaterialIcons" style={{ color: "#000000" }} />
-    };
 
     constructor(props) {
         super(props);
         this.state = {
-            data : data,
             list : list
         }
     }
@@ -338,38 +318,6 @@ export class MainMenu extends Component {
     }
 }
 
-// Tab Category
-class Kategori extends React.Component {
-    signIn = () => {
-        console.warn('Tes Highlight')  
-    }
-    render() {
-        return (
-            <View style={styles.container}>
-                <FlatList
-                    data={data}
-                    renderItem={({ item }) => (
-                        <TouchableHighlight underlayColor="cyan" onPress={this.signIn}>
-                            <View style={{flexDirection:'row', borderBottomWidth:1, borderColor:'#33cccc'}}>
-                                <Text style={styles.item}>{item.nameCategory}</Text>
-                                <View style={{justifyContent:'center'}}>
-                                    <IconButton
-                                        icon='keyboard-arrow-right'
-                                        color={Colors.black}
-                                        size={25}
-                                        onPress={() => console.log('Pressed')}
-                                    />
-                                </View>
-                            </View>
-                        </TouchableHighlight>
-                    )}
-                    keyExtractor={(item,index)=>index.toString()}
-                />
-            </View>
-        );
-    }
-}
-
 //Tab Navigation
 const TabNavigator = createMaterialTopTabNavigator(
     {
@@ -421,7 +369,7 @@ const Stack = createStackNavigator({
                         icon='shopping-cart'
                         color={Colors.white}
                         size={22}
-                        onPress={() => {navigation.openDrawer()}}
+                        onPress={() => {navigation.navigate('Informasi')}}
                     />
                 </View>
             ),
@@ -437,21 +385,6 @@ const Stack = createStackNavigator({
     DetailPage:{
         screen: DetailPage
     }
-})
-
-const styles = StyleSheet.create({
-    container: {
-        borderColor: '#33cccc',
-        flexDirection: 'column',
-        textAlignVertical: 'center',
-    },
-    item: {
-        flex: 1,
-        fontSize: 17,
-        paddingLeft: '18%',
-        height: 60,
-        textAlignVertical: 'center',
-    },
 })
 
 export default createAppContainer(Stack);

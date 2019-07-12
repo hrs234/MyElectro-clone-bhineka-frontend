@@ -2,11 +2,14 @@ import { combineReducers } from 'redux';
 
 // import all reducers
 import reducer from './reducer';
+import category from './category';
+import product from './product';
 
 // combine them
 const appReducer = combineReducers({
-    // auth,
-    reducer // es6 shorthand from notes: notes
+    reducer, // auth reducer
+    product,
+    category // category reducer
 })
 
 export default appReducer;

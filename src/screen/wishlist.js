@@ -29,7 +29,7 @@ export default class wishlist extends Component {
   }
   static navigationOptions = {
     drawerIcon: (
-      <Icon name="store" type="MaterialIcons" style={{ color: "#000000" }} />
+      <Icon name="favorite" type="MaterialIcons" style={{ color: "#000000", marginRight:-5 }} />
     )
   };
 
@@ -44,7 +44,7 @@ export default class wishlist extends Component {
         return (
             // Header
             <View style={{ backgroundColor: "#F5F5F5" }}>
-                <Appbar.Header style={{ backgroundColor: '#092B51'}}>
+            <Appbar.Header style={{ backgroundColor: '#092B51'}}>
                 <Appbar.BackAction
                     onPress={() => alert('this back')}
                 />

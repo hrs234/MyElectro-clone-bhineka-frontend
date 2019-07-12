@@ -4,7 +4,7 @@ import { IconButton, Colors, Button} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 
-import ModalBuy from '../component/ModalBeli'
+import ModalBuy from '../components/ModalBeli'
 
 export default class Note extends Component {
 
