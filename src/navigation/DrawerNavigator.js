@@ -18,7 +18,8 @@ import kontak from '../screen/Kontak';
 import informasi from '../screen/Informasi';
 
 //custom drawer
-import SideMenu from '../components/SideMenu';
+// import SideMenu from '../components/SideMenu';
+import SideMenu from '../Components/SideMenu';
 
 const AppSwitchNavigatorA = createDrawerNavigator(
     {

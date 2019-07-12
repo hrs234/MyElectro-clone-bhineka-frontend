@@ -4,11 +4,31 @@ import { createAppContainer, createStackNavigator, createMaterialTopTabNavigator
 import { IconButton, Colors, Card, Button } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import Carousel from "react-native-carousel-control";
+import Search from '../screen/Search';
+import Cart from '../screen/Cart';
+
 
 import DetailPage from "./DetailPage";
+import { Icon } from "native-base";
+import axios from 'axios';
 import Kategori from "./CategoryScreen.js"
 import listproduct from '../screen/ListProduct'
 import Cart from '../screen/Cart'
+
+
+
+const data = [
+    {nameCategory: 'Aksesories Gadget & Komputer'},
+    {nameCategory: 'Alat Musik & Pro Audio'},
+    {nameCategory: 'Alat Tulis & Perlengkapan Kerja'},
+    {nameCategory: 'Buku, Film & Musik'},
+    {nameCategory: 'Camera and Video'},
+    {nameCategory: 'Computer,Dekstop,Notebook'},
+    {nameCategory: 'Fashion & Busana Pria'},
+    {nameCategory: 'Fashion & Busana Wanita'},
+    {nameCategory: 'Gadget'},
+    {nameCategory: 'Kesehatan dan Kecantikan'},
+]
 
 const list = [
     {
@@ -37,21 +57,60 @@ const list = [
     },
 ];
 
+
 // Tab Main Menu
 export class MainMenu extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            list : list
+            data : data,
+            list : list,
+            Category1:[],
+            Category2:[],
+            Category3:[],
+            list: list
         }
     }
+
+    componentDidMount()
+    {
+        axios.get('https://clone-bhineka.herokuapp.com/product?category=1').then(res => {
+            const data = res.data;
+            //console.warn(data.data)
+            this.setState({ Category1: data.data, loading: false });
+        }).catch(error => {
+            this.setState({ loading: false, error: 'something went wrong' })
+        });
+
+        axios.get('https://clone-bhineka.herokuapp.com/product?category=2').then(res => {
+            const data = res.data;
+            //console.warn(data.data)
+            this.setState({ Category2: data.data, loading: false });
+        }).catch(error => {
+            this.setState({ loading: false, error: 'something went wrong' })
+        });
+
+        axios.get('https://clone-bhineka.herokuapp.com/product/category=3').then(res => {
+            const data = res.data;
+            //console.warn(data.data)
+            this.setState({ Category3: data.data, loading: false });
+        }).catch(error => {
+            this.setState({ loading: false, error: 'something went wrong' })
+        });
+
+
+    }
+
+    
+
     handleNavigate = (Item) => {
         const { navigation } = this.props;
         navigation.navigate('DetailPage', Item)
     }
 
     render() {
+        console.warn(this.state.Category1)
         return (
             <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'#f2f5f7'}}>
@@ -88,7 +147,7 @@ export class MainMenu extends Component {
                                 style={{borderWidth:0, marginLeft:-16, paddingLeft:10, paddingRight:30, marginRight:-16}}
                                 horizontal
                                 showsHorizontalScrollIndicator={false}
-                                data={list}
+                                data={this.state.Category1}
                                 renderItem={({ item }) => {
                                     return (
                                         <TouchableOpacity
@@ -103,17 +162,104 @@ export class MainMenu extends Component {
                                             </View>
                                             <View style={{marginTop:12}}>
                                                 <Text style={{ fontSize:15 }} numberOfLines={2}>
-                                                    {item.nameBarang}
-                                                </Text>
-                                            </View>
-                                            <View style={{marginTop:5, marginBottom:3}}>
-                                                <Text style={{ textDecorationLine: 'line-through', color:'#6a6f7a' }}>
-                                                    {item.discon}
+                                                    {item.product}
                                                 </Text>
                                             </View>
                                             <View style={{flex:1, alignItems: 'flex-start',justifyContent: 'flex-end'}}>
                                                 <Text style={{ fontWeight:'bold' }}>
-                                                    Rp {item.harga}
+                                                    Rp {item.price}
+                                                </Text>
+                                            </View>
+                                        </View>
+                                        </TouchableOpacity>
+                                    );
+                                }}
+                                keyExtractor={(item, index) => index}
+                            />
+                        </Card.Content>
+                    </Card>
+                </View>
+                <View style={{width:'95%', marginTop:20, borderWidth:0}}>
+                    <Card style={{elevation:5}}>
+                        <Card.Title 
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
+                            title="Rekomendasi untuk Anda"
+                            titleStyle={{fontSize: 17}}
+                            right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
+                            rightStyle={{marginRight:16}}
+                        />
+                        <Card.Content>
+                            <FlatList
+                                style={{borderWidth:0, marginLeft:-16, paddingLeft:10, paddingRight:30, marginRight:-16}}
+                                horizontal
+                                showsHorizontalScrollIndicator={false}
+                                data={this.state.Category2}
+                                renderItem={({ item }) => {
+                                    return (
+                                        <TouchableOpacity
+                                            onPress={() => this.props.navigation.navigate('DetailPage', item)}
+                                        >
+                                        <View style={{width:180, marginTop:25, marginBottom:14,}}>
+                                            <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+                                                <Image
+                                                    style={{width: 100, height: 120,}}
+                                                    source={{uri: item.image}}
+                                                />
+                                            </View>
+                                            <View style={{marginTop:12}}>
+                                                <Text style={{ fontSize:15 }} numberOfLines={2}>
+                                                    {item.product}
+                                                </Text>
+                                            </View>
+                                            <View style={{flex:1, alignItems: 'flex-start',justifyContent: 'flex-end'}}>
+                                                <Text style={{ fontWeight:'bold' }}>
+                                                    Rp {item.price}
+                                                </Text>
+                                            </View>
+                                        </View>
+                                        </TouchableOpacity>
+                                    );
+                                }}
+                                keyExtractor={(item, index) => index}
+                            />
+                        </Card.Content>
+                    </Card>
+                </View>
+                <View style={{width:'95%', marginTop:20, borderWidth:0}}>
+                    <Card style={{elevation:5}}>
+                        <Card.Title 
+                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
+                            title="Rekomendasi untuk Anda"
+                            titleStyle={{fontSize: 17}}
+                            right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
+                            rightStyle={{marginRight:16}}
+                        />
+                        <Card.Content>
+                            <FlatList
+                                style={{borderWidth:0, marginLeft:-16, paddingLeft:10, paddingRight:30, marginRight:-16}}
+                                horizontal
+                                showsHorizontalScrollIndicator={false}
+                                data={this.state.Category3}
+                                renderItem={({ item }) => {
+                                    return (
+                                        <TouchableOpacity
+                                            onPress={() => this.props.navigation.navigate('DetailPage', item)}
+                                        >
+                                        <View style={{width:180, marginTop:25, marginBottom:14,}}>
+                                            <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+                                                <Image
+                                                    style={{width: 100, height: 120,}}
+                                                    source={{uri: item.image}}
+                                                />
+                                            </View>
+                                            <View style={{marginTop:12}}>
+                                                <Text style={{ fontSize:15 }} numberOfLines={2}>
+                                                    {item.product}
+                                                </Text>
+                                            </View>
+                                            <View style={{flex:1, alignItems: 'flex-start',justifyContent: 'flex-end'}}>
+                                                <Text style={{ fontWeight:'bold' }}>
+                                                    Rp {item.price}
                                                 </Text>
                                             </View>
                                         </View>
@@ -152,105 +298,6 @@ export class MainMenu extends Component {
                                             <View style={{marginTop:12}}>
                                                 <Text style={{ fontSize:15 }} numberOfLines={2}>
                                                     {item.nameBarang}
-                                                </Text>
-                                            </View>
-                                            <View style={{marginTop:5, marginBottom:3}}>
-                                                <Text style={{ textDecorationLine: 'line-through', color:'#6a6f7a' }}>
-                                                    {item.discon}
-                                                </Text>
-                                            </View>
-                                            <View style={{flex:1, alignItems: 'flex-start',justifyContent: 'flex-end'}}>
-                                                <Text style={{ fontWeight:'bold' }}>
-                                                    Rp {item.harga}
-                                                </Text>
-                                            </View>
-                                        </View>
-                                    );
-                                }}
-                                keyExtractor={(item, index) => index}
-                            />
-                        </Card.Content>
-                    </Card>
-                </View>
-                <View style={{width:'95%', marginTop:20, borderWidth:0}}>
-                    <Card style={{elevation:5}}>
-                        <Card.Title 
-                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
-                            title="Rekomendasi untuk Anda"
-                            titleStyle={{fontSize: 17}}
-                            right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
-                            rightStyle={{marginRight:16}}
-                        />
-                        <Card.Content>
-                            <FlatList
-                                style={{borderWidth:0, marginLeft:-16, paddingLeft:10, paddingRight:30, marginRight:-16}}
-                                horizontal
-                                showsHorizontalScrollIndicator={false}
-                                data={list}
-                                renderItem={({ item }) => {
-                                    return (
-                                        <View style={{width:180, marginTop:25, marginBottom:14,}}>
-                                            <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                                                <Image
-                                                    style={{width: 100, height: 120,}}
-                                                    source={{uri: item.image}}
-                                                />
-                                            </View>
-                                            <View style={{marginTop:12}}>
-                                                <Text style={{ fontSize:15 }} numberOfLines={2}>
-                                                    {item.nameBarang}
-                                                </Text>
-                                            </View>
-                                            <View style={{marginTop:5, marginBottom:3}}>
-                                                <Text style={{ textDecorationLine: 'line-through', color:'#6a6f7a' }}>
-                                                    {item.discon}
-                                                </Text>
-                                            </View>
-                                            <View style={{flex:1, alignItems: 'flex-start',justifyContent: 'flex-end'}}>
-                                                <Text style={{ fontWeight:'bold' }}>
-                                                    Rp {item.harga}
-                                                </Text>
-                                            </View>
-                                        </View>
-                                    );
-                                }}
-                                keyExtractor={(item, index) => index}
-                            />
-                        </Card.Content>
-                    </Card>
-                </View>
-                <View style={{width:'95%', marginTop:20, borderWidth:0}}>
-                    <Card style={{elevation:5}}>
-                        <Card.Title 
-                            style={{borderBottomWidth:1, borderColor:'#07e8ca', height:50}}
-                            title="Rekomendasi untuk Anda"
-                            titleStyle={{fontSize: 17}}
-                            right={(props) => <Text style={{color:'blue', fontWeight:'bold', fontSize:12}}>LIHAT SEMUA</Text>} 
-                            rightStyle={{marginRight:16}}
-                        />
-                        <Card.Content>
-                            <FlatList
-                                style={{borderWidth:0, marginLeft:-16, paddingLeft:10, paddingRight:30, marginRight:-16}}
-                                horizontal
-                                showsHorizontalScrollIndicator={false}
-                                data={list}
-                                renderItem={({ item }) => {
-                                    return (
-                                        <View style={{width:180, marginTop:25, marginBottom:14,}}>
-                                            <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                                                <Image
-                                                    style={{width: 100, height: 120,}}
-                                                    source={{uri: item.image}}
-                                                />
-                                            </View>
-                                            <View style={{marginTop:12}}>
-                                                <Text style={{ fontSize:15 }} numberOfLines={2}>
-                                                    {item.nameBarang}
-                                                </Text>
-                                            </View>
-                                            <View style={{marginTop:5, marginBottom:3}}>
-                                                <Text style={{ textDecorationLine: 'line-through', color:'#6a6f7a' }}>
-                                                    {item.discon}
                                                 </Text>
                                             </View>
                                             <View style={{flex:1, alignItems: 'flex-start',justifyContent: 'flex-end'}}>
@@ -300,11 +347,6 @@ export class MainMenu extends Component {
                                             <View style={{marginTop:12}}>
                                                 <Text style={{ fontSize:15 }} numberOfLines={2}>
                                                     {item.nameBarang}
-                                                </Text>
-                                            </View>
-                                            <View style={{marginTop:5, marginBottom:3}}>
-                                                <Text style={{ textDecorationLine: 'line-through', color:'#6a6f7a' }}>
-                                                    {item.discon}
                                                 </Text>
                                             </View>
                                             <View style={{flex:1, alignItems: 'flex-start',justifyContent: 'flex-end'}}>
@@ -371,7 +413,7 @@ const Stack = createStackNavigator({
                         icon='search'
                         color={Colors.white}
                         size={25}
-                        onPress={() => {navigation.openDrawer()}}
+                        onPress={() => { navigation.navigate('Search')}}
                     />
                     <IconButton
                         icon='shopping-cart'
@@ -396,9 +438,16 @@ const Stack = createStackNavigator({
     ListProduct: { 
         screen: listproduct,
     },
-    Cart: { 
-        screen: Cart,
+
+    Search: {
+        screen: Search,
+        navigationOptions: {header: null}
     },
+    Cart: {
+        screen: Cart,
+        navigationOptions: {header: null}
+    }
+
 })
 
 export default createAppContainer(Stack);
