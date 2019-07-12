@@ -9,6 +9,27 @@ import ModalBuy from '../components/ModalBeli';
 
 export default class Note extends Component {
 
+    state = {
+        favorit: false
+    }
+
+    componentDidMount = () => {
+        if(this.state.favorit == true){
+            this.setState({iconFavorit:'favorite'})
+        }
+        else{
+            this.setState({iconFavorit:'favorite-border'})
+        }
+    }
+
+    addFavorit = () => {
+        if(this.state.favorit == true) {
+        }
+        else{
+            this.setState({favorit: true, iconFavorit:'favorite'})
+        }
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -72,6 +93,8 @@ export default class Note extends Component {
         headerTintColor: '#fff',
         title: 'Detail Produk',
     })
+
+    
     
     render() {
         const { visible } = this.state;
@@ -102,7 +125,17 @@ export default class Note extends Component {
                             </View>
                             <View style={styles.view1D}>
                                 <Text style={{ marginTop:2, fontSize:24, fontWeight:'bold', color:'blue'}}>Rp {this.state.price}</Text>
-                                <Text style={{ marginTop:4, color:'#272929'}}>Siap dikirim di hari yang sama</Text>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text style={{ marginTop:4, color:'#272929'}}>Siap dikirim di hari yang sama</Text>
+                                    <View style={{flex:1, justifyContent:'flex-end', alignItems:'flex-end'}}>
+                                        <IconButton
+                                            icon={this.state.iconFavorit}
+                                            color={Colors.red}
+                                            size={30}
+                                            onPress={() => this.addFavorit()}
+                                        />
+                                    </View>
+                                </View>
                             </View>
                         </View>
                         <View style={styles.view2}>

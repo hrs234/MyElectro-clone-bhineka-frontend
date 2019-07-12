@@ -426,9 +426,12 @@ const Stack = createStackNavigator({
                 backgroundColor: '#092B51',
                 elevation:0
             },
-            
-            headerTintColor: 'red',
-            title: 'MyElectro',
+            headerTitle: (
+                <Image
+                    style={{height:20, width:110}}
+                    source={require("../assets/image/baner1.png")}
+                />
+            ),
         })
     },
     DetailPage: {

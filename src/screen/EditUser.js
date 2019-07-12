@@ -145,8 +145,8 @@ class EditUser extends Component {
       <View style={{ backgroundColor: "#F5F5F5" }}>
         {/* Header */}
         <Appbar.Header style={styles.Head}>
-          <Appbar.BackAction onPress={() => alert("this back")} />
-          <Appbar.Content title="Account Registration" />
+          <Appbar.BackAction onPress={() => this.props.navigation.goBack()} />
+          <Appbar.Content title="Edit Data Pembeli" />
         </Appbar.Header>
         {/* End Header */}
 

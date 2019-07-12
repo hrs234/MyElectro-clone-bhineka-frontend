@@ -5,6 +5,7 @@ import { Container, Header, Body } from "native-base";
 import {NavigationActions, DrawerItems } from 'react-navigation';
 
 import { ScrollView } from "react-native-gesture-handler";
+import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 
 class SideMenu extends Component {
 
@@ -28,12 +29,12 @@ class SideMenu extends Component {
               style={styles.drawerImage}
               source={require("../assets/image/logo.png")}
             />
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, padding:10, paddingTop:0 }}>
               <Text
                 style={{
-                  color: "#000000",
+                  color: "#fff",
                   fontStyle: "normal",
-                  fontWeight: "600",
+                  fontWeight: "bold",
                   lineHeight: 23
                 }}
               >
@@ -41,9 +42,8 @@ class SideMenu extends Component {
               </Text>
               <Text
                 style={{
-                  color: "#000000",
+                  color: "#fff",
                   fontStyle: "normal",
-                  fontWeight: "600",
                   lineHeight: 23
                 }}
               >
@@ -57,9 +57,11 @@ class SideMenu extends Component {
             <DrawerItems
               {...this.props} />
               <TouchableOpacity
+                style={{flexDirection:'row', alignItems:'center', paddingLeft:17}}
                 onPress={ () => {this.props.navigation.navigate('Belanja'),this.props.navigation.closeDrawer()} }
                 >
-                <Text style={{margin: 16,fontWeight: 'bold'}}>Logout</Text>
+                <Icon name="exit-to-app" size={28} color="grey" />
+                <Text style={{margin: 16, marginLeft:27, fontWeight: 'bold'}}>Logout</Text>
               </TouchableOpacity>
           </View>
         </ScrollView>
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0B2D53"
   },
   drawerImage: {
-    height: 150,
-    width: 150
+    height: 135,
+    width: 135
   }
 });
