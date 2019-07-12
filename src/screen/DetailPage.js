@@ -55,7 +55,7 @@ class DetailPage extends Component {
         });
       }
     });
-    alert("login id " + this.state.id + " token " + this.state.token);
+    alert("login id " + this.state.id_user + " token " + this.state.token);
 
   };
 
