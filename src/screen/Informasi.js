@@ -17,7 +17,7 @@ export default class Informasi extends Component {
                 <View>
                     <Appbar.Header style={{ backgroundColor: '#092B51'}}>
                         <Appbar.BackAction
-                            onPress={() => alert('this back')}
+                            onPress={() => this.props.navigate.openDrawer()}
                         />
                         <Appbar.Content
                             title="Informasi"

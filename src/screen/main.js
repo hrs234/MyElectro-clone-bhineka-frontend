@@ -8,6 +8,7 @@ import Carousel from "react-native-carousel-control";
 import DetailPage from "./DetailPage";
 import Kategori from "./CategoryScreen.js"
 import listproduct from '../screen/ListProduct'
+import Cart from '../screen/Cart'
 
 const list = [
     {
@@ -376,7 +377,7 @@ const Stack = createStackNavigator({
                         icon='shopping-cart'
                         color={Colors.white}
                         size={22}
-                        onPress={() => {navigation.navigate('Informasi')}}
+                        onPress={() => {navigation.navigate('Cart')}}
                     />
                 </View>
             ),
@@ -394,6 +395,9 @@ const Stack = createStackNavigator({
     },
     ListProduct: { 
         screen: listproduct,
+    },
+    Cart: { 
+        screen: Cart,
     },
 })
 
