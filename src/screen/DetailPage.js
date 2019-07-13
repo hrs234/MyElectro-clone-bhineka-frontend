@@ -1,11 +1,10 @@
-
-import React, {Component} from 'react';
-import { StyleSheet, Text, View, Image, ScrollView,Modal} from 'react-native';
-import { IconButton, Colors, Button} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/dist/MaterialIcons';
-import Icon2 from 'react-native-vector-icons/dist/MaterialCommunityIcons';
-import axios from 'axios';
-import {getCart} from '../public/action/cart'
+import React, { Component } from "react";
+import { StyleSheet, Text, View, Image, ScrollView, Modal } from "react-native";
+import { IconButton, Colors, Button } from "react-native-paper";
+import Icon from "react-native-vector-icons/dist/MaterialIcons";
+import Icon2 from "react-native-vector-icons/dist/MaterialCommunityIcons";
+import axios from "axios";
+import { getCart } from "../public/action/cart";
 
 import ModalBuy from "../components/ModalBeli";
 
@@ -13,34 +12,12 @@ import ModalBuy from "../components/ModalBeli";
 import { connect } from "react-redux";
 
 
-    state = {
-        favorit: false
-    }
-
-    componentDidMount = () => {
-        if(this.state.favorit == true){
-            this.setState({iconFavorit:'favorite'})
-        }
-        else{
-            this.setState({iconFavorit:'favorite-border'})
-        }
-    }
-
-    addFavorit = () => {
-        if(this.state.favorit == true) {
-        }
-        else{
-            this.setState({favorit: true, iconFavorit:'favorite'})
-        }
-    }
-
 
 class DetailPage extends Component {
   constructor(props) {
     super(props);
     console.log("this.props.navigation.state.params");
     console.log(this.props.navigation.state.params);
-
 
     this.state = {
       image: this.props.navigation.state.params.image,
@@ -51,10 +28,12 @@ class DetailPage extends Component {
       price: this.props.navigation.state.params.price,
       star: 3,
       amount_purchase: 1,
-      modalVisible: false
+      modalVisible: false,
+      favorit: false
     };
     this.loginasync();
   }
+
 
   loginasync = async () => {
     await AsyncStorage.getItem("user", (error, id) => {
@@ -82,7 +61,23 @@ class DetailPage extends Component {
       }
     });
     alert("login id " + this.state.id_user + " token " + this.state.token);
+  };
 
+  
+  componentDidMount = () => {
+    if (this.state.favorit == true) {
+      this.setState({ iconFavorit: "favorite" });
+    } else {
+      this.setState({ iconFavorit: "favorite-border" });
+    }
+  };
+  
+  addFavorit = () => {
+    if (this.state.favorit == true) {
+      this.setState({ favorit: false, iconFavorit: "favorite-border" });
+    } else {
+      this.setState({ favorit: true, iconFavorit: "favorite" });
+    }
   };
 
   setModalVisible(visible) {
@@ -100,7 +95,6 @@ class DetailPage extends Component {
     }
     return item;
   }
-
 
   postCart = data => {
     console.warn(data);
@@ -174,20 +168,37 @@ class DetailPage extends Component {
                 </View>
               </View>
               <View style={styles.view1D}>
-                                <Text style={{ marginTop:2, fontSize:24, fontWeight:'bold', color:'blue'}}>Rp {this.state.price}</Text>
-                                <View style={{flexDirection:'row'}}>
-                                    <Text style={{ marginTop:4, color:'#272929'}}>Siap dikirim di hari yang sama</Text>
-                                    <View style={{flex:1, justifyContent:'flex-end', alignItems:'flex-end'}}>
-                                        <IconButton
-                                            icon={this.state.iconFavorit}
-                                            color={Colors.red}
-                                            size={30}
-                                            onPress={() => this.addFavorit()}
-                                        />
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
+                <Text
+                  style={{
+                    marginTop: 2,
+                    fontSize: 24,
+                    fontWeight: "bold",
+                    color: "blue"
+                  }}
+                >
+                  Rp {this.state.price}
+                </Text>
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ marginTop: 4, color: "#272929" }}>
+                    Siap dikirim di hari yang sama
+                  </Text>
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: "flex-end",
+                      alignItems: "flex-end"
+                    }}
+                  >
+                    <IconButton
+                      icon={this.state.iconFavorit}
+                      color={Colors.red}
+                      size={30}
+                      onPress={() => this.addFavorit()}
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
             <View style={styles.view2}>
               <Icon name="store" size={25} color="#7b8785" />
               <Text style={{ marginLeft: 16, fontSize: 17, color: "#272929" }}>
@@ -244,55 +255,97 @@ class DetailPage extends Component {
                                 <Text style={{fontSize:17, color:'#7b6ec2'}}>{'\u2022'}Grey</Text>
                             </View>
                         </View> */}
-                        <View style={styles.view5}>
-                            <Text style={{fontSize:20, marginBottom:5}}>Overview</Text>
-                            <View style={{flex:1, marginBottom:12}}>
-                                <Text style={{fontSize:17, color:'#272929'}}>
-                                {this.state.description}
-                                </Text>
-                            </View>
-                        </View>
-                    </View> 
-                </ScrollView>
-                <View style={{backgroundColor: '#d5d902'}}>
-                <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={this.state.modalVisible}>
-                    <View style={{flex:1, backgroundColor: 'rgba(0, 0, 0, 0.50)', alignItems:'center', justifyContent:'center' }}>
-                        <View style={{backgroundColor:'#FFF', borderTopRightRadius:3, borderTopLeftRadius:3, width:'90%', height:'8%', padding:10, elevation:3 }}>
-                        <View style={{flexDirection:'row', padding:5, elevation:1}}>
-                            <Image
-                            style={{width: 22, height: 22, marginRight:5}}
-                            source={{uri: 'https://dumielauxepices.net/sites/default/files/hand-emoji-clipart-air-emoji-png-632601-5302983.png'}}
-                            />
-                            <Text style={{fontWeight:'bold', fontSize:17}}>Produk berhasil ditambah</Text>
-                        </View>
-                        </View>
-                        <View style={{backgroundColor:'#f2f0f0', borderBottomRightRadius:3, borderBottomLeftRadius:3, width:'90%', height:'20%', padding:10, elevation:3 }}>
-                        <View>
-                            <Button style={{height:46, justifyContent:'center', backgroundColor:'#d5d902'}} mode="contained"
-                            onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible);
-                                this.props.navigation.navigate('cart', this.state.id_user);
-                                console.log(this.state.id_user)
-                            }}
-                            >
-                            <Text style={{fontSize:14,color:'black'}}>LANJUT KE KERANJANG</Text>
-                            </Button>
-                            <Button style={{height:45, justifyContent:'center', backgroundColor:'#fff', marginTop:15, elevation:3}} mode="contained"
-                            onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible);
-                            }}
-                            >
-                            <Text style={{fontSize:14,color:'#c8a8ed'}}>KEMBALI BERBELANJA</Text>
-                            </Button>
-                        </View>
-                        </View>
-                    </View>
-                    </Modal>
-
-                    <Button style={{height:57, justifyContent:'center'}} mode="text"
+            <View style={styles.view5}>
+              <Text style={{ fontSize: 20, marginBottom: 5 }}>Overview</Text>
+              <View style={{ flex: 1, marginBottom: 12 }}>
+                <Text style={{ fontSize: 17, color: "#272929" }}>
+                  {this.state.description}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </ScrollView>
+        <View style={{ backgroundColor: "#d5d902" }}>
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={this.state.modalVisible}
+          >
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "rgba(0, 0, 0, 0.50)",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor: "#FFF",
+                  borderTopRightRadius: 3,
+                  borderTopLeftRadius: 3,
+                  width: "90%",
+                  height: "8%",
+                  padding: 10,
+                  elevation: 3
+                }}
+              >
+                <View
+                  style={{ flexDirection: "row", padding: 5, elevation: 1 }}
+                >
+                  <Image
+                    style={{ width: 22, height: 22, marginRight: 5 }}
+                    source={{
+                      uri:
+                        "https://dumielauxepices.net/sites/default/files/hand-emoji-clipart-air-emoji-png-632601-5302983.png"
+                    }}
+                  />
+                  <Text style={{ fontWeight: "bold", fontSize: 17 }}>
+                    Produk berhasil ditambah
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  backgroundColor: "#f2f0f0",
+                  borderBottomRightRadius: 3,
+                  borderBottomLeftRadius: 3,
+                  width: "90%",
+                  height: "20%",
+                  padding: 10,
+                  elevation: 3
+                }}
+              >
+                <View>
+                  <Button
+                    style={{
+                      height: 46,
+                      justifyContent: "center",
+                      backgroundColor: "#d5d902"
+                    }}
+                    mode="contained"
+                    onPress={() => {
+                      this.setModalVisible(!this.state.modalVisible);
+                      this.props.navigation.navigate(
+                        "Cart",
+                        this.state.id_user
+                      );
+                      console.log(this.state.id_user);
+                    }}
+                  >
+                    <Text style={{ fontSize: 14, color: "black" }}>
+                      LANJUT KE KERANJANG
+                    </Text>
+                  </Button>
+                  <Button
+                    style={{
+                      height: 45,
+                      justifyContent: "center",
+                      backgroundColor: "#fff",
+                      marginTop: 15,
+                      elevation: 3
+                    }}
+                    mode="contained"
                     onPress={() => {
                       this.setModalVisible(!this.state.modalVisible);
                     }}
@@ -305,7 +358,6 @@ class DetailPage extends Component {
               </View>
             </View>
           </Modal>
-
           <Button
             style={{ height: 57, justifyContent: "center" }}
             mode="text"

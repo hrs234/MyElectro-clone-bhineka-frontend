@@ -42,35 +42,31 @@ const AppSwitchNavigatorA = createDrawerNavigator(
         }
       },
       // Splash : { screen: Splash },
-      // Register : { screen: Register },
-      // Login : { screen: Login },
+      Register : { 
+        screen: Register,
+        navigationOptions: {
+          drawerLabel: ()=>null
+        }
+      },
       Profil :{ screen: profil },
       Wishlist :{ screen: wishlist },
       //PaymentHistory : {screen: paymentHistory},
       //AddSelling : {screen: addSelling},
-      Kontak :{ screen: kontak },
-      Informasi :{ screen: informasi },
+      Kontak :{ screen: Kontak },
+      Informasi :{ screen: Informasi },
+      Forgot :{ 
+        screen: Forgot,
+        navigationOptions: {
+          drawerLabel: ()=>null
+        }
+      },
+      Login : { screen: Login },
       History :{
         screen: history,
         navigationOptions: {
           drawerLabel: ()=>null
         }
-      }
-    },
-    {
-      initialRouteName:'Belanja',
-      drawerWidth: 280,
-      contentComponent: SideMenu,
-      contentOptions: {
-        activeTintColor: '#908be8',
-
-      }
-    },
-    Wishlist :{ screen: wishlist },
-    Kontak :{ screen: Kontak },
-    Informasi :{ screen: Informasi },
-    Login :{ screen: Login },
-  
+      },
   },
   {
     initialRouteName:'Belanja',
@@ -83,7 +79,7 @@ const AppSwitchNavigatorA = createDrawerNavigator(
   });
   const InitialNavigator = createSwitchNavigator({
     Splash: Splash,
-    App: AppSwitchNavigatiorA
+    App: AppSwitchNavigatorA
   });
 
 const AppContainer = createAppContainer(InitialNavigator);
