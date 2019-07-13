@@ -157,8 +157,6 @@ class Cart extends Component {
       });
     }
    
-    alert("login id " + this.state.id_user + " token " + this.state.token);
- 
     axios
       .get(`https://clone-bhineka.herokuapp.com/cart/` + this.state.id_user)
       .then(res => {
