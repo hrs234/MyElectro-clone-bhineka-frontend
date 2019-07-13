@@ -8,6 +8,7 @@ import {
   Appbar,
   Button
 } from "react-native-paper";
+import Icon from "react-native-vector-icons/dist/MaterialCommunityIcons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 //redux
@@ -23,11 +24,11 @@ class Login extends Component {
     };
   }
 
-  removeAsync = async () => {
-    await AsyncStorage.removeItem("token");
-    await AsyncStorage.removeItem("user");
-    alert("remove");
-  };
+  static navigationOptions = {
+    drawerIcon: (
+      <Icon name="login" type="MaterialIcons" style={{ color: "#000000", marginRight:-5, fontSize:28 }} />
+    )
+};
 
   login = async () => {
     let dataLogin = {
@@ -119,8 +120,7 @@ class Login extends Component {
             style={{ color: "blue", width: "34%", backgroundColor: "#fff" }}
             mode="contained"
             onPress={() => {
-              this.removeAsync()
-              this.props.navigation.navigate('Register');
+              this.props.navigation.navigate("Register");
             }}
           >
             <Text style={{ color: "blue" }}>REGISTRASI</Text>
