@@ -21,7 +21,7 @@ export default class wishlist extends Component {
                             onPress={() => this.props.navigation.goBack()}
                         />
                         <Appbar.Content
-                            title="Kontak Kami"
+                            title="Wishlist"
                         />
                     </Appbar.Header>
                 </View>

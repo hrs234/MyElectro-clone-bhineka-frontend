@@ -26,6 +26,7 @@ import profil from '../screen/Profil'
 import profilDetail from '../components/ProfilDetail'
 import search from '../screen/Search'
 import EditUser from '../screen/EditUser'
+import ChangePassword from '../screen/ChangePassword'
 
 const data = [
   { nameCategory: "Aksesories Gadget & Komputer" },
@@ -69,6 +70,7 @@ const list = [
   }
 ];
 
+console.disableYellowBox = true;
 // Tab Main Menu
 export class MainMenu extends Component {
   constructor(props) {
@@ -142,7 +144,7 @@ export class MainMenu extends Component {
       });
 
     axios
-      .get("https://clone-bhineka.herokuapp.com/product/category=3")
+      .get("https://clone-bhineka.herokuapp.com/product?category=3")
       .then(res => {
         const data = res.data;
         this.setState({ Category3: data.data, loading: false });
@@ -172,8 +174,7 @@ export class MainMenu extends Component {
             style={{
               flexDirection: "row",
               marginTop: 10,
-              marginRight: -13,
-              marginLeft: -12
+              marginRight: -13
             }}
           >
             <Carousel pageWidth={340}>
@@ -545,6 +546,10 @@ const Stack = createStackNavigator({
     ListProduct: { 
         screen: listproduct,
     },
+    ChangePassword:{
+      screen: ChangePassword,
+      navigationOptions: {header: null}
+  },
 
     Search: {
         screen: Search,

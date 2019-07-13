@@ -51,7 +51,11 @@ const AppSwitchNavigatorA = createDrawerNavigator(
       Profil :{ screen: profil },
       Wishlist :{ screen: wishlist },
       //PaymentHistory : {screen: paymentHistory},
-      //AddSelling : {screen: addSelling},
+      AddSelling : {screen: addSelling,
+        navigationOptions: {
+          drawerLabel: ()=>null
+        }
+      },
       Kontak :{ screen: Kontak },
       Informasi :{ screen: Informasi },
       Forgot :{ 

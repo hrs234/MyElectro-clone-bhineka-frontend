@@ -56,6 +56,7 @@ class Register extends Component {
         birth_date: this.state.birth_date
       };
       this.props.dispatch(regUser(dataReg));
+      this.props.navigation.navigate('Login');
     } else {
       Alert.alert("Field cannot empty");
     }
@@ -257,7 +258,7 @@ class Register extends Component {
               title="Register!"
               onPress={() => {
                 this.regUser()
-                // alert("this regist")
+                alert("this regist")
               }}
               style={styles.button}
             >
