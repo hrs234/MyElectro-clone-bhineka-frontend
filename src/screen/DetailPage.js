@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, ScrollView, Modal } from "react-native";
-import { IconButton, Colors, Button } from "react-native-paper";
-import Icon from "react-native-vector-icons/dist/MaterialIcons";
-import Icon2 from "react-native-vector-icons/dist/MaterialCommunityIcons";
-import axios from "axios";
-import { getCart } from "../public/action/cart";
+
+import React, {Component} from 'react';
+import { StyleSheet, Text, View, Image, ScrollView,Modal,AsyncStorage} from 'react-native';
+import { IconButton, Colors, Button} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/dist/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/dist/MaterialCommunityIcons';
+import axios from 'axios';
+import {getCart} from '../public/action/cart'
 
 import ModalBuy from "../components/ModalBeli";
 

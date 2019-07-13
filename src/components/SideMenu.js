@@ -20,6 +20,8 @@ class SideMenu extends Component {
     super(props);
   }
 
+
+  
   handleHomePressed() {
     console.warn("tes");
     const resetAction = NavigationActions.reset({
