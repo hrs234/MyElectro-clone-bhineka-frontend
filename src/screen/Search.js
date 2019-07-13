@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { Container, Header, Body, Input, Icon } from "native-base";
 import { FlatList, Text, View, Image } from "react-native";
+import axios from 'axios';
+import { Provider } from 'react-redux';
+import store from '../public/store';
+
+
+import {connect} from 'react-redux';
+import {search} from '../public/action/product';
 
 const faker = [
   {
@@ -40,20 +47,35 @@ const faker = [
 ];
 
 
-
-export default class Search extends Component {
+class Search extends Component {
   constructor(props) {
     super(props);
     {
       this.state = {
-        isLoading: false
+        isLoading: false,
+        query: '',
+        error: '',
+        res: '',
+        search_q: 'unk',
+        flatListProps: ''
       };
     }
   }
+  
+  
+  
+  search_product = () => 
+  {
 
-  componentDidMount() {}
 
-  _keyExtractor = (item, index) => item.id;
+    this.props.dispatch(search(this.state.search_q));
+    
+    console.log("[RS] "+JSON.stringify(this.props));
+  }
+
+
+
+  // _keyExtractor = (item, index) => item;
 
   renderItem = ({ item }) => (
     <View style={{ flex: 1, flexDirection: "row", marginBottom: 3,borderBottomWidth:1, borderBottomColor:"#E0E0E0" }}>
@@ -68,8 +90,15 @@ export default class Search extends Component {
     </View>
   );
 
-  render() {
+  render() 
+  {
+    // console.log('[OUT] : '+JSON.stringify(this.search_product('le')));
+    // console.log('[OUT2] : '+this.state.res);
+
+    console.log('[LT] : '+this.state.search_q);
     return (
+      <Provider store={store}>
+
       <Container>
         <Header style={{ backgroundColor: "white", alignItems: "center" }}>
           <Body style={{ flexDirection: "row" }}>
@@ -81,18 +110,31 @@ export default class Search extends Component {
               style={{}}
               placeholder="Cari Produk Asli"
               placeholderTextColor="gray"
+              onChangeText={(search) => {this.setState({ search_q: search })}}
+              onSubmitEditing={() => this.search_product()}
+              // onSubmitEditing={this.search_product(this.state.search)}
             />
           </Body>
         </Header>
         <FlatList
-          keyExtractor={this.keyExtractor}
-          data={faker}
+          // keyExtractor={this.keyExtractor}
+          data={this.props.data}
           renderItem={this.renderItem}
           style={{marginTop: 5}}
         />
+
+
       </Container>
+      </Provider>
     );
   }
 }
 
+const mapStateToProps = action => {
+  return {
+    reducer: action
+  };
+};
+
 // export default App;
+export default connect(mapStateToProps)(Search);

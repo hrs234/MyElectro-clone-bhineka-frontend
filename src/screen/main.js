@@ -5,7 +5,6 @@ import { IconButton, Colors, Card, Button } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 import Carousel from "react-native-carousel-control";
 import Search from '../screen/Search';
-import Cart from '../screen/Cart';
 
 
 import DetailPage from "./DetailPage";

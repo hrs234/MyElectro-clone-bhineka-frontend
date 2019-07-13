@@ -15,3 +15,10 @@ export const getProduct = (id) => {
         payload: axios.get(url)
     }
 }
+
+export const search = (s) => {
+    return {
+        type: 'SEARCH_PRODUCT',
+        payload: axios.get(URL + `/search?search=${s}`)
+    }
+}
