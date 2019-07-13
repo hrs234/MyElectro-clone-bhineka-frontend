@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Image, ScrollView,Modal} from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView,Modal,AsyncStorage} from 'react-native';
 import { IconButton, Colors, Button} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/dist/MaterialCommunityIcons';
@@ -266,20 +266,6 @@ class DetailPage extends Component {
                         </View>
                     </View>
                     </Modal>
-
-                    <Button style={{height:57, justifyContent:'center'}} mode="text"
-                    onPress={() => {
-                      this.setModalVisible(!this.state.modalVisible);
-                    }}
-                  >
-                    <Text style={{ fontSize: 14, color: "#c8a8ed" }}>
-                      KEMBALI BERBELANJA
-                    </Text>
-                  </Button>
-                </View>
-              </View>
-            </View>
-          </Modal>
 
           <Button
             style={{ height: 57, justifyContent: "center" }}

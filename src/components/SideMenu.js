@@ -19,6 +19,12 @@ class SideMenu extends Component {
     
   }
 
+  removeAsync = async () => {
+    await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("user");
+    alert("remove");
+  };
+
   
 
   handleHomePressed() {
@@ -47,7 +53,8 @@ class SideMenu extends Component {
             <DrawerItems {...this.props} />
             <TouchableOpacity
               onPress={() => {
-                this.props.navigation.navigate("Belanja"),
+                  this.removeAsync()
+                  this.props.navigation.navigate("Belanja"),
                   this.props.navigation.closeDrawer();
               }}
             >

@@ -257,6 +257,8 @@ class Register extends Component {
               title="Register!"
               onPress={() => {
                 this.regUser()
+                this.props.navigation.navigate('Login')
+                alert("Saved data, back to login ");
                 // alert("this regist")
               }}
               style={styles.button}
