@@ -1,3 +1,5 @@
+
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -6,67 +8,11 @@
  * @flow
  */
 
-import React, {Fragment, Component} from 'react';
-import {  View, Text, StyleSheet} from 'react-native';
-import { createAppContainer, createDrawerNavigator, createStackNavigator } from 'react-navigation';
-// import { Provider as paperProvider } from 'react-native-paper';
-// import AppStackNavigation from './src/navigator/navigate';
-// import styles from './src/css/style';
+import React, { Component } from 'react';
+import DrawerNavigator from './src/navigation/DrawerNavigator';
 
-// Import the pages component
-import Splash from './src/screen/splash';
-import Main from './src/screen/main';
-import Register from './src/screen/Register';
-import Login from './src/screen/Login';
-import wishlist from './src/screen/wishlist';
-import paymentHistory from './src/screen/paymentHistory';
-import addSelling from './src/screen/addSelling';
-
-// Drawer Navigator
-const AppSwitchNavigatiorA = createDrawerNavigator(
-{
-  App: { screen: Main },
-  Splash: { screen: Splash },
-  Register: { screen: Register },
-  Login: { screen: Login },
-  wishlist:{ screen: wishlist },
-  paymentHistory: {screen: paymentHistory},
-  addSelling: {screen: addSelling}
-
-
-},
-{
-  initialRouteName:'Splash',
-  drawerWidth: 250,
-  drawerPosition: 'left',
-  contentOptions: {
-    activeTintColor: '#000',
-  }
-});
-  
-const AppContainer = createAppContainer(AppSwitchNavigatiorA);
-
-export default class App extends Component 
-{
-
-  constructor(props)
-  {
-    super(props)
-    {
-      this.state = {
-        isLoading: false
-      }
-    }
-  }
-
-  render() 
-  {
-
-    return (
-      <AppContainer />
-    );
+export default class App extends Component {
+  render() {
+    return <DrawerNavigator />;
   }
 }
-
-
-// export default App;

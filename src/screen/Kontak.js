@@ -3,12 +3,12 @@ import { View, Image } from 'react-native';
 import { Appbar } from "react-native-paper";
 import { Icon } from "native-base";
 
-export default class wishlist extends Component {
+export default class Kontak extends Component {
 
     static navigationOptions = {
-        drawerLabel: 'Wishlist',
+        drawerLabel: 'Kontak Kami',
         drawerIcon: (
-          <Icon name="favorite" type="MaterialIcons" style={{ color: "#000000", marginRight:-5 }} />
+          <Icon name="forum" type="MaterialIcons" style={{ color: "#000000", marginRight:-5 }} />
         )
     };
     
