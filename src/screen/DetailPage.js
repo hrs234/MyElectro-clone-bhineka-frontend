@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, ScrollView, Modal } from "react-native";
+import { StyleSheet, Text, View, Image, ScrollView, Modal, Alert, AsyncStorage } from "react-native";
 import { IconButton, Colors, Button } from "react-native-paper";
 import Icon from "react-native-vector-icons/dist/MaterialIcons";
 import Icon2 from "react-native-vector-icons/dist/MaterialCommunityIcons";
@@ -24,7 +24,7 @@ class DetailPage extends Component {
       product: this.props.navigation.state.params.product,
       id_product: this.props.navigation.state.params.id_product,
       description: this.props.navigation.state.params.description,
-      id_user: this.props.navigation.state.params.id_user,
+      id_user: "",
       price: this.props.navigation.state.params.price,
       star: 3,
       amount_purchase: 1,
@@ -60,7 +60,6 @@ class DetailPage extends Component {
         });
       }
     });
-    alert("login id " + this.state.id_user + " token " + this.state.token);
   };
 
   
@@ -97,8 +96,12 @@ class DetailPage extends Component {
   }
 
   postCart = data => {
-    console.warn(data);
-    axios
+    if (this.state.id_user == '') {
+      this.setModalVisible(false);
+      Alert.alert('You must login')
+      this.props.navigation.navigate('Login')
+    }else{
+      axios
       .post("https://clone-bhineka.herokuapp.com/cart", {
         id_product: data.id_product,
         id_user: data.id_user,
@@ -110,6 +113,8 @@ class DetailPage extends Component {
       .catch(function(error) {
         console.warn(error);
       });
+    }
+    
   };
 
   static navigationOptions = ({ navigation }) => ({

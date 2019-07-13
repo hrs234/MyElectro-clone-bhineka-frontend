@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+ 
 import {
   View,
   Text,
@@ -25,7 +25,6 @@ import {
 } from "native-base";
 import {connect} from 'react-redux';
 import {getCart} from '../public/action/cart'
-import cart from "../public/reducer/cart";
 const Alamat = [
   {
     id: 1,
@@ -76,7 +75,7 @@ const kurir = [
     price: "200.000"
   }
 ];
-
+ 
 const faker = [
   {
     id: 1,
@@ -120,66 +119,70 @@ class Cart extends Component {
     this.state = {
       modalVisible: false,
       modalInput: false,
+      getid: true,
       loading: true,
-      id_user: this.props.navigation.state.params
-
+      id_user: this.props.navigation.state.params,
+      data:[]
+ 
     };
     this.loginasync();
   }
-
+ 
   loginasync = async () => {
-    await AsyncStorage.getItem("user", (error, id) => {
-      if (id) {
-        this.setState({
-          isLogin: true,
-          id_user: id
-        });
-      } else {
-        this.setState({
-          isLogin: false
-        });
-      }
-    });
-    await AsyncStorage.getItem("token", (error, token) => {
-      if (token) {
-        this.setState({
-          isLogin: true,
-          token: token
-        });
-      } else {
-        this.setState({
-          isLogin: false
-        });
-      }
-    });
-    // alert("login id " + this.state.id_user + " token " + this.state.token);
-
+    if(this.state.getid){
+      await AsyncStorage.getItem("user", (error, id) => {
+        if (id) {
+          this.setState({
+            isLogin: true,
+            id_user: id,
+            getid:false
+          });
+        } else {
+          this.setState({
+            isLogin: false
+          });
+        }
+      });
+      await AsyncStorage.getItem("token", (error, token) => {
+        if (token) {
+          this.setState({
+            isLogin: true,
+            token: token
+          });
+        } else {
+          this.setState({
+            isLogin: false
+          });
+        }
+      });
+    }
+   
+    alert("login id " + this.state.id_user + " token " + this.state.token);
+ 
     axios
       .get(`https://clone-bhineka.herokuapp.com/cart/` + this.state.id_user)
       .then(res => {
         const data = res.data;
-        console.log("res.data");
-        console.log(res.data);
-
-        this.setState({ cart: data.data, loading: false });
+ 
+        this.setState({ cart: data.data, loading: false, data: data.data });
       })
       .catch(error => {
         this.setState({ loading: false, error: "something went wrong" });
       });
     console.log(this.state.cart);
   };
-
-  
-
+ 
+ 
+ 
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
   setModalInput(visible) {
     this.setState({ modalInput: visible });
   }
-
+ 
   _keyExtractor = (item, index) => index.toString();
-
+ 
   renderItem = ({ item }) => (
     <View
       style={{
@@ -196,11 +199,11 @@ class Cart extends Component {
         }}
       >
         <Image
-          source={{ uri: item.image }}
+          source={{ uri: item.image}}
           style={{ width: 80, height: 80, margin: 5 }}
         />
         <View style={{ flex: 1, marginLeft: 5, marginTop: 15 }}>
-
+ 
           <Text style={{ fontSize: 15 }}>{item.product}</Text>
           <Text style={{ fontWeight: "bold", marginTop: 5 }}>
             Rp. {item.price}
@@ -261,9 +264,9 @@ class Cart extends Component {
       </View>
     </View>
   );
-
+ 
   _keyExtractorKurir = (item, index) => index;
-
+ 
   renderItemKurir = ({ item }) => (
     <View
       style={{
@@ -293,9 +296,9 @@ class Cart extends Component {
       </Text>
     </View>
   );
-
+ 
   _keyExtractorAlamat = (item, index) => index;
-
+ 
   renderItemAlamat = ({ item }) => (
     <View
       style={{ padding: 5, borderBottomWidth: 1, borderBottomColor: "#E0E0E0" }}
@@ -305,16 +308,52 @@ class Cart extends Component {
       <Text>{item.alamat}</Text>
     </View>
   );
-
+ 
   fatch = () =>{
     this.props.dispatch(getCart(this.state.id_user))
   }
-
+ 
   componentDidMount = () =>{
     this.fatch()
   }
-
+ 
+  Transaksi = () =>{
+    let data = this.state.data
+    let id_product = ''
+    let id_role = 3
+    let buy_methode= 1
+    let id_user = this.state.id_user
+    let id_addres = 1
+    let id_agent = 1
+ 
+    data.map(item =>{
+      id_product = item.id_product
+    })
+ 
+ 
+ 
+    axios.post('https://clone-bhineka.herokuapp.com/transaction',{
+      id_buy_methode : buy_methode,
+      id_product: id_product,
+      id_user: id_user,
+      id_role: id_role,
+      id_agent: id_agent,
+      id_address: id_addres
+    }).then(function(response) {
+      console.warn(response);
+    })
+    .catch(function(error) {
+      console.warn(error);
+    });
+ 
+    axios.delete(`https://clone-bhineka.herokuapp.com/cart/${id_user}`)
+ 
+   
+  }
+ 
   render() {
+    console.warn(this.state.id_user)
+    console.warn(this.state.getid)
     return (
       <Container>
         <Header style={{ backgroundColor: "#404D5D" }}>
@@ -341,10 +380,10 @@ class Cart extends Component {
           </Text>
         </View>
         <Content>
-        {this.state.loading ? <Spinner/> : 
+        {this.state.loading ? <Spinner/> :
           <FlatList
             keyExtractor={this.keyExtractor}
-            data={this.props.cart.data}
+            data={this.state.data}
             renderItem={this.renderItem}
             style={{ marginTop: 5 }}
           />}
@@ -474,19 +513,21 @@ class Cart extends Component {
             backgroundColor: "#2E78CF",
             justifyContent: "center",
             alignItems: "center"
-          }}
-        >
-          <Text
-            style={{
-              flex: 1,
-              textAlign: "center",
-              fontWeight: "bold",
-              color: "white"
-            }}
-          >
-            CHECKOUT
-          </Text>
-        </Footer>
+          }}>
+            <Button transparent
+              style={{ height: 57, justifyContent: "center" }}
+              mode="text"
+              onPress={() => {
+                this.Transaksi()
+                Alert.alert('Transaction Success')
+                this.props.navigation.goBack()
+               
+              }}
+            >
+              <Text style={{ fontSize: 17, color: "#fff" }}>CHECKOUT</Text>
+          </Button>
+          </Footer>
+         
         <Modal
           transparent={true}
           animationType="fade"
@@ -650,12 +691,12 @@ class Cart extends Component {
     );
   }
 }
-
+ 
 const mapStateToProps = (state) => {
   return {
     cart: state.category
   };
 };
-
+ 
 // connect with redux,first param is map and second is component
 export default connect(mapStateToProps)(Cart);

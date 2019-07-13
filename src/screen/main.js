@@ -112,7 +112,11 @@ export class MainMenu extends Component {
         });
       }
     });
-    alert("login id " + this.state.id + " token " + this.state.token);
+    if (this.state.id) {
+      alert("Anda sudah login")
+    }else{
+      alert("Anda belum login")
+    }
     
   };
 
@@ -664,7 +668,7 @@ const Stack = createStackNavigator({
                         icon='shopping-cart'
                         color={Colors.white}
                         size={22}
-                        onPress={() => {navigation.navigate('Cart')}}
+                        onPress={() => {navigation.navigate('Cart',)}}
                     />
                 </View>
             ),

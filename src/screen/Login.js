@@ -44,7 +44,7 @@ class Login extends Component {
       
       if (result) {
         this.props.navigation.goBack();
-        alert("berhasil Login token " + result);
+        alert("berhasil Login");
       } else {
         alert("salah");
       }
