@@ -34,7 +34,7 @@ class ModalExample extends Component {
               <View>
                 <Button style={{height:46, justifyContent:'center', backgroundColor:'#d5d902'}} mode="contained"
                   onPress={() => {
-                    this.setModalVisible(!this.state.modalVisible);
+                    this.props.navigation.openDrawer()
                   }}
                 >
                   <Text style={{fontSize:14,color:'black'}}>LANJUT KE KERANJANG</Text>

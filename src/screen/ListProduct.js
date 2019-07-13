@@ -36,7 +36,7 @@ class ListProduct extends Component {
                 icon='shopping-cart'
                 color={Colors.white}
                 size={22}
-                onPress={() => {navigation.navigate('Informasi')}}
+                onPress={() => {navigation.navigate('Cart')}}
             />
         </View>
     ),

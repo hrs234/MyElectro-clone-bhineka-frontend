@@ -15,26 +15,17 @@ import {
 import { IconButton, Colors, Card, Button } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import Carousel from "react-native-carousel-control";
-import Search from "../screen/Search";
-import Cart from "../screen/Cart";
+import Search from '../screen/Search';
+import Cart from '../screen/Cart';
 
 import DetailPage from "./DetailPage";
-import { Icon } from "native-base";
-import axios from "axios";
-import Kategori from "./CategoryScreen.js";
-import listproduct from "../screen/ListProduct";
-
-// Import the pages component
-import Splash from "./splash";
-import Register from "./Register";
-import Login from "./Login";
-import wishlist from "./wishlist";
-import paymentHistory from "./paymentHistory";
-import addSelling from "./addSelling";
-import Forgot from "./Forgot";
-import ChangePassword from "./ChangePassword";
-import cart from "./Cart";
-import search from "./Search";
+import axios from 'axios';
+import Kategori from "./CategoryScreen.js"
+import listproduct from '../screen/ListProduct'
+import profil from '../screen/Profil'
+import profilDetail from '../components/ProfilDetail'
+import search from '../screen/Search'
+import EditUser from '../screen/EditUser'
 
 const data = [
   { nameCategory: "Aksesories Gadget & Komputer" },
@@ -649,75 +640,109 @@ const TabNavigator = createMaterialTopTabNavigator(
 
 //Stack Navigation
 const Stack = createStackNavigator({
-  TabNavigator: {
-    screen: TabNavigator,
-    navigationOptions: ({ navigation }) => ({
-      headerLeft: (
-        <IconButton
-          icon="menu"
-          color={Colors.white}
-          size={25}
-          onPress={() => {
-            navigation.openDrawer();
-          }}
-        />
-      ),
-      headerRight: (
-        <View style={{ flexDirection: "row" }}>
-          <IconButton
-            style={{ marginRight: -3 }}
-            icon="search"
-            color={Colors.white}
-            size={25}
-            onPress={() => {
-              navigation.navigate("Search");
-            }}
-          />
-          <IconButton
-            icon="shopping-cart"
-            color={Colors.white}
-            size={22}
-            onPress={() => {
-              navigation.navigate("Cart");
-            }}
-          />
-        </View>
-      ),
-      headerStyle: {
-        backgroundColor: "#092B51",
-        elevation: 0
-      },
+    TabNavigator: {
+        screen: TabNavigator,
+        navigationOptions:({ navigation }) => ({
+            headerLeft: (
+                <IconButton
+                    icon='menu'
+                    color={Colors.white}
+                    size={25}
+                    onPress={() => {navigation.openDrawer()}}
+                />
+            ),
+            headerRight: (
+                <View style={{flexDirection:'row'}}>
+                    <IconButton
+                        style={{marginRight:-3}}
+                        icon='search'
+                        color={Colors.white}
+                        size={25}
+                        onPress={() => {navigation.navigate('Search')}}
+                    />
+                    <IconButton
+                        icon='shopping-cart'
+                        color={Colors.white}
+                        size={22}
+                        onPress={() => {navigation.navigate('Cart')}}
+                    />
+                </View>
+            ),
+            headerStyle: {
+                backgroundColor: '#092B51',
+                elevation:0
+            },
+            headerTitle: (
+                <Image
+                    style={{height:20, width:110}}
+                    source={require("../assets/image/baner1.png")}
+                />
+            ),
+        })
+    },
+    DetailPage: {
+        screen: DetailPage
+    },
+    ListProduct: { 
+        screen: listproduct,
+    },
 
-      headerTintColor: "red",
-      title: "MyElectro"
-    })
-  },
-  DetailPage: {
-    screen: DetailPage
-  },
-  ListProduct: {
-    screen: listproduct
-  },
-  Search: {
-    screen: Search,
-    navigationOptions: { header: null }
-  },
-  Cart: {
-    screen: Cart,
-    navigationOptions: { header: null }
-  },
-  Splash: { screen: Splash },
-  Register: { screen: Register, navigationOptions: { header: null } },
-  Login: { screen: Login, navigationOptions: { header: null } },
-  wishlist: { screen: wishlist },
-  paymentHistory: { screen: paymentHistory },
-  addSelling: { screen: addSelling },
-  Forgot: { screen: Forgot },
-  ChangePassword: { screen: ChangePassword },
-  cart: { screen: cart, navigationOptions: { header: null } },
-  search: { screen: search },
-  Main: { screen: MainMenu }
-});
+    Search: {
+        screen: Search,
+        navigationOptions: {header: null}
+    },
+    Profil: { 
+        screen: profil,
+        navigationOptions:({ navigation }) => ({
+            headerLeft: (
+                <IconButton
+                    icon='menu'
+                    color={Colors.white}
+                    size={25}
+                    onPress={() => {navigation.openDrawer()}}
+                />
+            ),
+            headerRight: (
+                <IconButton
+                    icon='shopping-cart'
+                    color={Colors.white}
+                    size={22}
+                    onPress={() => {navigation.navigate('Cart')}}
+                />
+            ),
+            headerStyle: {
+                backgroundColor: '#092B51',
+                elevation:0
+            },
+            
+            headerTintColor: '#fff',
+            title: 'Akun Saya',
+        })
+    },
+    ProfilDetail: {
+        screen: profilDetail,
+        navigationOptions:({ navigation }) => ({
+            headerStyle: {
+                backgroundColor: '#092B51',
+                elevation:0
+            },  
+            headerTintColor: '#fff',
+            title: 'Profil',
+        })
+    },
+    Search: {
+        screen: search,
+        navigationOptions: { header: null }
+    },
+    Cart: {
+        screen: Cart,
+        navigationOptions: {header: null}
+    },
+    EditUser: {
+        screen: EditUser,
+        navigationOptions: {header: null}
+    }
+})
 
 // connect with redux,first param is map and second is component
 // export default connect(mapStateToProps)(Login);

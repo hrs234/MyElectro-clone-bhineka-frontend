@@ -83,7 +83,7 @@ class paymentHistory extends Component {
             <View style={styles.back}>
                 <Appbar.Header style={styles.Head}>
                     <Appbar.BackAction
-                        onPress={() => alert('this back')}
+                        onPress={() => this.props.navigation.goBack()}
                     />
                     <Appbar.Content
                         title="Riwayat Pembayaran"

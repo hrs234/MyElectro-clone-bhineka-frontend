@@ -12,11 +12,35 @@ import ModalBuy from "../components/ModalBeli";
 //redux
 import { connect } from "react-redux";
 
+
+    state = {
+        favorit: false
+    }
+
+    componentDidMount = () => {
+        if(this.state.favorit == true){
+            this.setState({iconFavorit:'favorite'})
+        }
+        else{
+            this.setState({iconFavorit:'favorite-border'})
+        }
+    }
+
+    addFavorit = () => {
+        if(this.state.favorit == true) {
+        }
+        else{
+            this.setState({favorit: true, iconFavorit:'favorite'})
+        }
+    }
+
+
 class DetailPage extends Component {
   constructor(props) {
     super(props);
     console.log("this.props.navigation.state.params");
     console.log(this.props.navigation.state.params);
+
 
     this.state = {
       image: this.props.navigation.state.params.image,
@@ -76,6 +100,7 @@ class DetailPage extends Component {
     }
     return item;
   }
+
 
   postCart = data => {
     console.warn(data);
@@ -149,21 +174,20 @@ class DetailPage extends Component {
                 </View>
               </View>
               <View style={styles.view1D}>
-                <Text
-                  style={{
-                    marginTop: 2,
-                    fontSize: 24,
-                    fontWeight: "bold",
-                    color: "blue"
-                  }}
-                >
-                  Rp {this.state.price}
-                </Text>
-                <Text style={{ marginTop: 4, color: "#272929" }}>
-                  Siap dikirim di hari yang sama
-                </Text>
-              </View>
-            </View>
+                                <Text style={{ marginTop:2, fontSize:24, fontWeight:'bold', color:'blue'}}>Rp {this.state.price}</Text>
+                                <View style={{flexDirection:'row'}}>
+                                    <Text style={{ marginTop:4, color:'#272929'}}>Siap dikirim di hari yang sama</Text>
+                                    <View style={{flex:1, justifyContent:'flex-end', alignItems:'flex-end'}}>
+                                        <IconButton
+                                            icon={this.state.iconFavorit}
+                                            color={Colors.red}
+                                            size={30}
+                                            onPress={() => this.addFavorit()}
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
             <View style={styles.view2}>
               <Icon name="store" size={25} color="#7b8785" />
               <Text style={{ marginLeft: 16, fontSize: 17, color: "#272929" }}>
@@ -213,6 +237,7 @@ class DetailPage extends Component {
               </Text>
             </View>
             {/* <View style={styles.view4}>
+
                             <Icon2 name="file-document" size={25} color="#7b8785" />
                             <View style={{marginLeft:16}}>
                                 <Text style={{fontSize:17, color:'#272929'}}>Varian:</Text>
