@@ -40,10 +40,6 @@ My electro is Bhinneka.com apps but a clone version and this application not hav
   <td><img src="screenshoot/WhatsApp Image 2019-07-14 at 10.40.53 PM(1).jpeg" width="100px;" alt="Muhammad Juwarno"/></td>
   <td><img src="screenshoot/WhatsApp Image 2019-07-14 at 10.40.53 PM(2).jpeg" width="100px;" alt="Muhammad Juwarno"/></td>
 </tr>
-<tr>
-  <td><img src="screenshoot/WhatsApp Image 2019-07-14 at 10.40.53 PM.jpeg.jpeg" width="100px;" alt="Muhammad Juwarno"/></td>
-  <td><img src="screenshoot/WhatsApp Image 2019-07-14 at 10.40.51 PM(1).jpeg" width="100px;" alt="Muhammad Juwarno"/></td>
-</tr>
 
 
 ## Download
