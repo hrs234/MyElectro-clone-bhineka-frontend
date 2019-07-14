@@ -64,7 +64,12 @@ const AppSwitchNavigatorA = createDrawerNavigator(
           drawerLabel: ()=>null
         }
       },
-      Login : { screen: Login },
+      Login : { 
+        screen: Login,
+        navigationOptions: {
+          drawerLabel: ()=>null
+        }
+      },
       History :{
         screen: history,
         navigationOptions: {

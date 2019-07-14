@@ -38,6 +38,7 @@ export default (auth = async (state = initialState, action) => {
         token:action.payload.data.token,
         id:action.payload.data.id
       };
+
     default:
       return state;
   }

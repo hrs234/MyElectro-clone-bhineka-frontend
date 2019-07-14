@@ -9,8 +9,9 @@ class ListProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        name_category: this.props.navigation.state.params.category
+        id_category: this.props.navigation.state.params.id_category,
     }
+    this.props.navigation.setParams({ title : this.state.name_category })
   }
 
     getDataProduct(id){
@@ -18,8 +19,7 @@ class ListProduct extends Component {
     }
 
     componentWillMount = () => {
-        this.getDataProduct(this.props.navigation.state.params.id_category)
-        this.props.navigation.setParams({ title : this.state.name_category })
+        this.getDataProduct(this.state.id_category)
     }
   
   static navigationOptions = ({ navigation }) => ({

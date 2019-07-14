@@ -6,8 +6,28 @@ const initialState = {
   isError: false
 };
 
+
 export default reducer =  (state = initialState, action) => {
   switch (action.type) {
+
+    case 'GET_USER_PENDING':
+        return{
+          isLoading: true
+        }
+      case 'GET_USER_REJECTED':
+        return{
+          isLoading: false,
+          isError: true
+        }
+      case 'GET_USER_FULFILLED':
+        console.log("asdasd");
+        
+        console.log(action.payload.data);
+        return {
+          isLoading: false,
+          isError: false,
+          data: action.payload.data
+        }
 
     case "CHANGE_PASSWORD_PENDING":
       return {
