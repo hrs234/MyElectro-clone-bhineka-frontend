@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Image, ScrollView, Modal, Alert, AsyncStorage } from "react-native";
 import { IconButton, Colors, Button } from "react-native-paper";
@@ -6,26 +5,27 @@ import Icon from "react-native-vector-icons/dist/MaterialIcons";
 import Icon2 from "react-native-vector-icons/dist/MaterialCommunityIcons";
 import axios from "axios";
 import { getCart } from "../public/action/cart";
-
+ 
 import ModalBuy from "../components/ModalBeli";
-
+ 
 //redux
 import { connect } from "react-redux";
-
-
-
+ 
+ 
+ 
 class DetailPage extends Component {
   constructor(props) {
     super(props);
     console.log("this.props.navigation.state.params");
     console.log(this.props.navigation.state.params);
-
+ 
     this.state = {
       image: this.props.navigation.state.params.image,
       product: this.props.navigation.state.params.product,
       id_product: this.props.navigation.state.params.id_product,
       description: this.props.navigation.state.params.description,
-      
+      id_wishlist:0,
+     
       id_user: "",
       price: this.props.navigation.state.params.price,
       star: 3,
@@ -33,10 +33,10 @@ class DetailPage extends Component {
       modalVisible: false,
       favorit: false
     };
-    // this.loginasync();
+    this.loginasync();
   }
-
-
+ 
+ 
   loginasync = async () => {
     await AsyncStorage.getItem("user", (error, id) => {
       if (id) {
@@ -62,29 +62,53 @@ class DetailPage extends Component {
         });
       }
     });
+ 
+    console.log("this.state.id_user")
+    console.log(this.state.id_user)
   };
-
-  
+ 
+ 
   componentDidMount = () => {
+    axios.get(`https://clone-bhineka.herokuapp.com/wishlist?id=${this.state.id_user}&id_product=${this.state.id_product}`).then(res =>{
+      let data = res.data
+      if (data.data.id_wishlist) {
+          this.setState({
+            favorit :true,
+            id_wishlist:data.data.id_wishlist
+          })
+      }
+    })
+ 
     if (this.state.favorit == true) {
       this.setState({ iconFavorit: "favorite" });
     } else {
       this.setState({ iconFavorit: "favorite-border" });
     }
   };
-  
+ 
   addFavorit = () => {
-    if (this.state.favorit == true) {
-      this.setState({ favorit: false, iconFavorit: "favorite-border" });
-    } else {
-      this.setState({ favorit: true, iconFavorit: "favorite" });
+    let id_product = this.state.id_product
+    let id_user = this.state.id_user
+    let id_wishlist = this.state.id_wishlist
+    console.log("this.state.id_user2")
+    console.log(this.state.id_user)
+    if (id_user == '') {
+      this.props.navigation.navigate('Login')
+    }else{
+      if (this.state.favorit) {
+        this.setState({ favorit: false, iconFavorit: "favorite-border" });
+        axios.delete(`https://clone-bhineka.herokuapp.com/wishlist/${id_wishlist}`)
+      } else {
+        this.setState({ favorit: true, iconFavorit: "favorite" });
+        axios.post('https://clone-bhineka.herokuapp.com/wishlist',{ id_user: id_user, id_product: id_product })
+      }
     }
   };
-
+ 
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
-
+ 
   items() {
     let item = [];
     for (let i = 0; i < 5; i++) {
@@ -96,7 +120,7 @@ class DetailPage extends Component {
     }
     return item;
   }
-
+ 
   postCart = data => {
     if (this.state.id_user == '') {
       this.setModalVisible(false);
@@ -116,9 +140,9 @@ class DetailPage extends Component {
         console.warn(error);
       });
     }
-    
+   
   };
-
+ 
   static navigationOptions = ({ navigation }) => ({
     headerRight: (
       <IconButton
@@ -134,11 +158,11 @@ class DetailPage extends Component {
       backgroundColor: "#092B51",
       elevation: 0
     },
-
+ 
     headerTintColor: "#fff",
     title: "Detail Produk"
   });
-
+ 
   render() {
     const { visible } = this.state;
     // alert('asd'+this.props.auth._55.data.token);
@@ -255,14 +279,14 @@ class DetailPage extends Component {
               </Text>
             </View>
             {/* <View style={styles.view4}>
-
+ 
                             <Icon2 name="file-document" size={25} color="#7b8785" />
                             <View style={{marginLeft:16}}>
                                 <Text style={{fontSize:17, color:'#272929'}}>Varian:</Text>
                                 <Text style={{fontSize:17, color:'#7b6ec2'}}>{'\u2022'}Grey</Text>
                             </View>
                         </View> */}
-
+ 
             <View style={styles.view5}>
               <Text style={{ fontSize: 20, marginBottom: 5 }}>Overview</Text>
               <View style={{ flex: 1, marginBottom: 12 }}>
@@ -385,17 +409,17 @@ class DetailPage extends Component {
     );
   }
 }
-
+ 
 const mapStateToProps = state => {
   return {
     auth: state.auth
     // auth: state.auth
   };
 };
-
+ 
 // connect with redux,first param is map and second is component
 export default connect(mapStateToProps)(DetailPage);
-
+ 
 const styles = StyleSheet.create({
   viewMain: {
     flex: 1,
@@ -457,7 +481,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     backgroundColor: "#fff"
   },
-
+ 
   textA: {
     textAlign: "right",
     fontSize: 12,
