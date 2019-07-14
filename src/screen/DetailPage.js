@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Image, ScrollView, Modal, Alert, AsyncStorage } from "react-native";
 import { IconButton, Colors, Button } from "react-native-paper";
@@ -24,6 +25,7 @@ class DetailPage extends Component {
       product: this.props.navigation.state.params.product,
       id_product: this.props.navigation.state.params.id_product,
       description: this.props.navigation.state.params.description,
+      
       id_user: "",
       price: this.props.navigation.state.params.price,
       star: 3,
@@ -31,7 +33,7 @@ class DetailPage extends Component {
       modalVisible: false,
       favorit: false
     };
-    this.loginasync();
+    // this.loginasync();
   }
 
 
@@ -260,6 +262,7 @@ class DetailPage extends Component {
                                 <Text style={{fontSize:17, color:'#7b6ec2'}}>{'\u2022'}Grey</Text>
                             </View>
                         </View> */}
+
             <View style={styles.view5}>
               <Text style={{ fontSize: 20, marginBottom: 5 }}>Overview</Text>
               <View style={{ flex: 1, marginBottom: 12 }}>
