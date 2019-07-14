@@ -49,8 +49,8 @@ My electro is Bhinneka.com apps but a clone version and this application not hav
 
 <span>
  <tr>
-  <td><img src="https://github.com/hrs234/MyElectro-clone-bhineka-frontend/blob/master/screenshoot/Screenrecorder-2019-07-14-23-28-.gif" width="500;" alt="Muhammad Robai"/></td>
-  <td><img src="https://github.com/hrs234/MyElectro-clone-bhineka-frontend/blob/master/screenshoot/Screenrecorder-2019-07-14-23-35-(1).gif" width="500;" alt="Muhammad Robai"/></td>
+  <td><img src="https://github.com/hrs234/MyElectro-clone-bhineka-frontend/blob/master/screenshoot/Screenrecorder-2019-07-14-23-28-.gif" width="300;" alt="Muhammad Robai"/></td>
+  <td><img src="https://github.com/hrs234/MyElectro-clone-bhineka-frontend/blob/master/screenshoot/Screenrecorder-2019-07-14-23-35-(2).gif" width="300;" alt="Muhammad Robai"/></td>
 </tr>
 </span>
 
