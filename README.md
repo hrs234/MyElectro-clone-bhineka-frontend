@@ -1,13 +1,15 @@
 # MyElectro-clone-of-bhinneka.com-[frontend side]
 
 ## Introducing
-
+<p align='center'>
 <img src="screenshoot/Bhinneka-icon.jpg" width=300 height=100 />
+</p>
 
 ### what is Bhinneka.com
 Bhinneka.com is e-commerce pioneer in Indonesia and this e-commerce is established in 1997 until now this e-commerce always have an growth <br><br><br><br>
-
+<p align='center'>
 <img src="screenshoot/shopping-cart.png" width=150 height=150 />
+ </p>
 
 ### what is MyElectro
 My electro is Bhinneka.com apps but a clone version and this application not have affiliation with Bhinneka.com official Apps
@@ -28,6 +30,7 @@ My electro is Bhinneka.com apps but a clone version and this application not hav
 
 
 ## Screenshoot
+<p align='center'>
 <span>
 <tr>
   <td><img src="screenshoot/WhatsApp Image 2019-07-14 at 10.40.51 PM(1).jpeg" width="100px;" alt="Muhammad Juwarno"/></td>
@@ -42,6 +45,7 @@ My electro is Bhinneka.com apps but a clone version and this application not hav
   <td><img src="screenshoot/WhatsApp Image 2019-07-14 at 10.40.53 PM(2).jpeg" width="100px;" alt="Muhammad Juwarno"/></td>
 </tr>
 </span>
+</p>
 
 
 ## Download
