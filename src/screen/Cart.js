@@ -123,7 +123,6 @@ class Cart extends Component {
       loading: true,
       id_user: this.props.navigation.state.params,
       data:[]
- 
     };
     this.loginasync();
   }
@@ -156,12 +155,12 @@ class Cart extends Component {
         }
       });
     }
-   
+
     axios
       .get(`https://clone-bhineka.herokuapp.com/cart/` + this.state.id_user)
       .then(res => {
         const data = res.data;
- 
+
         this.setState({ cart: data.data, loading: false, data: data.data });
       })
       .catch(error => {
@@ -314,7 +313,7 @@ class Cart extends Component {
   componentDidMount = () =>{
     this.fatch()
   }
- 
+
   Transaksi = () =>{
     let data = this.state.data
     let id_product = ''
@@ -323,12 +322,10 @@ class Cart extends Component {
     let id_user = this.state.id_user
     let id_addres = 1
     let id_agent = 1
- 
+
     data.map(item =>{
       id_product = item.id_product
     })
- 
- 
  
     axios.post('https://clone-bhineka.herokuapp.com/transaction',{
       id_buy_methode : buy_methode,
@@ -345,10 +342,7 @@ class Cart extends Component {
     });
  
     axios.delete(`https://clone-bhineka.herokuapp.com/cart/${id_user}`)
- 
-   
   }
- 
   render() {
     console.warn(this.state.id_user)
     console.warn(this.state.getid)
@@ -519,13 +513,13 @@ class Cart extends Component {
                 this.Transaksi()
                 Alert.alert('Transaction Success')
                 this.props.navigation.goBack()
-               
+
               }}
             >
               <Text style={{ fontSize: 17, color: "#fff" }}>CHECKOUT</Text>
           </Button>
           </Footer>
-         
+
         <Modal
           transparent={true}
           animationType="fade"

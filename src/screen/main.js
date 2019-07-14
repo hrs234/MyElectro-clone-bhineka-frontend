@@ -19,6 +19,7 @@ import Search from '../screen/Search';
 import Cart from '../screen/Cart';
 
 import DetailPage from "./DetailPage";
+
 import axios from 'axios';
 import Kategori from "./CategoryScreen.js"
 import listproduct from '../screen/ListProduct'
@@ -114,6 +115,7 @@ export class MainMenu extends Component {
         });
       }
     });
+
     if (this.state.id) {
       alert("Anda sudah login")
     }else{
@@ -152,6 +154,8 @@ export class MainMenu extends Component {
       .catch(error => {
         this.setState({ loading: false, error: "something went wrong" });
       });
+    
+  
   }
 
   handleNavigate = Item => {
