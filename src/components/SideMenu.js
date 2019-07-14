@@ -83,10 +83,10 @@ class SideMenu extends Component {
       <Container>
         <Header style={styles.drawerHeader}>
           <Body style={{ alignItems: "baseline" }}>
-            {/* <Image
+            <Image
               style={styles.drawerImage}
-              source={{ uri: this.state.auth.data["0"].image}}
-            /> */}
+              source={require("../assets/image/logo.png")}
+            />
             { (this.state.isLogin == false) ?
               <Button mode="contained" onPress={() => this.props.navigation.navigate('Login')}>
                 <Text>LOGIN / REGISTER</Text>

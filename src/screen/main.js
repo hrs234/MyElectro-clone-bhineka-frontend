@@ -5,13 +5,14 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
+  RefreshControl,
+  ActivityIndicator
 } from "react-native";
 import {
   createAppContainer,
   createStackNavigator,
-  createMaterialTopTabNavigator,
-  
+  createMaterialTopTabNavigator
 } from "react-navigation";
 import { IconButton, Colors, Card, Button } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
@@ -27,10 +28,6 @@ import profil from '../screen/Profil'
 import profilDetail from '../components/ProfilDetail'
 import search from '../screen/Search'
 import EditUser from '../screen/EditUser'
-import ChangePassword from '../screen/ChangePassword'
-
-import OneSignal from 'react-native-onesignal';
-
 
 const data = [
   { nameCategory: "Aksesories Gadget & Komputer" },
@@ -74,7 +71,6 @@ const list = [
   }
 ];
 
-console.disableYellowBox = false;
 // Tab Main Menu
 export class MainMenu extends Component {
   constructor(props) {
@@ -88,24 +84,21 @@ export class MainMenu extends Component {
       list: list,
       token: "",
       id: "",
-      isLogin: false
+      isLogin: false,
+      refreshing: false,
+      loading: true,
+      loadingB: true,
+      loadingC: true,
+      isEmpty: false,
+      isEmptyB: false,
+      isEmptyC: false
     };
     this.loginasync();
-
-    OneSignal.init("7284a78f-6851-4288-b700-2b27beffa07e");
-
-    OneSignal.addEventListener('received', this.onReceived);
-    OneSignal.addEventListener('opened', this.onOpened);
-    OneSignal.addEventListener('ids', (device) => console.log('Device info: ', device));
-    OneSignal.configure();
-
   }
 
-  componentWillUnmount() {
-    OneSignal.removeEventListener('received', this.onReceived);
-    OneSignal.removeEventListener('opened', this.onOpened);
-    OneSignal.removeEventListener('ids', this.onIds);
-  }
+  formatNumber = nums => {
+    return nums.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
 
   loginasync = async () => {
     await AsyncStorage.getItem("user", (error, id) => {
@@ -136,16 +129,34 @@ export class MainMenu extends Component {
       alert("Anda sudah login")
     }else{
       alert("Anda belum login")
-    }
-    
+    }   
   };
 
-  componentDidMount() {
+  componentDidMount() 
+  {
+
+    this._onRefresh();    
+  }
+
+  _onRefresh = () =>
+  {
+
     axios
       .get("https://clone-bhineka.herokuapp.com/product?category=1")
       .then(res => {
         const data = res.data;
-        this.setState({ Category1: data.data, loading: false });
+
+        if (Object.keys(data).length < 0)
+        {
+          this.setState({ Category1: data.data, loading: false, isEmpty: true });
+
+        }
+        else
+        {
+
+          this.setState({ Category1: data.data, loading: false });
+        }
+
       })
       .catch(error => {
         this.setState({ loading: false, error: "something went wrong" });
@@ -155,21 +166,43 @@ export class MainMenu extends Component {
       .get("https://clone-bhineka.herokuapp.com/product?category=2")
       .then(res => {
         const data = res.data;
-        this.setState({ Category2: data.data, loading: false });
+
+        if (Object.keys(data).length < 0) 
+        {
+          this.setState({ Category1: data.data, loadingB: false, isEmptyB: true });
+
+        }
+        else
+        {
+
+          this.setState({ Category2: data.data, loadingB: false });
+        }
+
       })
       .catch(error => {
         this.setState({ loading: false, error: "something went wrong" });
       });
 
     axios
-      .get("https://clone-bhineka.herokuapp.com/product?category=3")
+      .get("https://clone-bhineka.herokuapp.com/product/category=3")
       .then(res => {
         const data = res.data;
-        this.setState({ Category3: data.data, loading: false });
+
+        if (Object.keys(data).length < 0) 
+        {
+          this.setState({ Category1: data.data, loadingC: false, isEmptyC: true });
+
+        }
+        else
+        {
+          this.setState({ Category3: data.data, loadingC: false });
+        }
+
       })
       .catch(error => {
         this.setState({ loading: false, error: "something went wrong" });
       });
+  
   }
 
   handleNavigate = Item => {
@@ -179,7 +212,14 @@ export class MainMenu extends Component {
 
   render() {
     return (
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} 
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={() => this._onRefresh()}
+          />
+        }
+      >
         <View
           style={{
             flex: 1,
@@ -192,7 +232,8 @@ export class MainMenu extends Component {
             style={{
               flexDirection: "row",
               marginTop: 10,
-              marginRight: -13
+              marginRight: -13,
+              marginLeft: -12
             }}
           >
             <Carousel pageWidth={340}>
@@ -262,6 +303,11 @@ export class MainMenu extends Component {
                 rightStyle={{ marginRight: 16 }}
               />
               <Card.Content>
+                {
+                this.state.loading
+                ?
+                  <ActivityIndicator size="large" color="#CFD8DC" style={{ marginVertical: 25 }} />
+                :
                 <FlatList
                   style={{
                     borderWidth: 0,
@@ -275,6 +321,7 @@ export class MainMenu extends Component {
                   data={this.state.Category1}
                   renderItem={({ item }) => {
                     return (
+                      
                       <TouchableOpacity
                         onPress={() =>
                           this.props.navigation.navigate("DetailPage", item)
@@ -311,7 +358,7 @@ export class MainMenu extends Component {
                             }}
                           >
                             <Text style={{ fontWeight: "bold" }}>
-                              Rp {item.price}
+                              Rp {this.formatNumber(item.price)}
                             </Text>
                           </View>
                         </View>
@@ -320,6 +367,7 @@ export class MainMenu extends Component {
                   }}
                   keyExtractor={(item, index) => index}
                 />
+                }
               </Card.Content>
             </Card>
           </View>
@@ -343,6 +391,11 @@ export class MainMenu extends Component {
                 rightStyle={{ marginRight: 16 }}
               />
               <Card.Content>
+                {
+                this.state.loadingB
+                ?
+                  <ActivityIndicator size="large" color="#CFD8DC" style={{ marginVertical: 25 }} />
+                :
                 <FlatList
                   style={{
                     borderWidth: 0,
@@ -392,7 +445,7 @@ export class MainMenu extends Component {
                             }}
                           >
                             <Text style={{ fontWeight: "bold" }}>
-                              Rp {item.price}
+                              Rp {this.formatNumber(item.price)}
                             </Text>
                           </View>
                         </View>
@@ -401,6 +454,7 @@ export class MainMenu extends Component {
                   }}
                   keyExtractor={(item, index) => index}
                 />
+                }
               </Card.Content>
             </Card>
           </View>
@@ -424,6 +478,11 @@ export class MainMenu extends Component {
                 rightStyle={{ marginRight: 16 }}
               />
               <Card.Content>
+                {
+                this.state.loadingC 
+                ?
+                <ActivityIndicator size="large" color="#CFD8DC" style={{ marginVertical: 25 }} />
+                :
                 <FlatList
                   style={{
                     borderWidth: 0,
@@ -473,7 +532,7 @@ export class MainMenu extends Component {
                             }}
                           >
                             <Text style={{ fontWeight: "bold" }}>
-                              Rp {item.price}
+                              Rp {this.formatNumber(item.price)}
                             </Text>
                           </View>
                         </View>
@@ -482,6 +541,7 @@ export class MainMenu extends Component {
                   }}
                   keyExtractor={(item, index) => index}
                 />
+                }
               </Card.Content>
             </Card>
           </View>
@@ -564,10 +624,6 @@ const Stack = createStackNavigator({
     ListProduct: { 
         screen: listproduct,
     },
-    ChangePassword:{
-      screen: ChangePassword,
-      navigationOptions: {header: null}
-  },
 
     Search: {
         screen: Search,

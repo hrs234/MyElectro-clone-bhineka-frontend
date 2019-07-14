@@ -162,13 +162,29 @@ class Cart extends Component {
       .then(res => {
         const data = res.data;
  
-        this.setState({ cart: data.data, loading: false, data: data.data });
+        this.setState({ cart: data.data, loading: false, data: data });
       })
       .catch(error => {
         this.setState({ loading: false, error: "something went wrong" });
       });
     console.log(this.state.cart);
   };
+
+  // _deleteItem = (id) =>
+  // {
+  //   console.log("you press delete cart");
+  //   axios
+  //     .delete(`https://clone-bhineka.herokuapp.com/cart/` + id)
+  //     .then(res => {
+  //       const data = res.data;
+
+  //       this.loginasync();
+  //     })
+  //     .catch(error => {
+  //       this.setState({ loading: false, error: "something went wrong" });
+  //       this.loginasync();
+  //     });
+  // }
  
  
  
@@ -178,6 +194,10 @@ class Cart extends Component {
   setModalInput(visible) {
     this.setState({ modalInput: visible });
   }
+
+  formatNumber = nums => {
+    return nums.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
  
   _keyExtractor = (item, index) => index.toString();
  
@@ -204,9 +224,9 @@ class Cart extends Component {
  
           <Text style={{ fontSize: 15 }}>{item.product}</Text>
           <Text style={{ fontWeight: "bold", marginTop: 5 }}>
-            Rp. {item.price}
+            Rp. {this.formatNumber(item.price)}
           </Text>
-          <View
+          {/* <View
             style={{
               flex: 1,
               flexDirection: "row",
@@ -218,14 +238,14 @@ class Cart extends Component {
               <Icon name="remove" style={{ color: "gray" }} />
             </Button>
             <Button bordered>
-              <Text style={{ padding: 20, color: '#000' }}>{item.amount_purchase}</Text>
+              <Text style={{ padding: 20, color: '#000' }}></Text>
             </Button>
             <TouchableOpacity>
               <Button bordered>
                 <Icon name="add" style={{ color: "gray" }} />
               </Button>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
       </View>
       <View
@@ -235,20 +255,22 @@ class Cart extends Component {
           marginBottom: 5
         }}
       >
-        <Icon
-          name="trash"
-          style={{
-            marginLeft: 15,
-            color: "gray"
-          }}
-        />
+        <TouchableOpacity onPress={() => alert("this delete")}>
+          <Icon
+            name="trash"
+            style={{
+              marginLeft: 15,
+              color: "gray"
+            }}
+          />
+        </TouchableOpacity>
         <Text
           style={{
             justifyContent: "center",
             marginLeft: 60
           }}
         >
-          @Rp {item.price}
+          @Rp {this.formatNumber(item.price)} x {item.amount_purchase}
         </Text>
         <Text
           style={{
@@ -257,7 +279,7 @@ class Cart extends Component {
             paddingRight: 10
           }}
         >
-          Rp {item.price * item.amount_purchase}
+          Rp { this.formatNumber(item.price * item.amount_purchase)}
         </Text>
       </View>
     </View>
@@ -312,11 +334,11 @@ class Cart extends Component {
   }
  
   componentDidMount = () =>{
-    this.fatch()
+    // this.fatch()
   }
  
   Transaksi = () =>{
-    let data = this.state.data
+    let data = this.state.data.data
     let id_product = ''
     let id_role = 3
     let buy_methode= 1
@@ -381,7 +403,7 @@ class Cart extends Component {
         {this.state.loading ? <Spinner/> :
           <FlatList
             keyExtractor={this.keyExtractor}
-            data={this.state.data}
+            data={this.state.data.data}
             renderItem={this.renderItem}
             style={{ marginTop: 5 }}
           />}
@@ -502,7 +524,8 @@ class Cart extends Component {
                 fontWeight: "bold"
               }}
             >
-              RP. TOTAL
+              
+              RP. {this.state.data.total}
             </Text>
           </View>
         </Footer>
