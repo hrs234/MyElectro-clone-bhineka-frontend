@@ -5,7 +5,7 @@
 <img src="screenshoot/Bhinneka-icon.jpg" width=300 height=100 />
 
 ### what is Bhinneka.com
-Bhinneka.com is e-commerce pioneer in Indonesia and this e-commerce is established in 1997 <br><br><br><br>
+Bhinneka.com is e-commerce pioneer in Indonesia and this e-commerce is established in 1997 until now this e-commerce always have an growth <br><br><br><br>
 
 <img src="screenshoot/shopping-cart.png" width=150 height=150 />
 
