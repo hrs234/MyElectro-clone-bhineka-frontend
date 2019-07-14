@@ -10,8 +10,10 @@ import {
 } from "react-native";
 import { Container, Header, Body, Button } from "native-base";
 import { NavigationActions, DrawerItems } from "react-navigation";
-
+import {getWishlist} from '../public/action/wishlist'
+import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
+import wishlist from "../screen/wishlist";
 
 class SideMenu extends Component {
   constructor(props) {
@@ -70,7 +72,14 @@ class SideMenu extends Component {
 SideMenu.propTypes = {
   navigation: PropTypes.object
 };
-export default SideMenu;
+const mapStateToProps = (state) =>{
+  return{
+    wishlist: state.wishlist
+  }
+  
+}
+export default connect(mapStateToProps)(SideMenu);
+
 
 const styles = StyleSheet.create({
   container: {

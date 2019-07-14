@@ -35,6 +35,7 @@ import Forgot from "./Forgot";
 import ChangePassword from "./ChangePassword";
 import cart from "./Cart";
 import search from "./Search";
+import { getWishlist } from "../public/action/wishlist";
 
 const data = [
   { nameCategory: "Aksesories Gadget & Komputer" },
@@ -122,6 +123,7 @@ export class MainMenu extends Component {
       }
     });
     alert("login id " + this.state.id + " token " + this.state.token);
+    this.props.dispatch(getWishlist(this.state.id))
     
   };
 
@@ -155,6 +157,8 @@ export class MainMenu extends Component {
       .catch(error => {
         this.setState({ loading: false, error: "something went wrong" });
       });
+    
+  
   }
 
   handleNavigate = Item => {

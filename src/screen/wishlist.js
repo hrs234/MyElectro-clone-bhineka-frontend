@@ -1,32 +1,64 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView, FlatList, Image } from "react-native";
+import { View, Text, ScrollView, FlatList, Image, AsyncStorage } from "react-native";
 import { Icon } from "native-base";
 import { Appbar } from "react-native-paper";
+import {getWishlist} from '../public/action/wishlist'
+import { connect } from "react-redux";
+import axios from "axios";
 // import { FlatList } from 'react-native-gesture-handler';
 
-export default class wishlist extends Component {
+class wishlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dummy: [
-        {
-          id: "1",
-          nameCategory: "wishlist",
-          price: 2000
-        },
-        {
-          id: "2",
-          nameCategory: "important",
-          price: 2000
-        },
-        {
-          id: "3",
-          nameCategory: "work",
-          price: 2000
-        }
-      ]
+      id_user:'',
+      getid:true,
+      data: [],
+      total:0
     };
+    this.loginasync();
   }
+
+  loginasync = async () => {
+    if(this.state.getid){
+      await AsyncStorage.getItem("user", (error, id) => {
+        if (id) {
+          this.setState({
+            isLogin: true,
+            id_user: id,
+            getid:false
+          });
+        } else {
+          this.setState({
+            isLogin: false
+          });
+        }
+      });
+      await AsyncStorage.getItem("token", (error, token) => {
+        if (token) {
+          this.setState({
+            isLogin: true,
+            token: token
+          });
+        } else {
+          this.setState({
+            isLogin: false
+          });
+        }
+      });
+    }
+    axios
+      .get(`https://clone-bhineka.herokuapp.com/wishlist?id=${this.state.id_user}`)
+      .then(res => {
+        const data = res.data;
+
+        this.setState({ data: data.data, total: data.total, loading: false});
+      })
+      .catch(error => {
+        this.setState({ loading: false, error: "something went wrong" });
+      });
+  };
+
   static navigationOptions = {
     drawerIcon: (
       <Icon name="favorite" type="MaterialIcons" style={{ color: "#000000", marginRight:-5 }} />
@@ -55,11 +87,11 @@ export default class wishlist extends Component {
 
         <ScrollView>
           <View style={{ marginTop: 15, marginLeft: 15, marginBottom: 25 }}>
-            <Text style={{ fontSize: 20, color: "#9E9E9E" }}>items 25</Text>
+            <Text style={{ fontSize: 20, color: "#9E9E9E" }}>Total Items {this.state.total} </Text>
           </View>
           <View style={{ marginBottom: 300 }}>
             <FlatList
-              data={this.state.dummy}
+              data={this.state.data}
               keyExtractor={(item, index) => {
                 item.id;
               }}
@@ -76,12 +108,12 @@ export default class wishlist extends Component {
                 >
                   <View style={{ display: "flex" }}>
                     <Image
-                      source={require("../icons/indonesia.jpg")}
-                      style={{ width: 176, height: 160, marginBottom: 70 }}
+                      source={{ uri: item.image }}
+                      style={{ width: 150, height: 150, marginBottom: 10, marginLeft:10 }}
                     />
                     <View style={{ marginLeft: 23 }}>
-                      <Text style={{ fontSize: 20, marginBottom: 35 }}>
-                        {item.nameCategory}
+                      <Text style={{ fontSize: 20, marginBottom: 10 }}>
+                        {item.product}
                       </Text>
                       <Text>Rp. {item.price}</Text>
                     </View>
@@ -102,3 +134,13 @@ export default class wishlist extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) =>{
+  return{
+    wishlist: state.product
+  }
+}
+
+export default connect(mapStateToProps)(wishlist)
+
+
