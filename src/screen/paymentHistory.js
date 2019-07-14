@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, FlatList, Image, AsyncStorage } from "react-native";
+import { ScrollView, StyleSheet, View, Text, FlatList, Image, AsyncStorage, RefreshControl, ActivityIndicator} from "react-native";
 import { Appbar } from "react-native-paper";
-import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import axios from 'axios';
 
 //redux
@@ -12,7 +12,8 @@ class paymentHistory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data:[]
+      data:[],
+      refreshing: true
       
     };
     this.loginasync();
@@ -50,10 +51,10 @@ class paymentHistory extends Component {
       .then(res => {
         const data = res.data;
 
-        this.setState({ data: data.data, loading: false, });
+        this.setState({ data: data.data, refreshing: false, });
       })
       .catch(error => {
-        this.setState({ loading: false, error: "something went wrong" });
+        this.setState({ refreshing: false, error: "something went wrong" });
       });
 
       console.log("this.state.data");
@@ -88,32 +89,48 @@ class paymentHistory extends Component {
           <Appbar.BackAction onPress={() => this.props.navigation.goBack()} />
           <Appbar.Content title="Riwayat Pembayaran" />
         </Appbar.Header>
-        <View>
-          <ScrollView>
-            <FlatList
-              data={this.state.data}
-              keyExtractor={this.props.reducer.data.id_transaction}
-              renderItem={({ item }) => (
-                <TouchableOpacity activeOpacity={0.8}>
-                  <View style={styles.FlatContainer}>
-                    <Image
-                      style={styles.imgs}
-                      source={{ uri: `${item.image}` }}
-                    />
-                    <View style={styles.TextDetails}>
-                      <Text style={styles.TextInner}>{item.product}</Text>
-                      <Text style={styles.TextInner}>
-                        {this.filter_date(item.date)}
-                      </Text>
-                      <Text style={styles.TextInner}>
-                        Rp. {this.formatNumber(item.price)}
-                      </Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              )}
-            />
-          </ScrollView>
+        <View style={{flex: 1}}>
+            {
+            this.state.refreshing
+            ?
+              <View style={styles.backActivity}>
+                <ActivityIndicator size="large" color="#CFD8DC" style={{ marginTop: 25 }} />
+              </View>
+            :
+              <View>
+                <FlatList
+                data={this.state.data}
+                keyExtractor={this.props.reducer.data.id_transaction}
+                
+                refreshControl={
+                  <RefreshControl
+                  refreshing={this.state.refreshing}
+                  onRefresh={() => this.loginasync()}
+                  />
+                  }
+                  renderItem={({ item }) => (
+
+                    <TouchableOpacity activeOpacity={0.8}>
+                      <View style={styles.FlatContainer}>
+                        <Image
+                          style={styles.imgs}
+                          source={{ uri: `${item.image}` }}
+                        />
+                        <View style={styles.TextDetails}>
+                          <Text style={styles.TextInner}>{item.product}</Text>
+                          <Text style={styles.TextInner}>
+                            {this.filter_date(item.date)}
+                          </Text>
+                          <Text style={styles.TextInner}>
+                            Rp. {this.formatNumber(item.price)}
+                          </Text>
+                        </View>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                  />
+              </View>
+              }
         </View>
       </View>
     );
@@ -132,8 +149,12 @@ const styles = StyleSheet.create({
   Head: {
     backgroundColor: "#092B51"
   },
-  back: {
+  backActivity:{
     backgroundColor: "#DEDEDE"
+  },
+  back: {
+    backgroundColor: "#DEDEDE",
+    flex: 1
   },
   FlatContainer: {
     backgroundColor: "#fff",

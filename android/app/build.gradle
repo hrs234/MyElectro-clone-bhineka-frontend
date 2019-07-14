@@ -117,6 +117,8 @@ android {
         applicationId "com.myelectroapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        manifestPlaceholders = [onesignal_app_id: "7284a78f-6851-4288-b700-2b27beffa07e",
+                                onesignal_google_project_number: "REMOTE"]
         versionCode 1
         versionName "1.0"
     }
@@ -167,7 +169,8 @@ dependencies {
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
-
+    implementation project(':react-native-onesignal')
+    
     // JSC from node_modules
     if (useIntlJsc) {
         implementation 'org.webkit:android-jsc-intl:+'

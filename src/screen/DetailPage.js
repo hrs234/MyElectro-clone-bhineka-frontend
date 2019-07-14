@@ -35,8 +35,12 @@ class DetailPage extends Component {
     };
     this.loginasync();
   }
- 
- 
+
+  formatNumber = nums => {
+    return nums.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
+
+
   loginasync = async () => {
     await AsyncStorage.getItem("user", (error, id) => {
       if (id) {
@@ -150,7 +154,7 @@ class DetailPage extends Component {
         color={Colors.white}
         size={22}
         onPress={() => {
-          navigation.openDrawer();
+          navigation.navigate('Cart');
         }}
       />
     ),
@@ -207,7 +211,7 @@ class DetailPage extends Component {
                     color: "blue"
                   }}
                 >
-                  Rp {this.state.price}
+                  Rp {this.formatNumber(this.state.price)}
                 </Text>
                 <View style={{ flexDirection: "row" }}>
                   <Text style={{ marginTop: 4, color: "#272929" }}>
