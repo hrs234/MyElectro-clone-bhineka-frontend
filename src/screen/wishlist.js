@@ -80,27 +80,25 @@ class wishlist extends Component {
           <Icon name="favorite" type="MaterialIcons" style={{ color: "#000000", marginRight:-5 }} />
         )
     };
-    
     render() {
-        return (
+      return (
+          // Header
+          <View style={{ backgroundColor: "#F5F5F5" }}>
+          <Appbar.Header style={{ backgroundColor: '#092B51'}}>
+              <Appbar.BackAction
+                  onPress={() => alert('this back')}
+              />
+              <Appbar.Content
+                  title="Wishlist"
+              />
+          </Appbar.Header>
 
-            // Header
-            <View style={{ backgroundColor: "#F5F5F5" }}>
-            <Appbar.Header style={{ backgroundColor: '#092B51'}}>
-                <Appbar.BackAction
-                    onPress={() => alert('this back')}
-                />
-                <Appbar.Content
-                    title="Wishlist"
-                />
-            </Appbar.Header>
-
-        <ScrollView>
-          <View style={{ marginTop: 15, marginLeft: 15, marginBottom: 25 }}>
-            <Text style={{ fontSize: 20, color: "#9E9E9E" }}>Total Items {this.state.total} </Text>
-          </View>
-          <View style={{ marginBottom: 300 }}>
-            <FlatList
+      <ScrollView>
+        <View style={{ marginTop: 15, marginLeft: 15, marginBottom: 25 }}>
+        <Text style={{ fontSize: 20, color: "#9E9E9E" }}>Total Items {this.state.total} </Text>
+        </View>
+        <View style={{ marginBottom: 300 }}>
+        <FlatList
               data={this.state.data}
               keyExtractor={(item, index) => {
                 item.id;
@@ -129,8 +127,20 @@ class wishlist extends Component {
                     </View>
                   </View>
                 </View>
-            </View>
-        )
+                 )}
+            />
+          {/* <FlatList
+                          data={[{ key: 'a' }, { key: 'b' }]}
+                          renderItem={({ item }) => <View style={{ borderStyle: "solid" }}>
+                              <Text>{item.key}</Text>
+                              {console.log('DATA: ' + JSON.stringify(item.id))}
+                          </View>}
+                      /> */}
+        </View>
+      </ScrollView>
+    </View>
+  );
+
     }
 }
 

@@ -25,6 +25,7 @@ class DetailPage extends Component {
       product: this.props.navigation.state.params.product,
       id_product: this.props.navigation.state.params.id_product,
       description: this.props.navigation.state.params.description,
+      id_wishlist:0,
       
       id_user: "",
       price: this.props.navigation.state.params.price,
@@ -62,10 +63,22 @@ class DetailPage extends Component {
         });
       }
     });
+
+    console.warn(this.state.id_user)
   };
 
   
   componentDidMount = () => {
+    axios.get(`https://clone-bhineka.herokuapp.com/wishlist?id=${this.state.id_user}&id_product=${this.state.id_product}`).then(res =>{
+      let data = res.data
+      if (data.data.id_wishlist) {
+          this.setState({
+            favorit :true,
+            id_wishlist:data.data.id_wishlist
+          })
+      }
+    })
+
     if (this.state.favorit == true) {
       this.setState({ iconFavorit: "favorite" });
     } else {
@@ -74,10 +87,19 @@ class DetailPage extends Component {
   };
   
   addFavorit = () => {
-    if (this.state.favorit == true) {
-      this.setState({ favorit: false, iconFavorit: "favorite-border" });
-    } else {
-      this.setState({ favorit: true, iconFavorit: "favorite" });
+    let id_product = this.state.id_product
+    let id_user = this.state.id_user
+    let id_wishlist = this.state.id_wishlist
+    if (id_user == '') {
+      this.props.navigation.navigate('Login')
+    }else{
+      if (this.state.favorit) {
+        this.setState({ favorit: false, iconFavorit: "favorite-border" });
+        axios.delete(`https://clone-bhineka.herokuapp.com/wishlist/${id_wishlist}`)
+      } else {
+        this.setState({ favorit: true, iconFavorit: "favorite" });
+        axios.post('https://clone-bhineka.herokuapp.com/wishlist',{ id_user: id_user, id_product: id_product })
+      }
     }
   };
 

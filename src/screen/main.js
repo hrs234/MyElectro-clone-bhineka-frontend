@@ -71,7 +71,7 @@ const list = [
   }
 ];
 
-console.disableYellowBox = true;
+// console.disableYellowBox = true;
 // Tab Main Menu
 export class MainMenu extends Component {
   constructor(props) {
