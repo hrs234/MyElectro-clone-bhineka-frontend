@@ -9,15 +9,57 @@ import {
   TouchableOpacity,
   AsyncStorage
 } from "react-native";
-import { Container, Header, Body, Button } from "native-base";
+import { Container, Header, Body } from "native-base";
+import { Button } from "react-native-paper"
 import { NavigationActions, DrawerItems } from "react-navigation";
-
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/dist/MaterialIcons";
+import { connect } from 'react-redux'
+import { getUser } from '../public/action/action'
 
 class SideMenu extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isLogin: false,
+    }
+    this.loginasync();
+  }
+
+  loginasync = async () => {
+    await AsyncStorage.getItem("user", (error, id) => {
+      if (id) {
+        this.setState({
+          isLogin: true,
+          id: id
+        });
+      } else {
+        this.setState({
+          isLogin: false
+        });
+      }
+    });
+    await AsyncStorage.getItem("token", (error, token) => {
+      if (token) {
+        this.setState({
+          isLogin: true,
+          token: token
+        });
+      } else {
+        this.setState({
+          isLogin: false
+        });
+      }
+    });
+    this.getDataUser(this.state.id)
+  };
+
+  getDataUser(id){
+    console.warn(this.state.id)
+    this.props.dispatch(getUser(id))
+    this.setState({auth:this.props.reducer})
+    console.log('this.state.auth');
+    console.log(this.state.auth.data["0"].image);
   }
 
   handleHomePressed() {
@@ -36,35 +78,42 @@ class SideMenu extends Component {
   };
 
   render() {
+    console.log(this.props.reducer)
     return (
       <Container>
         <Header style={styles.drawerHeader}>
           <Body style={{ alignItems: "baseline" }}>
-            <Image
+            {/* <Image
               style={styles.drawerImage}
-              source={require("../assets/image/logo.png")}
-            />
+              source={{ uri: this.state.auth.data["0"].image}}
+            /> */}
+            { (this.state.isLogin == false) ?
+              <Button mode="contained" onPress={() => this.props.navigation.navigate('Login')}>
+                <Text>LOGIN / REGISTER</Text>
+              </Button> : null }
           </Body>
         </Header>
         <ScrollView>
           <View style={{ marginTop: 10 }}>
             <DrawerItems {...this.props} />
-            <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                paddingLeft: 17
-              }}
-              onPress={() => {
-                this.removeAsync();
-                this.props.navigation.closeDrawer();
-              }}
-            >
-              <Icon name="exit-to-app" size={28} color="grey" />
-              <Text style={{ margin: 16, marginLeft: 27, fontWeight: "bold" }}>
-                Logout
-              </Text>
-            </TouchableOpacity>
+            {(this.state.isLogin == true) ?
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  paddingLeft: 17
+                }}
+                onPress={() => {
+                  this.removeAsync();
+                  this.props.navigation.closeDrawer();
+                }}
+              >
+                <Icon name="exit-to-app" size={28} color="grey" />
+                <Text style={{ margin: 16, marginLeft: 27, fontWeight: "bold" }}>
+                  Logout
+                </Text>
+              </TouchableOpacity> : null
+            }
           </View>
         </ScrollView>
       </Container>
@@ -75,7 +124,13 @@ class SideMenu extends Component {
 SideMenu.propTypes = {
   navigation: PropTypes.object
 };
-export default SideMenu;
+
+const mapStateToProps = ( state ) => {
+  return {
+    reducer: state.reducer
+  }
+}
+export default connect(mapStateToProps)(SideMenu);
 
 const styles = StyleSheet.create({
   container: {

@@ -24,12 +24,6 @@ class Login extends Component {
     };
   }
 
-  static navigationOptions = {
-    drawerIcon: (
-      <Icon name="login" type="MaterialIcons" style={{ color: "#000000", marginRight:-5, fontSize:28 }} />
-    )
-};
-
   login = async () => {
     let dataLogin = {
       email: this.state.email,

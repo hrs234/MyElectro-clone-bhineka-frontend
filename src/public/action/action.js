@@ -1,6 +1,14 @@
 import axios from "axios";
 let URL = "https://clone-bhineka.herokuapp.com";
 
+export const getUser = (id) => {
+  return {
+    type: "GET_USER",
+    payload: axios.get(URL + "/user/"+ id)
+  };
+};
+
+
 export const changePassword = (dataPassword) => {
   console.log('action');
   console.log(dataPassword);  

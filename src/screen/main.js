@@ -74,7 +74,7 @@ const list = [
   }
 ];
 
-console.disableYellowBox = true;
+console.disableYellowBox = false;
 // Tab Main Menu
 export class MainMenu extends Component {
   constructor(props) {
@@ -96,7 +96,7 @@ export class MainMenu extends Component {
 
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
-    OneSignal.addEventListener('ids', this.onIds);
+    OneSignal.addEventListener('ids', (device) => console.log('Device info: ', device));
     OneSignal.configure();
 
   }
@@ -625,8 +625,6 @@ const Stack = createStackNavigator({
         navigationOptions: {header: null}
     }
 })
-
-
 
 // connect with redux,first param is map and second is component
 // export default connect(mapStateToProps)(Login);
