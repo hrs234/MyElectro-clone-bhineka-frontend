@@ -64,7 +64,7 @@ https://drive.google.com/file/d/1QsIsL7TOFEDgtGuEMZjOWy8FITpPaqy0/view?usp=shari
 ## Our Contributor
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/juwar"><img src="https://avatars3.githubusercontent.com/u/50343114?s=400&v=4" width="100px;" alt="Muhammad Juwarno"/><br /><sub><b>Muhammad Juwarno</b></sub></a><br />
+    <td align="center"><a href="https://github.com/juwar"><img src="https://avatars3.githubusercontent.com/u/50343114?s=400&v=4" width="100px;" alt="Muhammad Juwarno"/><br /><sub><b>Muhammad Juwarno</b></sub></a><br>Back-end</br><br />
     <td align="center"><a href="https://github.com/muhrobai"><img src="https://avatars1.githubusercontent.com/u/50520431?s=460&v=4" width="100px;" alt="Muhamad Robai"/><br /><sub><b>Muhamad Robai</b></sub></a><br />
      <td align="center"><a href="https://github.com/hrs234"><img src="https://avatars2.githubusercontent.com/u/50226393?s=460&v=4"  width="100px;" alt="Harris Santoso"/><br /><sub><b>Harris Santoso</b></sub></a><br />
      <td align="center"><a href="https://github.com/ilhamyoga"><img src="https://avatars3.githubusercontent.com/u/38208370?s=460&v=4" width="100px;" alt="Ilham Yoga"/><br /><sub><b>Ilham Yoga</b></sub></a><br />
