@@ -12,9 +12,9 @@ Bhinneka.com is e-commerce pioneer in Indonesia and this e-commerce is establish
  </p>
 
 ### what is MyElectro
-My electro is Bhinneka.com apps but a clone version and this application not have affiliation with Bhinneka.com official Apps
-
-<br><br>
+My electro is Bhinneka.com apps but a clone version and this application not have affiliation with Bhinneka.com official Apps.
+this project is not perfect but is work. many bugs here, we really appreciate if you want to contribute together to build this diverse clone apps, pls contact me at ##Contributor
+<br>
 
 ## Features
 
