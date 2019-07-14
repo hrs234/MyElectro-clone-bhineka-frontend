@@ -27,6 +27,22 @@ export default product = (state = initialState, action) => {
                 isError: false,
 				data: action.payload.data.data
             }
+        case 'GET_WISHLIST_PENDING':
+            return{
+                isLoading:true,
+                isError:false
+            }
+        case 'GET_WISHLIST_REJECTED':
+            return{
+                isLoading: false,
+                isError:true
+            }
+        case 'GET_WISHLIST_FULFIELD':
+            return{
+                isLoading: false,
+                isError:true,
+                data: action.payload.data.data
+            }
 
         // DEFAULT
         default:

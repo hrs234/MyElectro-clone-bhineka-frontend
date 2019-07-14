@@ -11,14 +11,22 @@ import {
 } from "react-native";
 import { Container, Header, Body, Button } from "native-base";
 import { NavigationActions, DrawerItems } from "react-navigation";
-
+import {getWishlist} from '../public/action/wishlist'
+import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/dist/MaterialIcons";
+import wishlist from "../screen/wishlist";
+
 
 class SideMenu extends Component {
   constructor(props) {
     super(props);
   }
+  removeAsync = async () => {
+    await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("user");
+    alert("remove");
+  };
 
   handleHomePressed() {
     console.warn("tes");
@@ -75,7 +83,14 @@ class SideMenu extends Component {
 SideMenu.propTypes = {
   navigation: PropTypes.object
 };
-export default SideMenu;
+const mapStateToProps = (state) =>{
+  return{
+    wishlist: state.wishlist
+  }
+  
+}
+export default connect(mapStateToProps)(SideMenu);
+
 
 const styles = StyleSheet.create({
   container: {

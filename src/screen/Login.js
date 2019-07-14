@@ -120,7 +120,9 @@ class Login extends Component {
             style={{ color: "blue", width: "34%", backgroundColor: "#fff" }}
             mode="contained"
             onPress={() => {
+
               this.props.navigation.navigate("Register");
+
             }}
           >
             <Text style={{ color: "blue" }}>REGISTRASI</Text>

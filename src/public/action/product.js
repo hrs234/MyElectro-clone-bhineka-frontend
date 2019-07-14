@@ -15,3 +15,4 @@ export const getProduct = (id) => {
         payload: axios.get(url)
     }
 }
+
