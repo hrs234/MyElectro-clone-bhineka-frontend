@@ -47,6 +47,7 @@ export default class Kontak extends Component {
       }
     });
     if (this.state.id) {
+
     } else {
       this.props.navigation.goBack();
       alert("Anda belum login");
@@ -70,7 +71,7 @@ export default class Kontak extends Component {
         <Content style={{ padding: 20 }}>
           <Card>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("ProfilDetail")}
+              onPress={() => this.props.navigation.navigate("ProfilDetail",this.state.id)}
             >
               <CardItem>
                 <Icon active name="contact" />
