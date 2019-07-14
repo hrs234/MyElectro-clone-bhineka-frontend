@@ -18,6 +18,13 @@ this project is not perfect but is work. many bugs here, we really appreciate if
 To see how me and my team works this we'er trello : `https://trello.com/b/o9bUJfG7/myelectro`
 <br>
 
+## Links
+some links that can help you if you want to make this application from scratch :
+- `https://medium.com/@johnryancottam/image-uploading-with-node-cloudinary-6f7796c8277a`
+- `https://codeshack.io/basic-login-system-nodejs-express-mysql/`
+- `https://www.youtube.com/watch?v=Qt2ohl-hyFw&list=PL_jn5jikluSL9zb126G9jh-yq2z5Yt4XK`
+- `https://www.npmjs.com/package/awt`
+- `https://medium.com/@kiddy.xyz/tutorial-restful-api-fastify-js-mysql-token-auth-part-1-1fa538d1b1ee`
 ## Features
 
 - Login User
