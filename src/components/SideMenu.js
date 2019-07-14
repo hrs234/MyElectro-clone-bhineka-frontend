@@ -6,28 +6,27 @@ import {
   StyleSheet,
   Image,
   Alert,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from "react-native";
 import { Container, Header, Body, Button } from "native-base";
 import { NavigationActions, DrawerItems } from "react-navigation";
 import {getWishlist} from '../public/action/wishlist'
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
+import Icon from "react-native-vector-icons/dist/MaterialIcons";
 import wishlist from "../screen/wishlist";
+
 
 class SideMenu extends Component {
   constructor(props) {
     super(props);
-    
   }
-
   removeAsync = async () => {
     await AsyncStorage.removeItem("token");
     await AsyncStorage.removeItem("user");
     alert("remove");
   };
-
-  
 
   handleHomePressed() {
     console.warn("tes");
@@ -38,6 +37,12 @@ class SideMenu extends Component {
     return () => this.props.navigation.dispatch(resetAction);
   }
 
+  removeAsync = async () => {
+    await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("user");
+    alert("Logout");
+  };
+
   render() {
     return (
       <Container>
@@ -47,20 +52,26 @@ class SideMenu extends Component {
               style={styles.drawerImage}
               source={require("../assets/image/logo.png")}
             />
-            
           </Body>
         </Header>
         <ScrollView>
           <View style={{ marginTop: 10 }}>
             <DrawerItems {...this.props} />
             <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                paddingLeft: 17
+              }}
               onPress={() => {
-                  this.removeAsync()
-                  this.props.navigation.navigate("Belanja"),
-                  this.props.navigation.closeDrawer();
+                this.removeAsync();
+                this.props.navigation.closeDrawer();
               }}
             >
-              <Text style={{ margin: 16, fontWeight: "bold" }}>Logout</Text>
+              <Icon name="exit-to-app" size={28} color="grey" />
+              <Text style={{ margin: 16, marginLeft: 27, fontWeight: "bold" }}>
+                Logout
+              </Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -92,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0B2D53"
   },
   drawerImage: {
-    height: 150,
-    width: 150
+    height: 135,
+    width: 135
   }
 });

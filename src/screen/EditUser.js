@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { regUser } from "../public/action/action";
 
 
-class Register extends Component {
+class EditUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,7 +56,6 @@ class Register extends Component {
         birth_date: this.state.birth_date
       };
       this.props.dispatch(regUser(dataReg));
-      this.props.navigation.navigate('Login');
     } else {
       Alert.alert("Field cannot empty");
     }
@@ -146,8 +145,8 @@ class Register extends Component {
       <View style={{ backgroundColor: "#F5F5F5" }}>
         {/* Header */}
         <Appbar.Header style={styles.Head}>
-          <Appbar.BackAction onPress={() => alert("this back")} />
-          <Appbar.Content title="Account Registration" />
+          <Appbar.BackAction onPress={() => this.props.navigation.goBack()} />
+          <Appbar.Content title="Edit Data Pembeli" />
         </Appbar.Header>
         {/* End Header */}
 
@@ -258,7 +257,7 @@ class Register extends Component {
               title="Register!"
               onPress={() => {
                 this.regUser()
-                alert("this regist")
+                // alert("this regist")
               }}
               style={styles.button}
             >
@@ -279,7 +278,7 @@ const mapStateToProps = state => {
 };
 
 // connect with redux,first param is map and second is component
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps)(EditUser);
 
 const styles = StyleSheet.create({
   Head: {

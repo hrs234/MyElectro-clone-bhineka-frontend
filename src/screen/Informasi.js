@@ -6,6 +6,7 @@ import { Icon } from "native-base";
 export default class Informasi extends Component {
 
     static navigationOptions = {
+        drawerLabel: 'Informasi',
         drawerIcon: (
           <Icon name="help" type="MaterialIcons" style={{ color: "#000000", marginRight:-5 }} />
         )
@@ -17,10 +18,10 @@ export default class Informasi extends Component {
                 <View>
                     <Appbar.Header style={{ backgroundColor: '#092B51'}}>
                         <Appbar.BackAction
-                            onPress={() => alert('this back')}
+                            onPress={() => this.props.navigation.goBack()}
                         />
                         <Appbar.Content
-                            title="Informasi"
+                            title="Kontak Kami"
                         />
                     </Appbar.Header>
                 </View>

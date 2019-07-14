@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { View, Text, ScrollView, FlatList, Image, AsyncStorage } from "react-native";
 import { Icon } from "native-base";
@@ -72,8 +73,17 @@ class wishlist extends Component {
     </View>;
   };
 
+
+    static navigationOptions = {
+        drawerLabel: 'Wishlist',
+        drawerIcon: (
+          <Icon name="favorite" type="MaterialIcons" style={{ color: "#000000", marginRight:-5 }} />
+        )
+    };
+    
     render() {
         return (
+
             // Header
             <View style={{ backgroundColor: "#F5F5F5" }}>
             <Appbar.Header style={{ backgroundColor: '#092B51'}}>
@@ -119,20 +129,9 @@ class wishlist extends Component {
                     </View>
                   </View>
                 </View>
-              )}
-            />
-            {/* <FlatList
-                            data={[{ key: 'a' }, { key: 'b' }]}
-                            renderItem={({ item }) => <View style={{ borderStyle: "solid" }}>
-                                <Text>{item.key}</Text>
-                                {console.log('DATA: ' + JSON.stringify(item.id))}
-                            </View>}
-                        /> */}
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
+            </View>
+        )
+    }
 }
 
 const mapStateToProps = (state) =>{

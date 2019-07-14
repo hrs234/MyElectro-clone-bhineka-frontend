@@ -4,13 +4,15 @@ let URL = 'https://clone-bhineka.herokuapp.com'
 
 export const getProduct = (id) => {
     if (id == ''){
-        URL += `/product`
+        url = URL+'/product'
     }else{
-        URL += `/product?category=${id}`
+        url = URL+'/product?category='+id
     }
+
+    console.warn(url)
     return {
         type: 'GET_PRODUCT',
-        payload: axios.get(URL)
+        payload: axios.get(url)
     }
 }
 

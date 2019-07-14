@@ -17,7 +17,7 @@ class ListProduct extends Component {
         this.props.dispatch(getProduct(id))
     }
 
-    componentDidMount = () => {
+    componentWillMount = () => {
         this.getDataProduct(this.props.navigation.state.params.id_category)
         this.props.navigation.setParams({ title : this.state.name_category })
     }
@@ -36,7 +36,7 @@ class ListProduct extends Component {
                 icon='shopping-cart'
                 color={Colors.white}
                 size={22}
-                onPress={() => {navigation.navigate('Informasi')}}
+                onPress={() => {navigation.navigate('Cart')}}
             />
         </View>
     ),
@@ -57,7 +57,7 @@ class ListProduct extends Component {
 
         <ScrollView>
           <View style={{ marginTop: 15, marginLeft: 15, marginBottom: 25 }}>
-            <Text style={{ fontSize: 20, color: "#9E9E9E" }}>items 25</Text>
+            <Text style={{ fontSize: 20, color: "#9E9E9E" }}>{this.state.name_category}</Text>
           </View>
           <View style={{ marginBottom: 300 }}>
             <FlatList

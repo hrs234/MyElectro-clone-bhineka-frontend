@@ -15,27 +15,19 @@ import {
 import { IconButton, Colors, Card, Button } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import Carousel from "react-native-carousel-control";
-import Search from "../screen/Search";
-import Cart from "../screen/Cart";
+import Search from '../screen/Search';
+import Cart from '../screen/Cart';
 
 import DetailPage from "./DetailPage";
-import { Icon } from "native-base";
-import axios from "axios";
-import Kategori from "./CategoryScreen.js";
-import listproduct from "../screen/ListProduct";
 
-// Import the pages component
-import Splash from "./splash";
-import Register from "./Register";
-import Login from "./Login";
-import wishlist from "./wishlist";
-import paymentHistory from "./paymentHistory";
-import addSelling from "./addSelling";
-import Forgot from "./Forgot";
-import ChangePassword from "./ChangePassword";
-import cart from "./Cart";
-import search from "./Search";
-import { getWishlist } from "../public/action/wishlist";
+import axios from 'axios';
+import Kategori from "./CategoryScreen.js"
+import listproduct from '../screen/ListProduct'
+import profil from '../screen/Profil'
+import profilDetail from '../components/ProfilDetail'
+import search from '../screen/Search'
+import EditUser from '../screen/EditUser'
+import ChangePassword from '../screen/ChangePassword'
 
 const data = [
   { nameCategory: "Aksesories Gadget & Komputer" },
@@ -79,6 +71,7 @@ const list = [
   }
 ];
 
+console.disableYellowBox = true;
 // Tab Main Menu
 export class MainMenu extends Component {
   constructor(props) {
@@ -122,8 +115,12 @@ export class MainMenu extends Component {
         });
       }
     });
-    alert("login id " + this.state.id + " token " + this.state.token);
-    this.props.dispatch(getWishlist(this.state.id))
+
+    if (this.state.id) {
+      alert("Anda sudah login")
+    }else{
+      alert("Anda belum login")
+    }
     
   };
 
@@ -149,7 +146,7 @@ export class MainMenu extends Component {
       });
 
     axios
-      .get("https://clone-bhineka.herokuapp.com/product/category=3")
+      .get("https://clone-bhineka.herokuapp.com/product?category=3")
       .then(res => {
         const data = res.data;
         this.setState({ Category3: data.data, loading: false });
@@ -181,8 +178,7 @@ export class MainMenu extends Component {
             style={{
               flexDirection: "row",
               marginTop: 10,
-              marginRight: -13,
-              marginLeft: -12
+              marginRight: -13
             }}
           >
             <Carousel pageWidth={340}>
@@ -475,152 +471,7 @@ export class MainMenu extends Component {
               </Card.Content>
             </Card>
           </View>
-          <View style={{ width: "95%", marginTop: 20, borderWidth: 0 }}>
-            <Card style={{ elevation: 5 }}>
-              <Card.Title
-                style={{
-                  borderBottomWidth: 1,
-                  borderColor: "#07e8ca",
-                  height: 50
-                }}
-                title="Rekomendasi untuk Anda"
-                titleStyle={{ fontSize: 17 }}
-                right={props => (
-                  <Text
-                    style={{ color: "blue", fontWeight: "bold", fontSize: 12 }}
-                  >
-                    LIHAT SEMUA
-                  </Text>
-                )}
-                rightStyle={{ marginRight: 16 }}
-              />
-              <Card.Content>
-                <FlatList
-                  style={{
-                    borderWidth: 0,
-                    marginLeft: -16,
-                    paddingLeft: 10,
-                    paddingRight: 30,
-                    marginRight: -16
-                  }}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  data={list}
-                  renderItem={({ item }) => {
-                    return (
-                      <View
-                        style={{ width: 180, marginTop: 25, marginBottom: 14 }}
-                      >
-                        <View
-                          style={{
-                            justifyContent: "center",
-                            alignItems: "center"
-                          }}
-                        >
-                          <Image
-                            style={{ width: 100, height: 120 }}
-                            source={{ uri: item.image }}
-                          />
-                        </View>
-                        <View style={{ marginTop: 12 }}>
-                          <Text style={{ fontSize: 15 }} numberOfLines={2}>
-                            {item.nameBarang}
-                          </Text>
-                        </View>
-                        <View
-                          style={{
-                            flex: 1,
-                            alignItems: "flex-start",
-                            justifyContent: "flex-end"
-                          }}
-                        >
-                          <Text style={{ fontWeight: "bold" }}>
-                            Rp {item.harga}
-                          </Text>
-                        </View>
-                      </View>
-                    );
-                  }}
-                  keyExtractor={(item, index) => index}
-                />
-              </Card.Content>
-            </Card>
-          </View>
-          <View style={{ width: "95%", marginTop: 20, marginBottom: 40 }}>
-            <Card style={{ elevation: 5 }}>
-              <Card.Title
-                style={{
-                  borderBottomWidth: 1,
-                  borderColor: "#07e8ca",
-                  height: 50
-                }}
-                title="Rekomendasi untuk Anda"
-                titleStyle={{ fontSize: 17 }}
-                right={props => (
-                  <Button
-                    style={{ color: "blue", fontWeight: "bold", fontSize: 12 }}
-                    onPress={() =>
-                      this.props.navigation.navigate("ListProduct")
-                    }
-                  >
-                    LIHAT SEMUA
-                  </Button>
-                )}
-                rightStyle={{ marginRight: 16 }}
-              />
-              <Card.Content>
-                <FlatList
-                  style={{
-                    borderWidth: 0,
-                    marginLeft: -16,
-                    paddingLeft: 10,
-                    paddingRight: 30,
-                    marginRight: -16
-                  }}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  data={list}
-                  renderItem={({ item }) => {
-                    return (
-                      <View
-                        style={{ width: 180, marginTop: 25, marginBottom: 14 }}
-                      >
-                        <View
-                          style={{
-                            justifyContent: "center",
-                            alignItems: "center"
-                          }}
-                        >
-                          <Image
-                            style={{ width: 100, height: 120 }}
-                            source={{ uri: item.image }}
-                          />
-                        </View>
-                        <View style={{ marginTop: 12 }}>
-                          <Text style={{ fontSize: 15 }} numberOfLines={2}>
-                            {item.nameBarang}
-                          </Text>
-                        </View>
-                        <View
-                          style={{
-                            flex: 1,
-                            alignItems: "flex-start",
-                            justifyContent: "flex-end"
-                          }}
-                        >
-                          <Text style={{ fontWeight: "bold" }}>
-                            Rp {item.harga}
-                          </Text>
-                        </View>
-                      </View>
-                    );
-                  }}
-                  keyExtractor={(item, index) => index}
-                />
-              </Card.Content>
-            </Card>
-          </View>
-        </View>
+         </View>
       </ScrollView>
     );
   }
@@ -653,75 +504,113 @@ const TabNavigator = createMaterialTopTabNavigator(
 
 //Stack Navigation
 const Stack = createStackNavigator({
-  TabNavigator: {
-    screen: TabNavigator,
-    navigationOptions: ({ navigation }) => ({
-      headerLeft: (
-        <IconButton
-          icon="menu"
-          color={Colors.white}
-          size={25}
-          onPress={() => {
-            navigation.openDrawer();
-          }}
-        />
-      ),
-      headerRight: (
-        <View style={{ flexDirection: "row" }}>
-          <IconButton
-            style={{ marginRight: -3 }}
-            icon="search"
-            color={Colors.white}
-            size={25}
-            onPress={() => {
-              navigation.navigate("Search");
-            }}
-          />
-          <IconButton
-            icon="shopping-cart"
-            color={Colors.white}
-            size={22}
-            onPress={() => {
-              navigation.navigate("Cart");
-            }}
-          />
-        </View>
-      ),
-      headerStyle: {
-        backgroundColor: "#092B51",
-        elevation: 0
-      },
+    TabNavigator: {
+        screen: TabNavigator,
+        navigationOptions:({ navigation }) => ({
+            headerLeft: (
+                <IconButton
+                    icon='menu'
+                    color={Colors.white}
+                    size={25}
+                    onPress={() => {navigation.openDrawer()}}
+                />
+            ),
+            headerRight: (
+                <View style={{flexDirection:'row'}}>
+                    <IconButton
+                        style={{marginRight:-3}}
+                        icon='search'
+                        color={Colors.white}
+                        size={25}
+                        onPress={() => alert("coming soon")}
+                    />
+                    <IconButton
+                        icon='shopping-cart'
+                        color={Colors.white}
+                        size={22}
+                        onPress={() => {navigation.navigate('Cart',)}}
+                    />
+                </View>
+            ),
+            headerStyle: {
+                backgroundColor: '#092B51',
+                elevation:0
+            },
+            headerTitle: (
+                <Image
+                    style={{height:20, width:110}}
+                    source={require("../assets/image/baner1.png")}
+                />
+            ),
+        })
+    },
+    DetailPage: {
+        screen: DetailPage
+    },
+    ListProduct: { 
+        screen: listproduct,
+    },
+    ChangePassword:{
+      screen: ChangePassword,
+      navigationOptions: {header: null}
+  },
 
-      headerTintColor: "red",
-      title: "MyElectro"
-    })
-  },
-  DetailPage: {
-    screen: DetailPage
-  },
-  ListProduct: {
-    screen: listproduct
-  },
-  Search: {
-    screen: Search,
-    navigationOptions: { header: null }
-  },
-  Cart: {
-    screen: Cart,
-    navigationOptions: { header: null }
-  },
-  Splash: { screen: Splash },
-  Register: { screen: Register, navigationOptions: { header: null } },
-  Login: { screen: Login, navigationOptions: { header: null } },
-  wishlist: { screen: wishlist },
-  paymentHistory: { screen: paymentHistory },
-  addSelling: { screen: addSelling },
-  Forgot: { screen: Forgot },
-  ChangePassword: { screen: ChangePassword },
-  cart: { screen: cart, navigationOptions: { header: null } },
-  search: { screen: search },
-  Main: { screen: MainMenu }
-});
+    Search: {
+        screen: Search,
+        navigationOptions: {header: null}
+    },
+    Profil: { 
+        screen: profil,
+        navigationOptions:({ navigation }) => ({
+            headerLeft: (
+                <IconButton
+                    icon='menu'
+                    color={Colors.white}
+                    size={25}
+                    onPress={() => {navigation.openDrawer()}}
+                />
+            ),
+            headerRight: (
+                <IconButton
+                    icon='shopping-cart'
+                    color={Colors.white}
+                    size={22}
+                    onPress={() => {navigation.navigate('Cart')}}
+                />
+            ),
+            headerStyle: {
+                backgroundColor: '#092B51',
+                elevation:0
+            },
+            
+            headerTintColor: '#fff',
+            title: 'Akun Saya',
+        })
+    },
+    ProfilDetail: {
+        screen: profilDetail,
+        navigationOptions:({ navigation }) => ({
+            headerStyle: {
+                backgroundColor: '#092B51',
+                elevation:0
+            },  
+            headerTintColor: '#fff',
+            title: 'Profil',
+        })
+    },
+    Search: {
+        screen: search,
+        navigationOptions: { header: null }
+    },
+    Cart: {
+        screen: Cart,
+        navigationOptions: {header: null}
+    },
+    EditUser: {
+        screen: EditUser,
+        navigationOptions: {header: null}
+    }
+})
 
 // connect with redux,first param is map and second is component
 // export default connect(mapStateToProps)(Login);

@@ -18,7 +18,7 @@ export default class Kontak extends Component {
                 <View>
                     <Appbar.Header style={{ backgroundColor: '#092B51'}}>
                         <Appbar.BackAction
-                            onPress={() => alert('this back')}
+                            onPress={() => this.props.navigation.goBack()}
                         />
                         <Appbar.Content
                             title="Kontak Kami"
