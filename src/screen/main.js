@@ -10,7 +10,8 @@ import {
 import {
   createAppContainer,
   createStackNavigator,
-  createMaterialTopTabNavigator
+  createMaterialTopTabNavigator,
+  
 } from "react-navigation";
 import { IconButton, Colors, Card, Button } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
@@ -27,6 +28,9 @@ import profilDetail from '../components/ProfilDetail'
 import search from '../screen/Search'
 import EditUser from '../screen/EditUser'
 import ChangePassword from '../screen/ChangePassword'
+
+import OneSignal from 'react-native-onesignal';
+
 
 const data = [
   { nameCategory: "Aksesories Gadget & Komputer" },
@@ -87,6 +91,20 @@ export class MainMenu extends Component {
       isLogin: false
     };
     this.loginasync();
+
+    OneSignal.init("7284a78f-6851-4288-b700-2b27beffa07e");
+
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('ids', this.onIds);
+    OneSignal.configure();
+
+  }
+
+  componentWillUnmount() {
+    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('opened', this.onOpened);
+    OneSignal.removeEventListener('ids', this.onIds);
   }
 
   loginasync = async () => {
@@ -607,6 +625,8 @@ const Stack = createStackNavigator({
         navigationOptions: {header: null}
     }
 })
+
+
 
 // connect with redux,first param is map and second is component
 // export default connect(mapStateToProps)(Login);

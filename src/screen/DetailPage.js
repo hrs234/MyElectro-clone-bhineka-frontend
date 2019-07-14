@@ -11,8 +11,6 @@ import ModalBuy from "../components/ModalBeli";
 //redux
 import { connect } from "react-redux";
 
-
-
 class DetailPage extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +31,6 @@ class DetailPage extends Component {
     };
     this.loginasync();
   }
-
 
   loginasync = async () => {
     await AsyncStorage.getItem("user", (error, id) => {
