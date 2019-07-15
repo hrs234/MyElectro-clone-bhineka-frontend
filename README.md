@@ -15,7 +15,7 @@
 My electro is [Bhinneka.com](Bhinneka.com) apps but a clone version and this application not have affiliation with Bhinneka.com official Apps.
 this project is not perfect but is work. many bugs here, we really appreciate if you want to contribute together to build this diverse clone apps, pls contact me at contributor.
 <br>
-To see how me and my team works in trello : `https://trello.com/b/o9bUJfG7/myelectro`
+To see how me and my team works in [trello](https://trello.com/b/o9bUJfG7/myelectro)
 <br>
 
 ## Links
