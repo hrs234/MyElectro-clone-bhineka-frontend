@@ -37,6 +37,14 @@ some links that can help you if you want to make this application from scratch :
 
 ## Preview
 
+<p align='center'>
+<span>
+ <tr>
+  <td><img src="https://github.com/hrs234/MyElectro-clone-bhineka-frontend/blob/master/screenshoot/Screenrecorder-2019-07-14-23-28-.gif" width="300;" height="500" alt="Muhammad Robai"/></td>
+  <td><img src="https://github.com/hrs234/MyElectro-clone-bhineka-frontend/blob/master/screenshoot/Screenrecorder-2019-07-14-23-35-(2).gif" width="300;" height="500" alt="Muhammad Robai"/></td>
+</tr>
+</span>
+</p>
 
 
 ## Screenshoot
@@ -57,14 +65,6 @@ some links that can help you if you want to make this application from scratch :
 </span>
 </p>
 
-<p align='center'>
-<span>
- <tr>
-  <td><img src="https://github.com/hrs234/MyElectro-clone-bhineka-frontend/blob/master/screenshoot/Screenrecorder-2019-07-14-23-28-.gif" width="300;" height="500" alt="Muhammad Robai"/></td>
-  <td><img src="https://github.com/hrs234/MyElectro-clone-bhineka-frontend/blob/master/screenshoot/Screenrecorder-2019-07-14-23-35-(2).gif" width="300;" height="500" alt="Muhammad Robai"/></td>
-</tr>
-</span>
-</p>
 
 
 ## Download Links
