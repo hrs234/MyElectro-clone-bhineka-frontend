@@ -5,13 +5,13 @@
 <img src="screenshoot/Bhinneka-icon.jpg" width=300 height=100 />
 </p>
 
-### what is Bhinneka.com
+### What is Bhinneka.com
 [Bhinneka.com](Bhinneka.com) is e-commerce pioneer in Indonesia and this e-commerce is established in 1997 until now this e-commerce always have an growth <br><br><br><br>
 <p align='center'>
 <img src="screenshoot/shopping-cart.png" width=150 height=150 />
  </p>
 
-### what is MyElectro
+### What is MyElectro
 My electro is [Bhinneka.com](Bhinneka.com) apps but a clone version and this application not have affiliation with Bhinneka.com official Apps.
 this project is not perfect but is work. many bugs here, we really appreciate if you want to contribute together to build this diverse clone apps, pls contact me at contributor.
 <br>
