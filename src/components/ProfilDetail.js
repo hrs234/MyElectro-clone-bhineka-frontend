@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Image } from "react-native";
 import { Spinner } from "native-base";
 import { List, Colors, Button } from "react-native-paper";
 import axios from "axios";
@@ -45,14 +45,20 @@ export default class ProfilDetail extends Component {
         ) : (
           <View style={styles.view2}>
             <View>
-              <Text
-                style={{ fontSize: 15, fontWeight: "bold", marginBottom: 10 }}
-              >
-                {this.state.data.first_name} {this.state.data.first_name}
-              </Text>
-              <Text style={{ fontSize: 15, marginBottom: 10 }}>
-                {this.state.data.email}
-              </Text>
+              <View style={{ flexDirection: "row", marginBottom: 20 }}>
+
+              <Image source={{ uri: this.state.data.image }} style={{ width: 50, height: 50, borderRadius: 150, marginRight: 25}} />
+              <View>
+                <Text
+                  style={{ fontSize: 15, fontWeight: "bold", marginBottom: 10 }}
+                >
+                  {this.state.data.first_name} {this.state.data.last_name}
+                </Text>
+                <Text style={{ fontSize: 15, marginBottom: 10 }}>
+                  {this.state.data.email}
+                </Text>
+              </View>
+              </View>
             </View>
             <Button
               style={{
@@ -81,7 +87,7 @@ const styles = StyleSheet.create({
   view2: {
     padding: 20,
     paddingLeft: 50,
-    height: "25%",
+    height: "35%",
     backgroundColor: "#fff",
     elevation: 2
   }
